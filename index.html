@@ -13,6 +13,10 @@ body {
   font-family: Droid-Sans, Helvetica, sans;
   font-size: 10pt;
 }
+<script>
+  window.x = w.innerWidth || e.clientWidth || g.clientWidth;
+  window.y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+</script>
 </style>
 </head>
 <body>
@@ -29,6 +33,9 @@ body {
     </script>
 
     <script>
+        d3.select("map")
+          .style("width", window.x)
+          .style("height", window.y-200);
         var map = L.map('map').setView([41.90, -87.65], 13);
         mapLink = 
             '<a href="http://openstreetmap.org">OpenStreetMap</a>';
