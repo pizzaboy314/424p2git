@@ -1,41 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CS424 - P2 - Divvy Map</title>
-    <script src="js/d3.v3.min.js"></script>
-    <script
-        src="js/leaflet.js">
-    </script>
-
-   <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
-    <link 
-        rel="stylesheet" 
-        href="css/leaflet.css"
-    />
-    <link rel="stylesheet" href="css/leaflet-sidebar.css" />
-<style>
-  html, body, #map {
-    height: 100%;
-    font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
-  }
+  <style>
+    html, body, #map {
+      width: 100%;
+      height: 100%;
+      font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
+    }
  
-  a {
-   text-decoration: none;
-   color: darkblue;
-  }
+    a {
+      text-decoration: none;
+      color: darkblue;
+    }
+  </style>
+  <title>CS424 - P2 - Divvy Map</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  .lorem {
-    font-style: italic;
-    color: #AAA;
-  }
-</style>
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/leaflet.css" />
+  <link rel="stylesheet" href="css/leaflet-sidebar.css" />
+
+  <script src="js/d3.v3.min.js"></script>
+  <script src="js/leaflet.js"></script>
 </head>
 <body>
-    <div id="map" style="width: 100%; height: 100%;">
+    <div id="map">
     </div>
     
     <div id="sidebar" class="sidebar">
@@ -79,15 +69,32 @@
     <script src="js/leaflet-sidebar.js"></script>
 
     <script>
-        var map = L.map('map').setView([41.85, -87.65], 13);
+        mapLink = 
+          '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+        var osm = L.tileLayer(
+          'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: 'Map data &copy; ' + mapLink,
+        });
+        var sat = L.tileLayer(
+	  'http://oatile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
+	  attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency',
+	  subdomains: '1234'
+       });
+ 
+       var map = L.map('map', { //).setView([41.85, -87.65], 13);
+          center: [41.85, -87.60],
+	  zoom: 13,
+          layers: [osm]
+        });
+       var baseMaps = {
+         "OpenStreetMaps": osm, 
+         "Satellite": sat
+       }
+ 
         mapLink = 
             '<a href="http://openstreetmap.org">OpenStreetMap</a>';
-        L.tileLayer(
-            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: 'Map data &copy; ' + mapLink,
-            maxZoom: 18,
-            }).addTo(map);
 
+	var zoomcontrol = L.control.zoom({ position: 'topright' }).addTo(map);
         var sidebar = L.control.sidebar('sidebar').addTo(map);
         var url = 'divy.csv'
         var stations = []
@@ -95,10 +102,12 @@
 	  .get(function(error, data) {
  	    stations = data;
             for (i=0; i<stations.length; i++) {
-            var marker = L.marker([stations[i].latitude, stations[i].longitude]).addTo(map);
+            var marker = L.marker([parseFloat(stations[i].latitude), parseFloat(stations[i].longitude)]).addTo(map);
 	    marker.bindPopup(stations[i].name +"<br />capacity: "+stations[i].dpcapacity);
 	}
       })
+
+      var layercontrol = L.control.layers(baseMaps, null, 'bottomright').addTo(map);
     </script>
 </body>
 </html>
