@@ -3,33 +3,85 @@
 <head>
     <title>CS424 - P2 - Divvy Map</title>
     <script src="js/d3.v3.min.js"></script>
-    <meta charset="utf-8" />
-    <link 
-        rel="stylesheet" 
-        href="css/leaflet.css"
-    />
-<style>
-body {
-  font-family: Droid-Sans, Helvetica, sans;
-  font-size: 10pt;
-}
-</style>
-</head>
-<body>
-    <div id="map" style="width: 100%; height: 800px"></div>
-    <div id="contact">
-    <br />
-    Current group members:<br />
-    <a href="mailto:mt@trustdarkness.com">Mike Thompson</a><br />
-    <a href="mailto:bspahr314@gmail.com">Brian Spahr</a><br />
-    <a href="mailto:ddesut2@uic.edu">Dane DeSutter</a><br />
-    <a href="bugz/">Bugzilla</a>
     <script
         src="js/leaflet.js">
     </script>
 
+   <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+    <link 
+        rel="stylesheet" 
+        href="css/leaflet.css"
+    />
+    <link rel="stylesheet" href="css/leaflet-sidebar.css" />
+<style>
+  html, body, #map {
+    height: 100%;
+    font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
+  }
+ 
+  a {
+   text-decoration: none;
+   color: darkblue;
+  }
+
+  .lorem {
+    font-style: italic;
+    color: #AAA;
+  }
+</style>
+</head>
+<body>
+    <div id="map" style="width: 100%; height: 100%;">
+    </div>
+    
+    <div id="sidebar" class="sidebar">
+        <!-- Nav tabs -->
+        <ul class="sidebar-tabs" role="tablist">
+            <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+            <li class="active"><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li>
+            <li><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
+            <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="sidebar-content active">
+            <div class="sidebar-pane" id="home">
+                <h1>Overview Data</h1>
+                <p>(mockup)</p>
+		<p><img src="images/bikes-by-day.jpg" /></p>
+                <p><img src="images/bikes-by-hour.jpg" /></p>
+                <p><img src="images/distance-per-bike.png" /></p>
+            </div>
+            <div class="sidebar-pane active" id="profile">
+              <div id="contact">
+                <h1>Weekly activity:</h1>
+                  <h2><a href="mailto:mt@trustdarkness.com">Mike Thompson</a></h2>
+                    - Setup initial map and sidebar<br />
+                    - Setup Git for collaboration
+                  <h2><a href="mailto:bspahr314@gmail.com">Brian Spahr</a></h2>
+                    - Began data analysis<br />
+		    - Built sqllite db for divvy data
+                  <h2><a href="mailto:ddesut2@uic.edu">Dane DeSutter</a><br /></h2>
+                    - Made Mockups for final application<br />
+ 		    - Setup planning / organization spreadsheet
+                  <h2><a href="bugz/">Bugzilla</a></h2>
+		    - Dormant so far
+              </div>
+            </div>
+            <div class="sidebar-pane" id="messages"><h1>Messages</h1></div>
+            <div class="sidebar-pane" id="settings"><h1>Settings</h1></div>
+        </div>
+    </div>
+    <div id="sidebar-map" class="sidebar-map"></div>
+
+    <script src="js/leaflet-sidebar.js"></script>
+
     <script>
-        var map = L.map('map').setView([41.90, -87.65], 13);
+        var map = L.map('map').setView([41.85, -87.65], 13);
         mapLink = 
             '<a href="http://openstreetmap.org">OpenStreetMap</a>';
         L.tileLayer(
@@ -37,6 +89,8 @@ body {
             attribution: 'Map data &copy; ' + mapLink,
             maxZoom: 18,
             }).addTo(map);
+
+        var sidebar = L.control.sidebar('sidebar').addTo(map);
         var url = 'divy.csv'
         var stations = []
         csv = d3.csv(url)
@@ -47,7 +101,6 @@ body {
 	    marker.bindPopup(stations[i].name +"<br />capacity: "+stations[i].dpcapacity);
 	}
       })
- 
     </script>
 </body>
 </html>
