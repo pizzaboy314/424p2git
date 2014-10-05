@@ -19,8 +19,8 @@
 
   <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/leaflet.css" />
-  <link rel="stylesheet" href="css/leaflet-sidebar.css" />
 
+  <link rel="stylesheet" href="css/leaflet-sidebar.css" />
   <script src="js/d3.v3.min.js"></script>
   <script src="js/leaflet.js"></script>
 </head>
@@ -28,7 +28,7 @@
     <div id="map">
     </div>
     
-    <div id="sidebar" class="sidebar">
+    <div id="sidebar-right" class="sidebar">
         <!-- Nav tabs -->
         <ul class="sidebar-tabs" role="tablist">
             <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
@@ -42,9 +42,12 @@
             <div class="sidebar-pane" id="home">
                 <h1>Overview Data</h1>
                 <p>(mockup)</p>
-		<p><img src="images/bikes-by-day.jpg" /></p>
-                <p><img src="images/bikes-by-hour.jpg" /></p>
-                <p><img src="images/distance-per-bike.png" /></p>
+              <div id="graphs"><img src="images/bikes-by-day.png" />
+                <img src="images/bikes-by-hour.png" />
+                <img src="images/bikes-per-year.png" />
+                <img src="images/dist_dist.png" />
+                <img src="images/dist_rides.png" />
+              </div>
             </div>
             <div class="sidebar-pane active" id="profile">
               <div id="contact">
@@ -88,7 +91,7 @@
        });
  
        var map = L.map('map', { //).setView([41.85, -87.65], 13);
-          center: [41.90, -87.70],
+          center: [41.90, -87.60],
 	  zoom: 13,
           layers: [osm]
         });
@@ -100,8 +103,10 @@
         mapLink = 
             '<a href="http://openstreetmap.org">OpenStreetMap</a>';
 
-	var zoomcontrol = L.control.zoom({ position: 'topright' }).addTo(map);
-        var sidebar = L.control.sidebar('sidebar').addTo(map);
+	//var zoomcontrol = L.control.zoom({ position: 'topright' }).addTo(map);
+        var sidebar = L.control.sidebar('sidebar-right', { position: 'right' });
+	//sidebar.addTo(map);
+        map.addControl(sidebar);
         var url = 'divy.csv'
         var stations = []
         csv = d3.csv(url)
@@ -113,7 +118,7 @@
 	}
       })
 
-      var layercontrol = L.control.layers(baseMaps, null, 'bottomright').addTo(map);
+      var layercontrol = L.control.layers(baseMaps, null, {position: 'bottomleft'}).addTo(map);
     </script>
 </body>
 </html>
