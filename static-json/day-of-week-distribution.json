@@ -1,0 +1,9 @@
+[
+	{"range":"Sunday", "frequency":"101929"},
+	{"range":"Monday", "frequency":"99550"},
+	{"range":"Tuesday", "frequency":"97402"},
+	{"range":"Wednesday", "frequency":"92031"},
+	{"range":"Thursday", "frequency":"91504"},
+	{"range":"Friday", "frequency":"108360"},
+	{"range":"Saturday", "frequency":"118458"}
+]
