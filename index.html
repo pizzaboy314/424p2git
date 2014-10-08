@@ -28,6 +28,7 @@
   <link rel="stylesheet" href="css/leaflet-sidebar.css" />
   <script src="js/d3.v3.min.js"></script>
   <script src="js/leaflet.js"></script>
+  <script src="js/pie.js"></script>
 </head>
 <body>
     <div id="map">
@@ -47,11 +48,14 @@
             <div class="sidebar-pane" id="home">
                 <h1>Overview Data</h1>
                 <p>(mockup)</p>
-              <div id="graphs"><img src="images/bikes-by-day.png" />
-                <img src="images/bikes-by-hour.png" />
-                <img src="images/bikes-per-year.png" />
-                <img src="images/dist_dist.png" />
-                <img src="images/dist_rides.png" />
+              <div id="graphs">
+                <div id="gender" style="display: inline"></div>
+                <div id="type" style="display: inline"></div>
+                <div id="bikes-by-day"><img src="images/bikes-by-day.png" /></div>
+                <div id="bikes-by-hour"><img src="images/bikes-by-hour.png" /></div>
+                <div id="bikes-per-year"><img src="images/bikes-per-year.png" /></div>
+                <div id="dist-by-distance"><img src="images/dist_dist.png" /></div>
+                <div id="dist-by-ride"><img src="images/dist_rides.png" /></div>
               </div>
             </div>
             <div class="sidebar-pane active" id="profile">
@@ -120,7 +124,7 @@
         var sidebar = L.control.sidebar('sidebar-right', { position: 'right' });
 	//sidebar.addTo(map);
         map.addControl(sidebar);
-        var url = 'divy.csv'
+        var url = 'csv/divvy.csv'
         var stations = []
         csv = d3.csv(url)
 	  .get(function(error, data) {
@@ -132,6 +136,17 @@
       })
 
       var layercontrol = L.control.layers(baseMaps, null, {position: 'bottomleft'}).addTo(map);
+    var url = 'csv/gender_all.csv'
+    ourCsv = d3.text(url)
+      .get(function(error, data) {
+         renderPieChart(data, "#gender", "#4682b4");
+      })
+    var url = 'csv/type_all.csv'
+    ourCsv = d3.text(url)
+      .get(function(error, data) {
+         renderPieChart(data, "#type", "#2ca25f");
+      })
+
     </script>
 </body>
 </html>

@@ -1,25 +1,32 @@
 function renderPieChart(ourData, ourDiv, ourColor)  {               
   d = d3.csv.parseRows(ourData);
 
-  data = [{"label":d[1][0], "value":d[1][1]},
-          {"label":d[2][0], "value":d[2][1]}]
+  // this is a hack and should be fixed
+  if (d.length == 4) {
+    data = [{"label":d[1][0], "value":d[1][1]},
+            {"label":d[2][0], "value":d[2][1]}, 
+            {"label":d[3][0], "value":d[3][1]}]
+  } else {
+    data = [{"label":d[1][0], "value":d[1][1]},
+            {"label":d[2][0], "value":d[2][1]}]
+  }  
 
   d3.select(ourDiv).select("svg").remove()
 
   var canvas = d3.select(ourDiv)
     .append('svg')
-    .attr({'width':320,'height':200});
+    .attr({'width':340,'height':220});
 
   var colors = [ourColor, colorLight(ourColor, .5)];
   var colorscale = d3.scale.linear().domain([0,data.length]).range(colors);
 
   var arc = d3.svg.arc()
     .innerRadius(0)
-    .outerRadius(80);
+    .outerRadius(90);
 
   var arcOver = d3.svg.arc()
     .innerRadius(0)
-    .outerRadius(90 + 10);
+    .outerRadius(90 + 20);
 
   var pie = d3.layout.pie()
     .value(function(d){ return d.value; });
@@ -49,15 +56,35 @@ function renderPieChart(ourData, ourDiv, ourColor)  {
     renderarcs.append('text')
       .style("text-anchor", "middle")
       .style('font-family', 'Helvetica,Arial,sans-serif')
-      .style('font-size', '8pt')
+      .style('font-size', '7pt')
       .attr('transform',function(d) { 
       var c = arc.centroid(d);
         console.log(c);
-        return "translate(" + c[0] +"," + c[1]+ ")";
+        return "translate(" + c[0]+15 +"," + c[1]+50 + ")";
       })
       .text(function(d){ 
         console.log(d);
-        return d.data.label+" "+d.value+"%"; 
+        return d.data.label+" "+d.value+""; 
       });
 
 }
+
+// Below code borrowed from http://stackoverflow.com/questions/1507931/generate-lighter-darker-color-in-css-using-javascript
+function colorLight(hex, lum) {
+// // validate hex string
+  hex = String(hex).replace(/[^0-9a-f]/gi, '');
+  if (hex.length < 6) {
+    hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+  }
+  lum = lum || 0;
+  // convert to decimal and change luminosity
+  var rgb = "#", c, i;
+  for (i = 0; i < 3; i++) {
+    c = parseInt(hex.substr(i*2,2), 16);
+    c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
+    rgb += ("00"+c).substr(c.length);
+  }
+  console.log("rbg "+rgb);
+  return rgb;
+}
+
