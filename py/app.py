@@ -48,7 +48,7 @@ class Root(object):
     eightyplus = 0
     c.execute(q)
     for row in c.fetchall():
-      if row[0] < 12:
+      if row[0] < 12 and row[0] > 0:
         kids += row[1]
       elif 20 > row[0] and row[0] > 12:
         teens += row[1]
