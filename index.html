@@ -51,6 +51,7 @@
               <div id="graphs">
                 <div id="gender" style="display: inline"></div>
                 <div id="type" style="display: inline"></div>
+                <div id="age" style="display: inline"></div>
                 <div id="bikes-by-day"><img src="images/bikes-by-day.png" /></div>
                 <div id="bikes-by-hour"><img src="images/bikes-by-hour.png" /></div>
                 <div id="bikes-per-year"><img src="images/bikes-per-year.png" /></div>
@@ -151,6 +152,11 @@
     ourCsv = d3.text(url)
       .get(function(error, data) {
          renderPieChart(data, "#type", "#2ca25f");
+      })
+    var url = '/py/age'
+    ourCsv = d3.text(url)
+      .get(function(error, data) {
+         renderPieChart(data, "#age", "#67000d");
       })
 
     </script>

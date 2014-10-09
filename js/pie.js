@@ -2,14 +2,10 @@ function renderPieChart(ourData, ourDiv, ourColor)  {
   d = d3.csv.parseRows(ourData);
 
   // this is a hack and should be fixed
-  if (d.length == 4) {
-    data = [{"label":d[1][0], "value":d[1][1]},
-            {"label":d[2][0], "value":d[2][1]}, 
-            {"label":d[3][0], "value":d[3][1]}]
-  } else {
-    data = [{"label":d[1][0], "value":d[1][1]},
-            {"label":d[2][0], "value":d[2][1]}]
-  }  
+  data = []
+  for (i = 1; i < d.length; i++) {
+    data.push({"label":d[i][0], "value":d[i][1]})
+  } 
 
   d3.select(ourDiv).select("svg").remove()
 
@@ -26,7 +22,7 @@ function renderPieChart(ourData, ourDiv, ourColor)  {
 
   var arcOver = d3.svg.arc()
     .innerRadius(0)
-    .outerRadius(90 + 20);
+    .outerRadius(90 + 10);
 
   var pie = d3.layout.pie()
     .value(function(d){ return d.value; });
