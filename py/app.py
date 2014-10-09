@@ -37,8 +37,9 @@ class Root(object):
       GROUP BY
         age_in_2014 
     """
-    kids = 0
-    teens = 0
+#    kids = 0
+#    teens = 0
+    undertwenty = 0
     twenties = 0
     thirties = 0
     forties = 0
@@ -48,10 +49,10 @@ class Root(object):
     eightyplus = 0
     c.execute(q)
     for row in c.fetchall():
-      if row[0] < 12 and row[0] > 0:
-        kids += row[1]
-      elif 20 > row[0] and row[0] > 12:
-        teens += row[1]
+      if row[0] < 20 and row[0] > 0:
+        undertwenty += row[1]
+#      elif 20 > row[0] and row[0] > 12:
+#        teens += row[1]
       elif 30 > row[0] and row[0] > 19:
         twenties += row[1]
       elif 40 > row[0] and row[0] > 29:
