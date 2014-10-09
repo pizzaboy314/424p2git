@@ -165,7 +165,7 @@
     var url = '/py/rides_by_day_of_year'
     ourCsv = d3.text(url)
       .get(function(error, data) {
-         365DayBar(data, "bikes-per-year", "Date", "Count", "blue");
+         yearDayBar(data, "bikes-per-year", "Date", "Count", "blue");
       })
     </script>
 </body>
