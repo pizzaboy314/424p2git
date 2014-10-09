@@ -11,9 +11,13 @@ function renderPieChart(ourData, ourDiv, ourColor)  {
 
   var canvas = d3.select(ourDiv)
     .append('svg')
-    .attr({'width':340,'height':220});
+    .attr({'width':250,'height':220});
 
-  var colors = [ourColor, colorLight(ourColor, .5)];
+  var colors = [ourColor];
+  for (i = 1; i < d.length; i++) {
+    ourColor = colorLight(ourColor, .5);
+    colors.push(ourColor)
+  }
   var colorscale = d3.scale.linear().domain([0,data.length]).range(colors);
 
   var arc = d3.svg.arc()
