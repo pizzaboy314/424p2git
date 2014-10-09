@@ -29,6 +29,7 @@ function renderPieChart(ourData, ourDiv, colorBase)  {
     .append('svg')
     .attr({'width':220,'height': 220})
     .style("padding-left", "40px");
+    .style("padding-top", "15px");
 
   var colorscale = d3.scale.linear().domain([0,data.length]).range(colors);
 
