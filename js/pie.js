@@ -88,7 +88,7 @@ function renderPieChart(ourData, ourDiv, colorBase)  {
         // pythagorean theorem for hypotenuse
         h = Math.sqrt(x*x + y*y);
         rad = d.endAngle - d.startAngle
-        if (rad < 1.57) {
+        if ((rad < 1.57) || ((d.startAngle >1.6) && (d.startAngle < 2) )) {
           cn = 84;
         } else {
           cn = 10;
