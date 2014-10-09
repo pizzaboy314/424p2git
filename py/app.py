@@ -60,12 +60,12 @@ class Root(object):
         forties += row[1]
       elif 60 > row[0] and row[0] > 49:
         fifties += row[1]
-      elif 70 > row[0] and row[0] > 59:
-        sixties += row[1]
-      elif 80 > row[0] and row[0] > 69:
-        seventies += row[1]
-      elif row[0] > 79:
-        eightyplus += row[1]
+#      elif 70 > row[0] and row[0] > 59:
+#        sixties += row[1]
+#      elif 80 > row[0] and row[0] > 69:
+#        seventies += row[1]
+      elif row[0] > 59:
+        sixtyplus += row[1]
     ret = [
       "Age,Count",
       "0-12,%s" % kids,
@@ -74,9 +74,9 @@ class Root(object):
       "30-39,%s" % thirties,
       "40-49,%s" % forties,
       "50-59,%s" % fifties,
-      "60-69,%s" % sixties,
-      "70-79,%s" % seventies,
-      "80+,%s" % eightyplus,
+#      "60-69,%s" % sixties,
+#      "70-79,%s" % seventies,
+      "60+,%s" % sixtyplus,
     ]
     return "\n".join(ret)
   age.exposed = True
