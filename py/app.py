@@ -43,7 +43,7 @@ class Root(object):
     thirties = 0
     forties = 0
     fifties = 0
-    sixties = 0
+    sixtyplus = 0
     seventies = 0
     eightyplus = 0
     c.execute(q)
