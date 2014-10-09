@@ -1,5 +1,5 @@
 
-function renderBarChart(csv, display_div, xname, yname, color) {
+function yearDayBar(csv, display_div, xname, yname, color) {
 
   //console.log("stuff "+csv);
   var data = d3.csv.parse(csv);
@@ -104,6 +104,4 @@ function renderBarChart(csv, display_div, xname, yname, color) {
     .style('font-family', 'Helvetica,Arial,sans-serif')
     .style('font-size', '10pt')
     .text(" " + xname + " by " + yname + "");
-
 }
-
