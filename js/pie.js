@@ -11,7 +11,7 @@ function renderPieChart(ourData, ourDiv, ourColor)  {
 
   var canvas = d3.select(ourDiv)
     .append('svg')
-    .attr({'width':250,'height':220});
+    .attr({'width':310,'height':320});
 
   var colors = [ourColor];
   for (i = 1; i < d.length; i++) {
@@ -54,16 +54,36 @@ function renderPieChart(ourData, ourDiv, ourColor)  {
     });
 
     renderarcs.append('text')
-      .style("text-anchor", "middle")
+//      .style("text-anchor", "middle")
       .style('font-family', 'Helvetica,Arial,sans-serif')
       .style('font-size', '7pt')
-      .attr('transform',function(d) { 
-      var c = arc.centroid(d);
-        console.log(c);
-        return "translate(" + c[0]+15 +"," + c[1]+50 + ")";
+//      .attr('transform',function(d) { 
+//      var c = arc.centroid(d);
+//        console.log(c);
+//        return "translate(" + c[0]+15 +"," + c[1]+50 + ")";
+//      })
+     .attr("text-anchor", function(d) {
+     // are we past the center?
+       return (d.endAngle + d.startAngle)/2 > Math.PI ?
+         "end" : "start";
+      })  
+      .attr("transform", function(d) {
+      var c = arc.centroid(d),
+        x = c[0],
+        y = c[1],
+        // pythagorean theorem for hypotenuse
+        h = Math.sqrt(x*x + y*y);
+        rad = d.endAngle - d.startAngle
+        if (rad < 1.57) {
+          cn = 76;
+        } else {
+          cn = 10;
+        }
+        console.log(d);
+        return "translate(" + (x/h * cn) +  ',' +
+                         (y/h * cn) +  ")"; 
       })
       .text(function(d){ 
-        console.log(d);
         return d.data.label+" "+d.value+""; 
       });
 
