@@ -27,6 +27,25 @@ class Root(object):
     return 'Hello World!'
   index.exposed = True
 
+  def rides_by_day_of_year(self):
+    q = """
+      SELECT
+        startdate, 
+        count(*)
+      FROM
+        divvy_trips_distances
+      GROUP BY
+        startdate
+    """
+    c.execute(q)
+    ret = []
+    ret.append("Date,Count")
+    for row in c.fetchall():
+      ret.append("%s,%s" % (row[0], row[1]))
+    return "\n".join(ret)
+  rides_by_day_of_year.exposed = True
+    
+
   def age(self):
     q = """
       SELECT 
