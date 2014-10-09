@@ -32,6 +32,7 @@
   <script src="js/d3.v3.min.js"></script>
   <script src="js/leaflet.js"></script>
   <script src="js/pie.js"></script>
+  <script src="js/365DayBar.js"></script>
 </head>
 <body>
     <div id="map">
@@ -57,7 +58,7 @@
                 <div id="age" style="display: inline"></div>
                 <div id="bikes-by-day"><img src="images/bikes-by-day.png" /></div>
                 <div id="bikes-by-hour"><img src="images/bikes-by-hour.png" /></div>
-                <div id="bikes-per-year"><img src="images/bikes-per-year.png" /></div>
+                <div id="bikes-per-year"></div>
                 <div id="dist-by-distance"><img src="images/dist_dist.png" /></div>
                 <div id="dist-by-ride"><img src="images/dist_rides.png" /></div>
               </div>
@@ -161,7 +162,11 @@
       .get(function(error, data) {
          renderPieChart(data, "#age", "red");
       })
-
+    var url = '/py/rides_by_day_of_year'
+    ourCsv = d3.text(url)
+      .get(function(error, data) {
+         365DayBar(data, "bikes-per-year", "Date", "Count", "blue");
+      })
     </script>
 </body>
 </html>
