@@ -41,7 +41,9 @@ function renderPieChart(ourData, ourDiv, colorBase)  {
     .outerRadius(90 + 10);
 
   var pie = d3.layout.pie()
-    .value(function(d){ return d.value; });
+    .value(function(d){ return d.value; })
+    .sort(null);
+ 
 
   var renderarcs = canvas.append('g')
     .attr('transform','translate(100,100)')
