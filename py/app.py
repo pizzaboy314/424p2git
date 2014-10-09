@@ -45,8 +45,8 @@ class Root(object):
     forties = 0
     fifties = 0
     sixtyplus = 0
-    seventies = 0
-    eightyplus = 0
+#    seventies = 0
+#    eightyplus = 0
     c.execute(q)
     for row in c.fetchall():
       if row[0] < 20 and row[0] > 0:
@@ -67,10 +67,12 @@ class Root(object):
 #        seventies += row[1]
       elif row[0] > 59:
         sixtyplus += row[1]
+
     ret = [
       "Age,Count",
-      "0-12,%s" % kids,
-      "12-19,%s" % teens,
+#      "0-12,%s" % kids,
+#      "12-19,%s" % teens,
+      "Under 20,%s" % undertwenty,
       "20-29,%s" % twenties,
       "30-39,%s" % thirties,
       "40-49,%s" % forties,
