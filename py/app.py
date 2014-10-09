@@ -79,7 +79,7 @@ class Root(object):
       "80+,%s" % eightyplus,
     ]
     return "\n".join(ret)
-
+  age.exposed = True
 
 application = cherrypy.Application(Root(), script_name=None, config=None)
 
