@@ -1,18 +1,18 @@
 function renderPieChart(ourData, ourDiv, colorBase)  {               
   d = d3.csv.parseRows(ourData);
-  reds = ['rgb(255,245,240)','rgb(254,224,210)','rgb(252,187,161)','rgb(252,146,114)','rgb(251,106,74)','rgb(239,59,44)','rgb(203,24,29)','rgb(165,15,21)','rgb(103,0,13)']
-  blues = ['rgb(247,251,255)','rgb(222,235,247)','rgb(198,219,239)','rgb(158,202,225)','rgb(107,174,214)','rgb(66,146,198)','rgb(33,113,181)','rgb(8,81,156)','rgb(8,48,107)']
-  greens = ['rgb(247,252,245)','rgb(229,245,224)','rgb(199,233,192)','rgb(161,217,155)','rgb(116,196,118)','rgb(65,171,93)','rgb(35,139,69)','rgb(0,109,44)','rgb(0,68,27)']
+  reds = ['rgb(255,245,235)','rgb(254,230,206)','rgb(253,208,162)','rgb(253,174,107)','rgb(253,141,60)','rgb(241,105,19)','rgb(217,72,1)','rgb(140,45,4)']
+  blues = ['rgb(247,251,255)','rgb(198,219,239)','rgb(107,174,214)','rgb(33,113,181)']
+  greens = ['rgb(229,245,224)','rgb(199,233,192)','rgb(116,196,118)','rgb(65,171,93)']
 
   switch(colorBase) {
     case "red":
-      colors = reds
+      colors = reds.reverse()
       break;
     case "blue":
-      colors = blues
+      colors = blues.reverse()
       break;
     case "green":
-      colors = greens
+      colors = greens.reverse()
       break;
     default: 
       colors = ['rgb(215,48,39)','rgb(244,109,67)','rgb(253,174,97)','rgb(254,224,139)','rgb(255,255,191)','rgb(217,239,139)','rgb(166,217,106)','rgb(102,189,99)','rgb(26,152,80)']
@@ -87,7 +87,7 @@ function renderPieChart(ourData, ourDiv, colorBase)  {
         h = Math.sqrt(x*x + y*y);
         rad = d.endAngle - d.startAngle
         if (rad < 1.57) {
-          cn = 76;
+          cn = 84;
         } else {
           cn = 10;
         }
