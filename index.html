@@ -146,17 +146,17 @@
     var url = 'csv/gender_all.csv'
     ourCsv = d3.text(url)
       .get(function(error, data) {
-         renderPieChart(data, "#gender", "#4682b4");
+         renderPieChart(data, "#gender", "blue");
       })
     var url = 'csv/type_all.csv'
     ourCsv = d3.text(url)
       .get(function(error, data) {
-         renderPieChart(data, "#type", "#2ca25f");
+         renderPieChart(data, "#type", "green");
       })
     var url = '/py/age'
     ourCsv = d3.text(url)
       .get(function(error, data) {
-         renderPieChart(data, "#age", "#67000d");
+         renderPieChart(data, "#age", "red");
       })
 
     </script>

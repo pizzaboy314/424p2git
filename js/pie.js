@@ -1,6 +1,22 @@
-function renderPieChart(ourData, ourDiv, ourColor)  {               
+function renderPieChart(ourData, ourDiv, colorBase)  {               
   d = d3.csv.parseRows(ourData);
+  reds = ['rgb(255,245,240)','rgb(254,224,210)','rgb(252,187,161)','rgb(252,146,114)','rgb(251,106,74)','rgb(239,59,44)','rgb(203,24,29)','rgb(165,15,21)','rgb(103,0,13)']
+  blues = ['rgb(247,251,255)','rgb(222,235,247)','rgb(198,219,239)','rgb(158,202,225)','rgb(107,174,214)','rgb(66,146,198)','rgb(33,113,181)','rgb(8,81,156)','rgb(8,48,107)']
+  greens = ['rgb(247,252,245)','rgb(229,245,224)','rgb(199,233,192)','rgb(161,217,155)','rgb(116,196,118)','rgb(65,171,93)','rgb(35,139,69)','rgb(0,109,44)','rgb(0,68,27)']
 
+  switch(colorBase) {
+    case "red":
+      colors = reds
+      break;
+    case "blue":
+      colors = blues
+      break;
+    case "green":
+      colors = greens
+      break;
+    default: 
+      colors = ['rgb(215,48,39)','rgb(244,109,67)','rgb(253,174,97)','rgb(254,224,139)','rgb(255,255,191)','rgb(217,239,139)','rgb(166,217,106)','rgb(102,189,99)','rgb(26,152,80)']
+   }
   // this is a hack and should be fixed
   data = []
   for (i = 1; i < d.length; i++) {
@@ -11,13 +27,9 @@ function renderPieChart(ourData, ourDiv, ourColor)  {
 
   var canvas = d3.select(ourDiv)
     .append('svg')
-    .attr({'width':310,'height':320});
+    .attr({'width':220,'height': 220})
+    .style("padding-left", "40px");
 
-  var colors = [ourColor];
-  for (i = 1; i < d.length; i++) {
-    ourColor = colorLight(ourColor, .5);
-    colors.push(ourColor)
-  }
   var colorscale = d3.scale.linear().domain([0,data.length]).range(colors);
 
   var arc = d3.svg.arc()
@@ -87,24 +99,5 @@ function renderPieChart(ourData, ourDiv, ourColor)  {
         return d.data.label+" "+d.value+""; 
       });
 
-}
-
-// Below code borrowed from http://stackoverflow.com/questions/1507931/generate-lighter-darker-color-in-css-using-javascript
-function colorLight(hex, lum) {
-// // validate hex string
-  hex = String(hex).replace(/[^0-9a-f]/gi, '');
-  if (hex.length < 6) {
-    hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
-  }
-  lum = lum || 0;
-  // convert to decimal and change luminosity
-  var rgb = "#", c, i;
-  for (i = 0; i < 3; i++) {
-    c = parseInt(hex.substr(i*2,2), 16);
-    c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
-    rgb += ("00"+c).substr(c.length);
-  }
-  console.log("rbg "+rgb);
-  return rgb;
 }
 
