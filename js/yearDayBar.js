@@ -1,6 +1,6 @@
 
 function yearDayBar(csv, display_div, xname, yname, color) {
-  //console.log("stuff "+csv);
+  console.log("stuff "+csv);
   var data = d3.csv.parse(csv);
   var valueLabelWidth = 40; // space reserved for value labels (right)
   var barHeight = 1 // height of one bar

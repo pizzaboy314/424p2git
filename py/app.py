@@ -24,10 +24,12 @@ if cherrypy.__version__.startswith('3.0') and cherrypy.engine.state == 0:
 
 class Root(object):
   def index(self):
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     return 'Hello World!'
   index.exposed = True
 
   def rides_by_day_of_year(self):
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     q = """
       SELECT
         startdate, 
@@ -47,6 +49,7 @@ class Root(object):
     
 
   def age(self):
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     q = """
       SELECT 
         age_in_2014,
