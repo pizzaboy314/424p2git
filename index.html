@@ -17,6 +17,12 @@
       text-decoration: none;
       color: darkblue;
     }
+    text {
+      z-index: 3000;
+    }
+    #graphs {
+      left: 10px;
+    }
   </style>
   <title>CS424 - P2 - Divvy Map</title>
   <meta charset="utf-8" />
@@ -28,6 +34,8 @@
   <link rel="stylesheet" href="css/leaflet-sidebar.css" />
   <script src="js/d3.v3.min.js"></script>
   <script src="js/leaflet.js"></script>
+  <script src="js/pie.js"></script>
+  <script src="js/yearDayBar.js"></script>
 </head>
 <body>
     <div id="map">
@@ -46,20 +54,29 @@
         <div class="sidebar-content active">
             <div class="sidebar-pane" id="home">
                 <h1>Overview Data</h1>
-                <p>(mockup)</p>
-              <div id="graphs"><img src="images/bikes-by-day.png" />
-                <img src="images/bikes-by-hour.png" />
-                <img src="images/bikes-per-year.png" />
-                <img src="images/dist_dist.png" />
-                <img src="images/dist_rides.png" />
+              <div id="graphs">
+                <div id="gender" style="display: inline"></div>
+                <div id="type" style="display: inline"></div>
+                <div id="age" style="display: inline"></div>
+                <div id="bikes-by-day"><img src="images/bikes-by-day.png" /></div>
+                <div id="bikes-by-hour"><img src="images/bikes-by-hour.png" /></div>
+                <div id="bikes-per-year"></div>
+                <div id="dist-by-distance"><img src="images/dist_dist.png" /></div>
+                <div id="dist-by-ride"><img src="images/dist_rides.png" /></div>
               </div>
             </div>
             <div class="sidebar-pane active" id="profile">
               <div id="contact">
                 <h1>Weekly activity:</h1>
                   <h2><a href="mailto:mt@trustdarkness.com">Mike Thompson</a></h2>
+                    <h3>Week 1</h3>
                     - Setup initial map and sidebar<br />
                     - Setup Git for collaboration
+                    <h3>Week 2</h3>
+                    - sidebar to the right with working controls<br />
+                    - Added rider breakdown demographics graphs<br />
+                    - Deployted SQL db<br />
+                    - Began work on python data interaction layer
                   <h2><a href="mailto:bspahr314@gmail.com">Bryan Spahr</a></h2>
                   <h3>Week 1</h3>
                     - Began data analysis<br />
@@ -123,7 +140,7 @@
         var sidebar = L.control.sidebar('sidebar-right', { position: 'right' });
 	//sidebar.addTo(map);
         map.addControl(sidebar);
-        var url = 'divy.csv'
+        var url = 'csv/divvy.csv'
         var stations = []
         csv = d3.csv(url)
 	  .get(function(error, data) {
@@ -135,6 +152,26 @@
       })
 
       var layercontrol = L.control.layers(baseMaps, null, {position: 'bottomleft'}).addTo(map);
+    var url = 'csv/gender_all.csv'
+    ourCsv = d3.text(url)
+      .get(function(error, data) {
+         renderPieChart(data, "#gender", "blue");
+      })
+    var url = 'csv/type_all.csv'
+    ourCsv = d3.text(url)
+      .get(function(error, data) {
+         renderPieChart(data, "#type", "green");
+      })
+    var url = '/py/age'
+    ourCsv = d3.text(url)
+      .get(function(error, data) {
+         renderPieChart(data, "#age", "red");
+      })
+    var url = 'http://trustdarkness.com/py/rides_by_day_of_year'
+    ourCsv = d3.text(url)
+      .get(function(error, data) {
+         yearDayBar(data, "#bikes-per-year", "Date", "Count", "#ef6548");
+      })
     </script>
 </body>
 </html>
