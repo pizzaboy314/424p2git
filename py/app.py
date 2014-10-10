@@ -146,4 +146,4 @@ class Root(object):
         return group
   station_popularity.exposed = True
 
-application = cherrypy.Application(Root(), script_name=None, config={'show_tracebacks':True})
+application = cherrypy.Application(Root(), script_name=None, config=None)
