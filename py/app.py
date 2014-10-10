@@ -47,7 +47,7 @@ def store_popularity_groups():
     pickle.dump(d,f)
                    
 
-cherrypy.config.update({'environment': 'embedded', 'show_tracebacks': True, 'log.error_file': 'site.log'})
+cherrypy.config.update({'environment': 'embedded', 'show_tracebacks': True, 'log.error_file': '/var/www/cs424/p2/py/site.log'})
 
 if cherrypy.__version__.startswith('3.0') and cherrypy.engine.state == 0:
     cherrypy.engine.start(blocking=False)
