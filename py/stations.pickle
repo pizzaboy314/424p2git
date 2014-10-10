@@ -1,0 +1,1207 @@
+ccollections
+OrderedDict
+p0
+((lp1
+(lp2
+I91
+aS'Clinton St & Washington Blvd'
+p3
+aa(lp4
+I85
+aS'Michigan Ave & Oak St'
+p5
+aa(lp6
+I88
+aS'May St & Randolph St'
+p7
+aa(lp8
+I17
+aS'Wood St & Division St'
+p9
+aa(lp10
+I28
+aS'Larrabee St & Menomonee St'
+p11
+aa(lp12
+I45
+aS'Michigan Ave & Congress Pkwy'
+p13
+aa(lp14
+I61
+aS'Wood St & Milwaukee Ave'
+p15
+aa(lp16
+I32
+aS'Racine Ave & Congress Pkwy'
+p17
+aa(lp18
+I68
+aS'Clinton St & Tilden St'
+p19
+aa(lp20
+I19
+aS'Loomis St & Taylor St'
+p21
+aa(lp22
+I34
+aS'Cannon Dr & Fullerton Ave'
+p23
+aa(lp24
+I349
+aS'Halsted St & Wrightwood Ave'
+p25
+aa(lp26
+I320
+aS'Loomis St & Lexington St'
+p27
+aa(lp28
+I55
+aS'Halsted St & James M Rochford St'
+p29
+aa(lp30
+I42
+aS'Wabash Ave & Cermak Rd'
+p31
+aa(lp32
+I36
+aS'Franklin St & Jackson Blvd'
+p33
+aa(lp34
+I81
+aS'Daley Center Plaza'
+p35
+aa(lp36
+I340
+aS'Clark St & Wrightwood Ave'
+p37
+aa(lp38
+I37
+aS'Dearborn St & Adams St'
+p39
+aa(lp40
+I44
+aS'State St & Randolph St'
+p41
+aa(lp42
+I94
+aS'Lincoln Ave & Armitage Ave'
+p43
+aa(lp44
+I76
+aS'Lake Shore Dr & Monroe St'
+p45
+aa(lp46
+I90
+aS'Millennium Park'
+p47
+aa(lp48
+I52
+aS'Michigan Ave & Lake St'
+p49
+aa(lp50
+I51
+aS'Clark St & Randolph St'
+p51
+aa(lp52
+I190
+aS'Southport Ave & Wrightwood Ave'
+p53
+aa(lp54
+I24
+aS'Fairbanks Ct & Grand Ave'
+p55
+aa(lp56
+I54
+aS'Ogden Ave & Chicago Ave'
+p57
+aa(lp58
+I20
+aS'Sheffield Ave & Kingsbury St'
+p59
+aa(lp60
+I31
+aS'Franklin St & Chicago Ave'
+p61
+aa(lp62
+I74
+aS'Kingsbury St & Erie St'
+p63
+aa(lp64
+I77
+aS'Clinton St & Madison St'
+p65
+aa(lp66
+I69
+aS'Damen Ave & Pierce Ave'
+p67
+aa(lp68
+I60
+aS'Dayton St & North Ave'
+p69
+aa(lp70
+I59
+aS'Wabash Ave & Roosevelt Rd'
+p71
+aa(lp72
+I67
+aS'Sheffield Ave & Fullerton Ave'
+p73
+aa(lp74
+I73
+aS'Jefferson St & Monroe St'
+p75
+aa(lp76
+I29
+aS'Noble St & Milwaukee Ave'
+p77
+aa(lp78
+I311
+aS'Lincoln Ave & Eastwood Ave'
+p79
+aa(lp80
+I72
+aS'State St & 16th St'
+p81
+aa(lp82
+I75
+aS'Canal St & Jackson Blvd'
+p83
+aa(lp84
+I48
+aS'Larrabee St & Kingsbury St'
+p85
+aa(lp86
+I16
+aS'Wood St & North Ave'
+p87
+aa(lp88
+I108
+aS'Halsted St & Polk St'
+p89
+aa(lp90
+I5
+aS'State St & Harrison St'
+p91
+aa(lp92
+I30
+aS'Ashland Ave & Augusta Blvd'
+p93
+aa(lp94
+I26
+aS'McClurg Ct & Illinois St'
+p95
+aa(lp96
+I25
+aS'Michigan Ave & Pearson St'
+p97
+aa(lp98
+I15
+aS'Racine Ave & 18th St'
+p99
+aa(lp100
+I66
+aS'Clinton St & Lake St'
+p101
+aa(lp102
+I166
+aS'Ashland Ave & Wrightwood Ave'
+p103
+aa(lp104
+I21
+aS'Aberdeen St & Jackson Blvd'
+p105
+aa(lp106
+I58
+aS'Ashland Ave & Armitage Ave'
+p107
+aa(lp108
+I350
+aS'Ashland Ave & Chicago Ave'
+p109
+aa(lp110
+I22
+aS'May St & Taylor St'
+p111
+aa(lp112
+I251
+aS'Clarendon Ave & Leland Ave'
+p113
+aa(lp114
+I46
+aS'Wells St & Walton St'
+p115
+aa(lp116
+I27
+aS'Larrabee St & North Ave'
+p117
+aa(lp118
+I341
+aS'Adler Planetarium'
+p119
+aa(lp120
+I149
+aS'Calumet Ave & 33rd St'
+p121
+aa(lp122
+I127
+aS'Lincoln Ave & Fullerton Ave'
+p123
+aa(lp124
+I164
+aS'Franklin St & Lake St'
+p125
+aa(lp126
+I279
+aS'Halsted St & 35th St'
+p127
+aa(lp128
+I252
+aS'Greenwood Ave & 47th St'
+p129
+aa(lp130
+I232
+aS'Pine Grove Ave & Addison St'
+p131
+aa(lp132
+I351
+aS'Cottage Grove Ave & 51st St'
+p133
+aa(lp134
+I62
+aS'McCormick Place'
+p135
+aa(lp136
+I99
+aS'Lake Shore Dr & Ohio St'
+p137
+aa(lp138
+I84
+aS'Green St & Milwaukee Ave'
+p139
+aa(lp140
+I56
+aS'Desplaines St & Kinzie St'
+p141
+aa(lp142
+I50
+aS'Clark St & Congress Pkwy'
+p143
+aa(lp144
+I250
+aS'Ashland Ave & Wellington Ave'
+p145
+aa(lp146
+I262
+aS'Halsted St & 37th St'
+p147
+aa(lp148
+I97
+aS'Museum Campus'
+p149
+aa(lp150
+I57
+aS'Clinton St & Roosevelt Rd'
+p151
+aa(lp152
+I43
+aS'Michigan Ave & Washington St'
+p153
+aa(lp154
+I33
+aS'State St & Van Buren St'
+p155
+aa(lp156
+I47
+aS'State St & Kinzie St'
+p157
+aa(lp158
+I322
+aS'Kimbark Ave & 53rd St'
+p159
+aa(lp160
+I14
+aS'Morgan St & 18th St'
+p161
+aa(lp162
+I87
+aS'Racine Ave & Fullerton Ave'
+p163
+aa(lp164
+I300
+aS'Broadway & Barry Ave'
+p165
+aa(lp166
+I71
+aS'Morgan St & Lake St'
+p167
+aa(lp168
+I255
+aS'Indiana Ave & Roosevelt Rd'
+p169
+aa(lp170
+I23
+aS'Orleans St & Elm St'
+p171
+aa(lp172
+I249
+aS'Montrose Harbor'
+p173
+aa(lp174
+I244
+aS'Ravenswood Ave & Irving Park Rd'
+p175
+aa(lp176
+I93
+aS'Sheffield Ave & Willow St'
+p177
+aa(lp178
+I49
+aS'Dearborn St & Monroe St'
+p179
+aa(lp180
+I53
+aS'Wells St & Erie St'
+p181
+aa(lp182
+I80
+aS'Aberdeen St & Madison St'
+p183
+aa(lp184
+I121
+aS'Blackstone Ave & Hyde Park Blvd'
+p185
+aa(lp186
+I220
+aS'Hampden Ct & Diversey Pkwy'
+p187
+aa(lp188
+I13
+aS'Wilton Ave & Diversey Pkwy'
+p189
+aa(lp190
+I181
+aS'LaSalle St & Illinois St'
+p191
+aa(lp192
+I92
+aS'Carpenter St & Huron St'
+p193
+aa(lp194
+I86
+aS'Eckhart Park'
+p195
+aa(lp196
+I285
+aS'Wood St & Grand Ave'
+p197
+aa(lp198
+I348
+aS'California Ave & 21st St'
+p199
+aa(lp200
+I312
+aS'Clarendon Ave & Gordon Ter'
+p201
+aa(lp202
+I112
+aS'Green St & Randolph St'
+p203
+aa(lp204
+I179
+aS'Martin Luther King Dr & Oakwood Blvd'
+p205
+aa(lp206
+I165
+aS'Clark St & Waveland Ave'
+p207
+aa(lp208
+I328
+aS'Ellis Ave & 58th St'
+p209
+aa(lp210
+I305
+aS'Western Ave & Division St'
+p211
+aa(lp212
+I319
+aS'Greenview Ave & Diversey Pkwy'
+p213
+aa(lp214
+I313
+aS'Lakeview Ave & Fullerton Pkwy'
+p215
+aa(lp216
+I195
+aS'Columbus Dr & Randolph St'
+p217
+aa(lp218
+I141
+aS'Clark St & Lincoln Ave'
+p219
+aa(lp220
+I330
+aS'Lincoln Ave & Addison St'
+p221
+aa(lp222
+I192
+aS'Canal St & Adams St'
+p223
+aa(lp224
+I188
+aS'Greenview Ave & Fullerton Ave'
+p225
+aa(lp226
+I98
+aS'LaSalle St & Washington St'
+p227
+aa(lp228
+I169
+aS'Canal St & Harrison St'
+p229
+aa(lp230
+I273
+aS'Michigan Ave & 18th St'
+p231
+aa(lp232
+I123
+aS'California Ave & Milwaukee Ave'
+p233
+aa(lp234
+I159
+aS'Claremont Ave & Hirsch St'
+p235
+aa(lp236
+I100
+aS'Orleans St & Merchandise Mart Plaza'
+p237
+aa(lp238
+I178
+aS'State St & 19th St'
+p239
+aa(lp240
+I115
+aS'Sheffield Ave & Wellington Ave'
+p241
+aa(lp242
+I170
+aS'Clinton St & 18th St'
+p243
+aa(lp244
+I134
+aS'Peoria St & Jackson Blvd'
+p245
+aa(lp246
+I150
+aS'Fort Dearborn Dr & 31st St'
+p247
+aa(lp248
+I135
+aS'Halsted St & 21st St'
+p249
+aa(lp250
+I167
+aS'Damen Ave & Coulter St'
+p251
+aa(lp252
+I147
+aS'Indiana Ave & 26th St'
+p253
+aa(lp254
+I129
+aS'Blue Island Ave & 18th St'
+p255
+aa(lp256
+I183
+aS'Damen Ave & Augusta Blvd'
+p257
+aa(lp258
+I153
+aS'Southport Ave & Wellington Ave'
+p259
+aa(lp260
+I162
+aS'Damen Ave & Wellington Ave'
+p261
+aa(lp262
+I116
+aS'Western Ave & Winnebago Ave'
+p263
+aa(lp264
+I171
+aS'May St & Cullerton St'
+p265
+aa(lp266
+I130
+aS'Damen Ave & Division St'
+p267
+aa(lp268
+I185
+aS'Stave St & Armitage Ave'
+p269
+aa(lp270
+I174
+aS'Canal St & Madison St'
+p271
+aa(lp272
+I160
+aS'Campbell Ave & North Ave'
+p273
+aa(lp274
+I158
+aS'Milwaukee Ave & Wabansia Ave'
+p275
+aa(lp276
+I186
+aS'Ogden Ave & Race Ave'
+p277
+aa(lp278
+I146
+aS'Loomis St & Jackson Blvd'
+p279
+aa(lp280
+I119
+aS'Ashland Ave & Lake St'
+p281
+aa(lp282
+I321
+aS'Wabash Ave & 8th St'
+p283
+aa(lp284
+I122
+aS'Ogden Ave & Congress Pkwy'
+p285
+aa(lp286
+I126
+aS'Clark St & North Ave'
+p287
+aa(lp288
+I163
+aS'Paulina St & Diversey Pkwy'
+p289
+aa(lp290
+I154
+aS'Southport Ave & Belmont Ave'
+p291
+aa(lp292
+I212
+aS'Wells St & Ohio St'
+p293
+aa(lp294
+I152
+aS'Lincoln Ave & Diversey Pkwy'
+p295
+aa(lp296
+I347
+aS'Ashland Ave & Grace St'
+p297
+aa(lp298
+I137
+aS'Morgan Ave & 14th Pl'
+p299
+aa(lp300
+I136
+aS'Racine Ave & 13th St'
+p301
+aa(lp302
+I173
+aS'Mies van der Rohe Way & Chicago Ave'
+p303
+aa(lp304
+I176
+aS'Clark St & Elm St'
+p305
+aa(lp306
+I118
+aS'Sedgwick St & North Ave'
+p307
+aa(lp308
+I224
+aS'Halsted St & Willow St'
+p309
+aa(lp310
+I110
+aS'State St & Erie St'
+p311
+aa(lp312
+I140
+aS'Dearborn Pkwy & Delaware Pl'
+p313
+aa(lp314
+I106
+aS'State St & Pearson St'
+p315
+aa(lp316
+I157
+aS'Lake Shore Dr & Wellington Ave'
+p317
+aa(lp318
+I111
+aS'Sedgwick St & Huron St'
+p319
+aa(lp320
+I114
+aS'Sheffield Ave & Addison St'
+p321
+aa(lp322
+I117
+aS'Wilton Ave & Belmont Ave'
+p323
+aa(lp324
+I233
+aS'Sangamon St & Washington Blvd'
+p325
+aa(lp326
+I144
+aS'Larrabee St & Webster Ave'
+p327
+aa(lp328
+I229
+aS'Southport Ave & Roscoe St'
+p329
+aa(lp330
+I156
+aS'Clark St & Wellington Ave'
+p331
+aa(lp332
+I143
+aS'Sedgwick St & Webster Ave'
+p333
+aa(lp334
+I168
+aS'Michigan Ave & 14th St'
+p335
+aa(lp336
+I175
+aS'Wells St & Polk St'
+p337
+aa(lp338
+I128
+aS'Damen Ave & Chicago Ave'
+p339
+aa(lp340
+I314
+aS'Ravenswood Ave & Berteau Ave'
+p341
+aa(lp342
+I124
+aS'Damen Ave & Cullerton St'
+p343
+aa(lp344
+I35
+aS'Streeter Dr & Illinois St'
+p345
+aa(lp346
+I138
+aS'Clybourn Ave & Division St'
+p347
+aa(lp348
+I184
+aS'State St & 35th St'
+p349
+aa(lp350
+I109
+aS'900 W Harrison'
+p351
+aa(lp352
+I120
+aS'Wentworth Ave & Archer Ave'
+p353
+aa(lp354
+I191
+aS'Canal St & Monroe St'
+p355
+aa(lp356
+I196
+aS'Cityfront Plaza & N Water St'
+p357
+aa(lp358
+I194
+aS'State St & Wacker Dr'
+p359
+aa(lp360
+I199
+aS'Wabash Ave & Grand Ave'
+p361
+aa(lp362
+I197
+aS'Michigan Ave & Madison St'
+p363
+aa(lp364
+I198
+aS'Halsted St & Madison St'
+p365
+aa(lp366
+I240
+aS'Sheridan Rd & Irving Park Rd'
+p367
+aa(lp368
+I202
+aS'Halsted St & 18th St'
+p369
+aa(lp370
+I177
+aS'Theater on the Lake'
+p371
+aa(lp372
+I200
+aS'King Dr & 47th St'
+p373
+aa(lp374
+I205
+aS'Paulina St & 18th St'
+p375
+aa(lp376
+I206
+aS'Halsted St & Archer Ave'
+p377
+aa(lp378
+I204
+aS'Prairie Ave & Garfield Blvd'
+p379
+aa(lp380
+I211
+aS'St Clair St & Erie St'
+p381
+aa(lp382
+I215
+aS'Damen Ave & Madison St'
+p383
+aa(lp384
+I207
+aS'Emerald Ave & 28th St'
+p385
+aa(lp386
+I201
+aS'Indiana Ave & 40th St'
+p387
+aa(lp388
+I203
+aS'Western Ave & 21st St'
+p389
+aa(lp390
+I210
+aS'Ashland Ave & Division St'
+p391
+aa(lp392
+I217
+aS'May St & Fulton St'
+p393
+aa(lp394
+I209
+aS'Normal Ave & Archer Ave'
+p395
+aa(lp396
+I214
+aS'Damen Ave & Grand Ave'
+p397
+aa(lp398
+I216
+aS'California Ave & Division St'
+p399
+aa(lp400
+I213
+aS'Leavitt St & North Ave'
+p401
+aa(lp402
+I208
+aS'Ashland Ave & 21st St'
+p403
+aa(lp404
+I225
+aS'Halsted St & Dickens Ave'
+p405
+aa(lp406
+I226
+aS'Racine Ave & Belmont Ave'
+p407
+aa(lp408
+I227
+aS'Southport Ave & Waveland Ave'
+p409
+aa(lp410
+I219
+aS'Damen Ave & Cortland St'
+p411
+aa(lp412
+I230
+aS'Lincoln Ave & Roscoe St'
+p413
+aa(lp414
+I231
+aS'Sheridan Rd & Montrose Ave'
+p415
+aa(lp416
+I237
+aS'Martin Luther King Dr & 29th St'
+p417
+aa(lp418
+I228
+aS'Damen Ave & Melrose Ave'
+p419
+aa(lp420
+I239
+aS'Western Ave & Leland Ave'
+p421
+aa(lp422
+I234
+aS'Clark St & Montrose Ave'
+p423
+aa(lp424
+I236
+aS'Sedgwick St & Schiller St'
+p425
+aa(lp426
+I223
+aS'Clifton Ave & Armitage Ave'
+p427
+aa(lp428
+I241
+aS'Morgan St & Polk St'
+p429
+aa(lp430
+I238
+aS'Ravenswood Ave & Montrose Ave'
+p431
+aa(lp432
+I243
+aS'Lincoln Ave & Leavitt St'
+p433
+aa(lp434
+I242
+aS'Damen Ave & Leland Ave'
+p435
+aa(lp436
+I222
+aS'Milwaukee Ave & Rockwell St'
+p437
+aa(lp438
+I218
+aS'Wells St & 19th St'
+p439
+aa(lp440
+I248
+aS'Woodlawn Ave & 55th St'
+p441
+aa(lp442
+I247
+aS'Shore Drive & 55th St'
+p443
+aa(lp444
+I193
+aS'State St & 29th St'
+p445
+aa(lp446
+I245
+aS'Clarendon Ave & Junior Ter'
+p447
+aa(lp448
+I246
+aS'Ashland Ave & Belle Plaine Ave'
+p449
+aa(lp450
+I342
+aS'Wolcott Ave & Polk St'
+p451
+aa(lp452
+I148
+aS'State St & 33rd St'
+p453
+aa(lp454
+I259
+aS'California Ave & Francis Pl'
+p455
+aa(lp456
+I261
+aS'Hermitage Ave & Polk St'
+p457
+aa(lp458
+I113
+aS'Bissell St & Armitage Ave'
+p459
+aa(lp460
+I256
+aS'Broadway & Sheridan Rd'
+p461
+aa(lp462
+I253
+aS'Clifton Ave & Lawrence Ave'
+p463
+aa(lp464
+I132
+aS'Wentworth Ave & 24th St'
+p465
+aa(lp466
+I338
+aS'Calumet Ave & 18th St'
+p467
+aa(lp468
+I292
+aS'Southport Ave & Clark St'
+p469
+aa(lp470
+I254
+aS'Pine Grove Ave & Irving Park Rd'
+p471
+aa(lp472
+I258
+aS'Logan Blvd & Elston Ave'
+p473
+aa(lp474
+I257
+aS'Lincoln Ave & Waveland Ave'
+p475
+aa(lp476
+I277
+aS'Ashland Ave & Grand Ave'
+p477
+aa(lp478
+I268
+aS'Lake Shore Dr & North Blvd'
+p479
+aa(lp480
+I271
+aS'Cottage Grove Ave & 43rd St'
+p481
+aa(lp482
+I275
+aS'Ashland Ave & 13th St'
+p483
+aa(lp484
+I276
+aS'California Ave & North Ave'
+p485
+aa(lp486
+I272
+aS'Indiana Ave & 31st St'
+p487
+aa(lp488
+I274
+aS'Racine Ave & 15th St'
+p489
+aa(lp490
+I281
+aS'Western Ave & 24th St'
+p491
+aa(lp492
+I287
+aS'Franklin St & Arcade Pl'
+p493
+aa(lp494
+I291
+aS'Wells St & Evergreen Ave'
+p495
+aa(lp496
+I296
+aS'Broadway & Belmont Ave'
+p497
+aa(lp498
+I282
+aS'Halsted St & Maxwell St'
+p499
+aa(lp500
+I280
+aS'Morgan St & 31st St'
+p501
+aa(lp502
+I288
+aS'Larrabee St & Armitage Ave'
+p503
+aa(lp504
+I278
+aS'Wallace Ave & 35th St'
+p505
+aa(lp506
+I284
+aS'Michigan Ave & Jackson Blvd'
+p507
+aa(lp508
+I283
+aS'LaSalle St & Jackson Blvd'
+p509
+aa(lp510
+I286
+aS'Franklin St & Quincy St'
+p511
+aa(lp512
+I289
+aS'Wells St & Concord Ln'
+p513
+aa(lp514
+I260
+aS'Kedzie Ave & Milwaukee Ave'
+p515
+aa(lp516
+I267
+aS'Lake Park Ave & 47th St'
+p517
+aa(lp518
+I263
+aS'Rhodes Ave & 32nd St'
+p519
+aa(lp520
+I265
+aS'Cottage Grove Ave & Oakwood Blvd'
+p521
+aa(lp522
+I264
+aS'Stetson Ave & South Water St'
+p523
+aa(lp524
+I293
+aS'Broadway & Wilson Ave'
+p525
+aa(lp526
+I294
+aS'Broadway & Berwyn Ave'
+p527
+aa(lp528
+I295
+aS'Broadway & Argyle St'
+p529
+aa(lp530
+I301
+aS'Clark St & Schiller St'
+p531
+aa(lp532
+I299
+aS'Halsted St & Roscoe St'
+p533
+aa(lp534
+I297
+aS'Paulina St & Montrose Ave'
+p535
+aa(lp536
+I303
+aS'Broadway & Cornelia Ave'
+p537
+aa(lp538
+I304
+aS'Halsted St & Waveland Ave'
+p539
+aa(lp540
+I309
+aS'Leavitt St & Armitage Ave'
+p541
+aa(lp542
+I302
+aS'Sheffield Ave & Wrightwood Ave'
+p543
+aa(lp544
+I310
+aS'Damen Ave & Charleston St'
+p545
+aa(lp546
+I315
+aS'Leavitt St & Hirsch St'
+p547
+aa(lp548
+I317
+aS'Wood St & Taylor St'
+p549
+aa(lp550
+I318
+aS'Southport Ave & Irving Park Rd'
+p551
+aa(lp552
+I323
+aS'Sheridan Rd & Lawrence Ave'
+p553
+aa(lp554
+I131
+aS'Lincoln Ave & Belmont Ave'
+p555
+aa(lp556
+I325
+aS'Clark St & Winnemac Ave'
+p557
+aa(lp558
+I306
+aS'Sheridan Rd & Buena Ave'
+p559
+aa(lp560
+I307
+aS'Southport Ave & Clybourn Ave'
+p561
+aa(lp562
+I327
+aS'Sheffield Ave & Webster Ave'
+p563
+aa(lp564
+I316
+aS'Damen Ave & Sunnyside Ave'
+p565
+aa(lp566
+I329
+aS'Lake Shore Dr & Diversey Pkwy'
+p567
+aa(lp568
+I308
+aS'Seeley Ave & Roscoe St'
+p569
+aa(lp570
+I334
+aS'Lake Shore Dr & Belmont Ave'
+p571
+aa(lp572
+I326
+aS'Clark St & Leland Ave'
+p573
+aa(lp574
+I333
+aS'Ashland Ave & Blackhawk St'
+p575
+aa(lp576
+I337
+aS'Clark St & Chicago Ave'
+p577
+aa(lp578
+I332
+aS'Halsted St & Diversey Pkwy'
+p579
+aa(lp580
+I331
+aS'Halsted St & Blackhawk St'
+p581
+aa(lp582
+I339
+aS'Emerald Ave & 31st St'
+p583
+aa(lp584
+I298
+aS'Lincoln Ave & Belle Plaine Ave'
+p585
+aa(lp586
+I324
+aS'Stockton Dr & Wrightwood Ave'
+p587
+aa(lp588
+I345
+aS'Lake Park Ave & 56th St'
+p589
+aa(lp590
+I344
+aS'Wolcott Ave & Lawrence Ave'
+p591
+aa(lp592
+I290
+aS'Kedzie Ave & Palmer Ct'
+p593
+aa(lp594
+I346
+aS'Ada St & Washington Blvd'
+p595
+aa(lp596
+I336
+aS'Cottage Grove Ave & 47th St'
+p597
+aa(lp598
+I335
+aS'Calumet Ave & 35th St'
+p599
+aa(lp600
+I343
+aS'Racine Ave & Wrightwood Ave'
+p601
+aatp602
+Rp603
+.
