@@ -20,6 +20,9 @@
     text {
       z-index: 3000;
     }
+    #graphs {
+      left: 10px;
+    }
   </style>
   <title>CS424 - P2 - Divvy Map</title>
   <meta charset="utf-8" />
@@ -161,10 +164,10 @@
       .get(function(error, data) {
          renderPieChart(data, "#age", "red");
       })
-    var url = '/py/rides_by_day_of_year'
+    var url = 'http://trustdarkness.com/py/rides_by_day_of_year'
     ourCsv = d3.text(url)
       .get(function(error, data) {
-         yearDayBar(data, "bikes-per-year", "Date", "Count", "blue");
+         yearDayBar(data, "#bikes-per-year", "Date", "Count", "#ef6548");
       })
     </script>
 </body>
