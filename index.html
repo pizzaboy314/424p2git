@@ -23,6 +23,16 @@
     #graphs {
       left: 10px;
     }
+	
+	.chartDayOfWeek rect {
+	  fill: darkorchid;
+	}
+
+	.chartDayOfWeek text {
+	  fill: black;
+	  font: 10px sans-serif;
+	  text-anchor: end;
+	}
   </style>
   <title>CS424 - P2 - Divvy Map</title>
   <meta charset="utf-8" />
@@ -52,20 +62,18 @@
 
         <!-- Tab panes -->
         <div class="sidebar-content active">
-            <div class="sidebar-pane" id="home">
+            <div class="sidebar-pane active" id="home">
                 <h1>Overview Data</h1>
               <div id="graphs">
                 <div id="gender" style="display: inline"></div>
                 <div id="type" style="display: inline"></div>
                 <div id="age" style="display: inline"></div>
-                <div id="bikes-by-day"><img src="images/bikes-by-day.png" /></div>
-                <div id="bikes-by-hour"><img src="images/bikes-by-hour.png" /></div>
+                <svg class="chartDayOfWeek"></svg>
                 <div id="bikes-per-year"></div>
-                <div id="dist-by-distance"><img src="images/dist_dist.png" /></div>
-                <div id="dist-by-ride"><img src="images/dist_rides.png" /></div>
+                
               </div>
             </div>
-            <div class="sidebar-pane active" id="profile">
+            <div class="sidebar-pane" id="profile">
               <div id="contact">
                 <h1>Weekly activity:</h1>
                   <h2><a href="mailto:mt@trustdarkness.com">Mike Thompson</a></h2>
@@ -78,8 +86,11 @@
                     - Deployted SQL db<br />
                     - Began work on python data interaction layer
                   <h2><a href="mailto:bspahr314@gmail.com">Bryan Spahr</a></h2>
+                  <h3>Week 1</h3>
                     - Began data analysis<br />
-		    - Built sqllite db for divvy data
+					- Built test sqllite db for divvy data
+				  <h3>Week 2</h3>
+				    - Started work on SVG overview graphs
                   <h2><a href="mailto:ddesut2@uic.edu">Dane DeSutter</a><br /></h2>
                   <h3>Week 1</h3>
                     - Made vector mockups of application interface and icons <br />
@@ -170,5 +181,62 @@
          yearDayBar(data, "#bikes-per-year", "Date", "Count", "#ef6548");
       })
     </script>
+	
+	<script>
+
+	var margin = {top: 20, right: 30, bottom: 30, left: 50},
+		width = 450 - margin.left - margin.right,
+		height = 250 - margin.top - margin.bottom;
+
+	var x = d3.scale.ordinal()
+		.rangeRoundBands([0, width], .1);
+
+	var y = d3.scale.linear()
+		.range([height, 0]);
+
+	var xAxis = d3.svg.axis()
+		.scale(x)
+		.orient("bottom");
+
+	var yAxis = d3.svg.axis()
+		.scale(y)
+		.orient("left");
+
+	var chart = d3.select(".chartDayOfWeek")
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom)
+	    .append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	d3.json("/static-json/day-of-week-distribution.json", function(error, data) {
+	  x.domain(data.map(function(d) { return d.range; }));
+	  y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+
+	  chart.append("g")
+		  .attr("class", "x axis")
+		  .attr("transform", "translate(0," + height + ")")
+		  .call(xAxis);
+
+	  chart.append("g")
+		  .attr("class", "y axis")
+		  .call(yAxis);
+
+	  chart.selectAll(".bar")
+		  .data(data)
+		.enter().append("rect")
+		  .attr("class", "bar")
+		  .attr("x", function(d) { return x(d.range); })
+		  .attr("y", function(d) { return y(d.frequency); })
+		  .attr("height", function(d) { return height - y(d.frequency); })
+		  .attr("width", x.rangeBand());
+	});
+
+	function type(d) {
+	  d.frequency = +d.frequency; // coerce to number
+	  return d;
+	}
+
+	</script>
+	
 </body>
 </html>
