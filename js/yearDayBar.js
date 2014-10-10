@@ -1,19 +1,14 @@
 
 function yearDayBar(csv, display_div, xname, yname, color) {
-
   //console.log("stuff "+csv);
   var data = d3.csv.parse(csv);
   var valueLabelWidth = 40; // space reserved for value labels (right)
-  if (xname == "Age") {
-    var barHeight = 18
-  } else {
-    var barHeight = 10 // height of one bar
-  }
+  var barHeight = 1 // height of one bar
   var barLabelWidth = 180// space reserved for bar labels
   var barLabelPadding = 5; // padding between bar and bar labels (left)
   var gridLabelHeight = 40 // space reserved for gridline labels
   var gridChartOffset = 3; // space between start of grid and first bar
-  var maxBarWidth = x2-620// width of the bar with the max value
+  var maxBarWidth = 300 // width of the bar with the max value
 
   // accessor functions 
   var barLabel = function(d) { return d[xname]; };
