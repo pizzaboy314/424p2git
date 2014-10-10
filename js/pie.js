@@ -94,7 +94,7 @@ function renderPieChart(ourData, ourDiv, colorBase)  {
         } else {
           cn = 10;
         }
-        console.log(d);
+        //console.log(d);
         return "translate(" + (x/h * cn) +  ',' +
                          (y/h * cn) +  ")"; 
       })

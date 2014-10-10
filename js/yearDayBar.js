@@ -19,7 +19,7 @@ function yearDayBar(csv, display_div, xname, yname, color) {
   var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
   var x = d3.scale.linear().domain([0, d3.max(data, barValue)]).range([0, maxBarWidth]);
 
-  console.log("removing "+display_div);
+  //console.log("removing "+display_div);
   d3.select(display_div).select("svg").remove()
   var chart = d3.select(display_div).append("svg")
     .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)

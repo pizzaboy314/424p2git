@@ -162,7 +162,7 @@
       .get(function(error, data) {
          renderPieChart(data, "#type", "green");
       })
-    var url = '/py/age'
+    var url = 'http://trustdarkness.com/py/age'
     ourCsv = d3.text(url)
       .get(function(error, data) {
          renderPieChart(data, "#age", "red");
