@@ -15,9 +15,39 @@ db = MySQLdb.connect(
 )
 
 c = db.cursor()
+ 
+def store_popularity_groups():
+  with open("stations.pickle", "rb") as f:
+    stations = pickle.load(f)
+  with open("id_popularity.pickle", "rb") as f:
+    id_pop = pickle.load(f)
+
+  pop_rankings = id_pop.values()
+  pop_rankings.sort()
+  d = {
+    0: [], 1: [], 2: [], 3: [], 4:[], 5:[], 6:[]
+  }
+  for sid, count in id_pop.items():
+    if count in pop_rankings[0:10]:
+      d[0].append(stations[sid])
+    elif count in pop_rankings[10:50]:
+      d[1].append(stations[sid])
+    elif count in pop_rankings[50:100]:
+      d[2].append(stations[sid])
+    elif count in pop_rankings[100:150]:
+      d[3].append(stations[sid])
+    elif count in pop_rankings[150:200]:
+      d[4].append(stations[sid])
+    elif count in pop_rankings[200:250]:
+      d[5].append(stations[sid])
+    elif count in pop_rankings[250:300]:
+      d[6].append(stations[sid])
+
+  with open("popularity.pickle", "wb") as f:
+    pickle.dump(d,f)
                    
 
-cherrypy.config.update({'environment': 'embedded'})
+cherrypy.config.update({'environment': 'embedded', 'show_tracebacks': True})
 
 if cherrypy.__version__.startswith('3.0') and cherrypy.engine.state == 0:
     cherrypy.engine.start(blocking=False)
@@ -116,36 +146,4 @@ class Root(object):
         return group
   station_popularity.exposed = True
 
-
-def store_popularity_groups():
-  with open("stations.pickle", "rb") as f:
-    stations = pickle.load(f)
-  with open("id_popularity.pickle", "rb") as f:
-    id_pop = pickle.load(f)
-
-  pop_rankings = id_pop.values()
-  pop_rankings.sort()
-  d = {
-    0: [], 1: [], 2: [], 3: [], 4:[], 5:[], 6:[]
-  }
-  for sid, count in id_pop.items():
-    if count in pop_rankings[0:10]:
-      d[0].append(stations[sid])
-    elif count in pop_rankings[10:50]:
-      d[1].append(stations[sid])
-    elif count in pop_rankings[50:100]:
-      d[2].append(stations[sid])
-    elif count in pop_rankings[100:150]:
-      d[3].append(stations[sid])
-    elif count in pop_rankings[150:200]:
-      d[4].append(stations[sid])
-    elif count in pop_rankings[200:250]:
-      d[5].append(stations[sid])
-    elif count in pop_rankings[250:300]:
-      d[6].append(stations[sid])
-
-  with open("popularity.pickle", "wb") as f:
-    pickle.dump(d,f)
-  
-application = cherrypy.Application(Root(), script_name=None, config=None)
-
+application = cherrypy.Application(Root(), script_name=None, config={'show_tracebacks':True})
