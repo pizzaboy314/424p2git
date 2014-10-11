@@ -139,6 +139,7 @@ class Root(object):
   age.exposed = True
 
   def station_popularity(self, station_name):
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     try:
       with open("/var/www/cs424/p2/py/popularity.pickle", "rb") as f:
         pop = pickle.load(f)
