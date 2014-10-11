@@ -140,7 +140,7 @@ class Root(object):
 
   def station_popularity(self, station_name):
     try:
-      with open("./popularity.pickle", "rb") as f:
+      with open("/var/www/cs424/p2/py/popularity.pickle", "rb") as f:
         pop = pickle.load(f)
     except:
       return "can't open file in cwd: %s" % subprocess.check_output(["pwd"])
