@@ -6,6 +6,7 @@ import threading
 import cherrypy
 import MySQLdb
 import pickle
+import subprocess
 
 db = MySQLdb.connect(
   host="127.0.0.1",
@@ -138,9 +139,11 @@ class Root(object):
   age.exposed = True
 
   def station_popularity(self, station_name):
-    with open("./popularity.pickle", "rb") as f:
-      pop = pickle.load(f)
- 
+    try:
+      with open("./popularity.pickle", "rb") as f:
+        pop = pickle.load(f)
+    except:
+      print "can't open file in cwd: %s" % subprocess.call(["pwd"])
     for group in pop:
       if station_name in pop[group]:
         return group
