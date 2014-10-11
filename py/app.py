@@ -143,7 +143,7 @@ class Root(object):
       with open("./popularity.pickle", "rb") as f:
         pop = pickle.load(f)
     except:
-      return "can't open file in cwd: %s" % subprocess.call(["pwd"])
+      return "can't open file in cwd: %s" % subprocess.check_output(["pwd"])
     for group in pop:
       if station_name in pop[group]:
         return group
