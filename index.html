@@ -46,6 +46,7 @@
   <script src="js/leaflet.js"></script>
   <script src="js/pie.js"></script>
   <script src="js/yearDayBar.js"></script>
+  <script src="js/stationPop.js"></script>
 </head>
 <body>
     <div id="map">
@@ -119,6 +120,73 @@
     <script src="js/leaflet-sidebar.js"></script>
 
     <script>
+        // setup heatmap icons
+        var iS = [26, 40]; // size of the icon
+        var sS = [50, 32]; // size of the shadow
+        var iA = [22, 42]; // point of the icon which will correspond to marker's location
+        var sA = [4, 31];  // the same for the shadow
+        var pA =  [-1, -38]; // point from which the popup should open relative to the iconAnchor
+        var i1 = L.icon({ 
+          iconUrl: 'images/divy-0.png',
+          iconSize:     iS, // size of the icon
+          shadowSize:   sS, // size of the shadow
+          iconAnchor:   iA, // point of the icon which will correspond to marker's location
+          shadowAnchor: sA,  // the same for the shadow
+          popupAnchor:  pA // point from which the popup should open relative to the iconAnchor
+        })
+        var i2 = L.icon({ 
+          iconUrl: 'images/divy-1.png',
+          iconSize:     iS, // size of the icon
+          shadowSize:   sS, // size of the shadow
+          iconAnchor:   iA, // point of the icon which will correspond to marker's location
+          shadowAnchor: sA,  // the same for the shadow
+          popupAnchor:  pA // point from which the popup should open relative to the iconAnchor
+
+        })
+        var i3 = L.icon({ 
+          iconUrl: 'images/divy-2.png',
+          iconSize:     iS, // size of the icon
+          shadowSize:   sS, // size of the shadow
+          iconAnchor:   iA, // point of the icon which will correspond to marker's location
+          shadowAnchor: sA,  // the same for the shadow
+          popupAnchor:  pA // point from which the popup should open relative to the iconAnchor
+        })
+        var i4 = L.icon({ 
+          iconUrl: 'images/divy-3.png',
+          iconSize:     iS, // size of the icon
+          shadowSize:   sS, // size of the shadow
+          iconAnchor:   iA, // point of the icon which will correspond to marker's location
+          shadowAnchor: sA,  // the same for the shadow
+          popupAnchor:  pA // point from which the popup should open relative to the iconAnchor
+
+        })
+        var i5 = L.icon({ 
+          iconUrl: 'images/divy-4.png',
+          iconSize:     iS, // size of the icon
+          shadowSize:   sS, // size of the shadow
+          iconAnchor:   iA, // point of the icon which will correspond to marker's location
+          shadowAnchor: sA,  // the same for the shadow
+          popupAnchor:  pA // point from which the popup should open relative to the iconAnchor
+
+        })
+        var i6 = L.icon({ 
+          iconUrl: 'images/divy-5.png',
+          iconSize:     iS, // size of the icon
+          shadowSize:   sS, // size of the shadow
+          iconAnchor:   iA, // point of the icon which will correspond to marker's location
+          shadowAnchor: sA,  // the same for the shadow
+          popupAnchor:  pA // point from which the popup should open relative to the iconAnchor
+
+        })
+        var i7 = L.icon({ 
+          iconUrl: 'images/divy-6.png',
+          iconSize:     iS, // size of the icon
+          shadowSize:   sS, // size of the shadow
+          iconAnchor:   iA, // point of the icon which will correspond to marker's location
+          shadowAnchor: sA,  // the same for the shadow
+          popupAnchor:  pA // point from which the popup should open relative to the iconAnchor
+
+        })
         mapLink = 
           '<a href="http://openstreetmap.org">OpenStreetMap</a>';
         var osm = L.tileLayer(
@@ -150,12 +218,22 @@
         map.addControl(sidebar);
         var url = 'csv/divvy.csv'
         var stations = []
+        var icons = [
+          i1, i2, i3, i4, i5, i6, i7
+        ]
         csv = d3.csv(url)
 	  .get(function(error, data) {
  	    stations = data;
+            var badcount = 0;
             for (i=0; i<stations.length; i++) {
-            var marker = L.marker([parseFloat(stations[i].latitude), parseFloat(stations[i].longitude)]).addTo(map);
-	    marker.bindPopup(stations[i].name +"<br />capacity: "+stations[i].dpcapacity);
+                  n = stationPop.get(stations[i].name);
+                  if (!n) {
+                    badcount++;
+                  }
+                  //console.log("stationPop: "+stationPop.get(stations[i].name) + stations[i].name);
+                  //console.log("icon: "+icons[stationPop.get(stations[i].name)].iconUrl);
+                  var marker = L.marker([parseFloat(stations[i].latitude), parseFloat(stations[i].longitude)], {icon: icons[stationPop.get(stations[i].name)]}).addTo(map);
+	          marker.bindPopup(stations[i].name +"<br />capacity: "+stations[i].dpcapacity);
 	}
       })
 
