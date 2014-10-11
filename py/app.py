@@ -138,7 +138,7 @@ class Root(object):
   age.exposed = True
 
   def station_popularity(self, station_name):
-    with open("popularity.pickle", "rb") as f:
+    with open("./popularity.pickle", "rb") as f:
       pop = pickle.load(f)
  
     for group in pop:
