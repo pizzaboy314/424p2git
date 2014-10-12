@@ -52,22 +52,22 @@
     }
     #day li {
       width: 300px;
-      padding-top: 6px;
-      padding-bottom: 6px;
+      padding-top: 7px;
+      padding-bottom: 7px;
       padding-left: 35px;
       border-bottom: 1px solid #aeaeae;
     }
     #day li.selected {
       background-color: lightblue;
     }
-    #day #sunrise {
+    #sunrise {
       position: absolute;
       top: 305.375px;
       left: 5px;
       color: #666;
       font-size: -1;
     }
-    #day #sunset {
+    #sunset {
       position: absolute;
       top: 714.425px;
       left: 5px;
@@ -92,7 +92,10 @@
   <script src="js/yearDayBar.js"></script>
   <script src="js/stationPop.js"></script>
   <script src="js/icons.js"></script>
+  <script src="js/moment.js"></script>
   <script src="js/pikaday.js"></script>
+  <script src="js/sunrise.js"></script>
+  <script src="js/sunset.js"></script>
 </head>
 <body>
     <div id="map">
@@ -166,7 +169,31 @@
                   trigger: document.getElementById('datepicker-button'),
                   minDate: new Date('2013-06-27'),
                   maxDate: new Date('2013-12-31'),
-                  yearRange: [2013,2013]
+                  yearRange: [2013,2013],
+                  onSelect: function() {
+                    ourDate = this.getMoment().format("YYYY-MM-DD")
+                    console.log("date selected: "+ourDate);
+                    sr = sunrise.get(ourDate);
+                    ss = sunset.get(ourDate);
+                    srh = sr.substr(0,1);
+                    ssh = ss.substr(0,2);
+                    srm = sr.substr(2,3);
+                    ssm = ss.substr(3,4);
+                    srp = srm/60;
+                    srtp = parseFloat(srh)+parseFloat(srp);
+                    ssp = ssm/60;
+                    sstp = parseFloat(ssh)+parseFloat(ssp);
+                    ss12 = ssh-12+":"+ssm;
+                    console.log("sunrise: "+srh+" sunset: "+ssh); 
+                    srtoppad = 116 + 30.2*srtp;
+                    sstoppad = 116 + 30.4*sstp;
+                    d3.select("#sunrise")
+                      .html(" "+sr+"am")
+                      .style("top", srtoppad+"px");
+                    d3.select("#sunset")
+                      .html(ss12+"pm")
+                      .style("top", sstoppad+"px");
+                  }
                 });
               </script>
               <ul id="day">
