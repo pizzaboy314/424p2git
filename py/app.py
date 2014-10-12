@@ -149,5 +149,40 @@ class Root(object):
       if station_name in pop[group]:
         return str(group)
   station_popularity.exposed = True
+  
+  def get_day(self, date):
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+    with open("/var/www/cs424/p2/py/station_lat_long.pickle", "rb") as f:
+      stat_lat_long = pickle.load(f)
+    q = "select starttime, stoptime, trip_id, from_station_id, to_station_id from divvy_trips_distances where startdate like '%s'" % date
+    ret = []
+    ret.append("timestamp,trip_id,start/end,from,flat,flong,to,tlat,tlong")
+    c.execute(q)
+    for row in c.fetchall():
+      ret.append("%s,%s,%s,%s,%s,%s,%s,%s,%s" % (
+        row[0], # start timestamp
+        row[2], # trip id
+        "start",
+        stat_lat_long[row[3]][0], # from station name
+        stat_lat_long[row[3]][1], # from lat
+        stat_lat_long[row[3]][2], # from long
+        stat_lat_long[row[4]][0], # to station name
+        stat_lat_long[row[4]][1], # from lat
+        stat_lat_long[row[4]][2]  # from long
+      ))
+      # now we do the same thing again but for the end of the trip
+      ret.append("%s,%s,%s,%s,%s,%s,%s,%s,%s" % (
+        row[1], # start timestamp
+        row[2], # trip id
+        "end",
+        stat_lat_long[row[3]][0], # from station name
+        stat_lat_long[row[3]][1], # from lat
+        stat_lat_long[row[3]][2], # from long
+        stat_lat_long[row[4]][0], # to station name
+        stat_lat_long[row[4]][1], # from lat
+        stat_lat_long[row[4]][2]  # from long
+      ))
+    return "\n".join(ret)
+  get_day.exposed = True
 
 application = cherrypy.Application(Root(), script_name=None, config=None)
