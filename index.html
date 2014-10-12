@@ -158,14 +158,11 @@
             <div class="sidebar-pane" id="messages">
               <h1>Playback A Day's Rides</h1>
               <input type="text" id="datepicker" value="Aug 24 2013">
-              <button id="datepicker-button">
-                Choose Date
-              </button>
               <script>
                 var picker = new Pikaday({
                   field: document.getElementById('datepicker'),
-                  format: 'MMM DD YYYY',
-                  trigger: document.getElementById('datepicker-button'),
+                  format: 'ddd MMM DD YYYY',
+                  trigger: document.getElementById('datepicker'),
                   minDate: new Date('2013-06-27'),
                   maxDate: new Date('2013-12-31'),
                   yearRange: [2013,2013],
