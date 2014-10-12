@@ -27,19 +27,19 @@ function renderPieChart(ourData, ourDiv, colorBase)  {
 
   var canvas = d3.select(ourDiv)
     .append('svg')
-    .attr({'width':220,'height': 220})
-    .style("padding-left", "50px")
-    .style("padding-top", "15px");
+    .attr({'width':210,'height': 220})
+    .style("padding-left", "70px")
+    .style("padding-top", "25px");
 
   var colorscale = d3.scale.linear().domain([0,data.length]).range(colors);
 
   var arc = d3.svg.arc()
     .innerRadius(0)
-    .outerRadius(90);
+    .outerRadius(87);
 
   var arcOver = d3.svg.arc()
     .innerRadius(0)
-    .outerRadius(90 + 10);
+    .outerRadius(87 + 10);
 
   var pie = d3.layout.pie()
     .value(function(d){ return d.value; })
