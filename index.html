@@ -104,11 +104,10 @@
     <div id="sidebar-right" class="sidebar collapsed">
         <!-- Nav tabs -->
         <ul class="sidebar-tabs" role="tablist">
-            <li><a href="#home" role="tab"><i class="fa fa-bar-chart"></i></a></li>
-            <li><a href="#messages" role="tab"><i class="fa fa-play"></i></a></li>
-
-            <li><a href="#profile" role="tab"><i class="fa fa-users"></i></a></li>
-            <li><a href="#settings" role="tab"><i class="fa fa-plug"></i></a></li>
+            <li><a href="#home" role="tab" onclick="repopulate()"><i class="fa fa-bar-chart"></i></a></li>
+            <li><a href="#messages" role="tab" onclick="removeAllMarkers()"><i class="fa fa-play"></i></a></li>
+            <li><a href="#profile" role="tab" onclick="repopulate()"><i class="fa fa-users"></i></a></li>
+            <li><a href="#settings" role="tab" onclick="repopulate()"><i class="fa fa-plug"></i></a></li>
         </ul>
 
         <!-- Tab panes -->
@@ -199,31 +198,31 @@
               <ul id="day">
                 <i id="sunrise" class="fa fa-sun-o"> 6:15am</i>
                 <i id="sunset" class="fa fa-moon-o"> 7:41pm</i>
-                <li>12 am</li>
-                <li> 1 am</li>
-                <li> 2 am</li>
-                <li> 3 am</li>
-                <li> 4 am</li>
-                <li> 5 am</li>
-                <li> 6 am</li>
-                <li> 7 am</li>
-                <li> 8 am</li>
-                <li> 9 am</li>
-                <li>10 am</li>
-                <li>11 am</li>
-                <li class="selected">12 pm</li>
-                <li> 1 pm</li>
-                <li> 2 pm</li>
-                <li> 3 pm</li>
-                <li> 4 pm</li>
-                <li> 5 pm</li>
-                <li> 6 pm</li>
-                <li> 7 pm</li>
-                <li> 8 pm</li>
-                <li> 9 pm</li>
-                <li>10 pm</li>
-                <li>11 pm</li>
-                <li>12 am</li>
+                <li id="0">12 am</li>
+                <li id="1"> 1 am</li>
+                <li id="2"> 2 am</li>
+                <li id="3"> 3 am</li>
+                <li id="4"> 4 am</li>
+                <li id="5"> 5 am</li>
+                <li id="6"> 6 am</li>
+                <li id="7"> 7 am</li>
+                <li id="8"> 8 am</li>
+                <li id="9"> 9 am</li>
+                <li id="10">10 am</li>
+                <li id="11">11 am</li>
+                <li id="12"class="selected">12 pm</li>
+                <li id="13"> 1 pm</li>
+                <li id="14"> 2 pm</li>
+                <li id="15"> 3 pm</li>
+                <li id="16"> 4 pm</li>
+                <li id="17"> 5 pm</li>
+                <li id="18"> 6 pm</li>
+                <li id="19"> 7 pm</li>
+                <li id="20"> 8 pm</li>
+                <li id="21"> 9 pm</li>
+                <li id="22">10 pm</li>
+                <li id="23">11 pm</li>
+                <li is="24">12 am</li>
                 <img id="dashes" src="images/vert-dashes.png" />    
               </ul>
             </div>
@@ -277,6 +276,8 @@
         var icons = [
           i1, i2, i3, i4, i5, i6, i7
         ]
+        var markers = new L.FeatureGroup();
+        function populate() {
         csv = d3.csv(url)
 	  .get(function(error, data) {
  	    stations = data;
@@ -288,12 +289,25 @@
                   }
                   //console.log("stationPop: "+stationPop.get(stations[i].name) + stations[i].name);
                   //console.log("icon: "+icons[stationPop.get(stations[i].name)].iconUrl);
-                  var marker = L.marker([parseFloat(stations[i].latitude), parseFloat(stations[i].longitude)], {icon: icons[stationPop.get(stations[i].name)]}).addTo(map);
+                  var marker = L.marker([parseFloat(stations[i].latitude), parseFloat(stations[i].longitude)], {icon: icons[stationPop.get(stations[i].name)]})
 	          marker.bindPopup(stations[i].name +"<br />capacity: "+stations[i].dpcapacity);
+                  markers.addLayer(marker);
 	}
       })
-
-      var layercontrol = L.control.layers(baseMaps, null, {position: 'bottomleft'}).addTo(map);
+      return false;
+    }
+    function removeAllMarkers(){
+      window.removed = true;
+      map.removeLayer(markers);
+    } 
+    function repopulate() {
+      if (window.removed) {
+        map.addLayer(markers);
+      }
+    }
+    map.addLayer(markers);
+    populate();
+    var layercontrol = L.control.layers(baseMaps, null, {position: 'bottomleft'}).addTo(map);
     var url = 'csv/gender_all.csv'
     ourCsv = d3.text(url)
       .get(function(error, data) {
