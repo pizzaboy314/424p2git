@@ -284,12 +284,29 @@
 	  zoom: 13,
           layers: [osm]
         });
+    var neighborhoods = new L.FeatureGroup();
+    json = d3.json('static-json/boundaries.json')
+      .get(function(error, data) {
+        d = data.slice();
+        for (i = 0; i < d.length; i++) {
+          var neighborhood = L.geoJson(d[i].geometry, {
+          "style": {
+            'color': '#222',
+            'opacity': .5,
+            'weight': 1,
+            'fillColor': 'aeaeae',
+            'fillOpacity': 0.1
+          }});
+          neighborhoods.addLayer(neighborhood);
+        }
+      });    
        var baseMaps = {
          "OpenStreetMaps": osm, 
          "Satellite": sat
        }
        var overlayMaps = {
-         "Chicago Border": chicagoBorder
+         "Chicago Border": chicagoBorder, 
+         "Neighborhoods": neighborhoods
        }
         mapLink = 
             '<a href="http://openstreetmap.org">OpenStreetMap</a>';
@@ -323,22 +340,6 @@
       })
       return false;
     }
-    var neighborhoods = new L.FeatureGroup();
-    json = d3.json('static-json/boundaries.json')
-      .get(function(error, data) {
-        d = data.slice();
-        for (i = 0; i < d.length; i++) {
-          var neighborhood = L.geoJson(d[i].geometry, {
-          "style": {
-            'color': '#222',
-            'opacity': .5,
-            'weight': 1,
-            'fillColor': 'aeaeae',
-            'fillOpacity': 0.1
-          }});
-          neighborhoods.addLayer(neighborhood);
-        }
-      });    
     function removeAllMarkers(){
       window.removed = true;
       map.removeLayer(markers);
@@ -349,7 +350,6 @@
       }
     }
     map.addLayer(markers);
-    map.addLayer(neighborhoods);
     populate();
     var layercontrol = L.control.layers(baseMaps, overlayMaps, {position: 'bottomleft'}).addTo(map);
     var url = 'csv/gender_all.csv'
