@@ -17,8 +17,6 @@ function dayOfWeekBar(display_div) {
 		.scale(y)
 		.orient("left");
 		
-	
-
 	d3.select(display_div).select("svg").remove()
 	var chart = d3.select(display_div).append("svg")
 		.attr("class", "chartOverview")
@@ -50,5 +48,4 @@ function dayOfWeekBar(display_div) {
 		  .attr("width", x.rangeBand()-8);
 	});
 
-	
 }
