@@ -105,6 +105,7 @@
         <script src="js/chartDayOfWeek.js"></script>
         <script src="js/chartHourOfDay.js"></script>
         <script src="js/chartDistancesOverall.js"></script>
+        <script src="js/chartTimesOverall.js"></script>
     </head>
     <body>
         <div id="map">
@@ -135,6 +136,9 @@
                         </div>
 						<div id="chartDistancesOverall">
 							<p class="chartLabel"> Average distances travelled by bikes overall</p>
+						</div>
+						<div id="chartTimesOverall">
+							<p class="chartLabel"> Average times travelled by bikes overall</p>
 						</div>
                         <div id="bikes-per-year"></div>
 
@@ -371,6 +375,7 @@
     dayOfWeekBar("#chartDayOfWeek"); 
     hourOfDayBar("#chartHourOfDay");
     distancesOverallBar("#chartDistancesOverall");
+    timesOverallBar("#chartTimesOverall");
 
     </script>
 	
