@@ -25,7 +25,7 @@ function dayOfWeekBar(display_div) {
 	    .append("g")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-	d3.json("/static-json/day-of-week-distribution.json", function(error, data) {
+	d3.json("static-json/day-of-week-distribution.json", function(error, data) {
 	  x.domain(data.map(function(d) { return d.range; }));
 	  y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
 
