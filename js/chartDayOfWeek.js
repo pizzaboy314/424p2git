@@ -26,14 +26,6 @@ function dayOfWeekBar(display_div) {
 		.attr("height", height + margin.top + margin.bottom)
 	    .append("g")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-		
-	chart.append("text")
-		.attr("x", 0)
-		.attr("y", -10)
-		.style("text-anchor", "left")
-		.style('font-family', 'Helvetica,Arial,sans-serif')
-		.style('font-size', '60pt')
-		.text("Number of bikes out by day of the week");
 
 	d3.json("/static-json/day-of-week-distribution.json", function(error, data) {
 	  x.domain(data.map(function(d) { return d.range; }));

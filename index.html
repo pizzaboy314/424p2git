@@ -31,6 +31,12 @@
       font: 10px sans-serif;
       text-anchor: end;
     }
+	.chartLabel {
+		fill: black;
+		font: 12px sans-serif;
+		text-anchor: end;
+		text-indent: 54px;
+	}
     .yaxis path,line {
       fill: none; 
       stroke: black; 
@@ -119,7 +125,9 @@
                 <div id="gender" style="display: inline"></div>
                 <div id="type" style="display: inline"></div>
                 <div id="age" style="display: inline"></div>
-                <div id="chartDayOfWeek"></div>
+                <div id="chartDayOfWeek">
+					<p class="chartLabel"> Number of bikes out by day of the week</p>
+				</div>
                 <div id="bikes-per-year"></div>
                 
               </div>
@@ -134,7 +142,7 @@
                     <h3>Week 2</h3>
                     - sidebar to the right with working controls<br />
                     - Added rider breakdown demographics graphs<br />
-                    - Deployted SQL db<br />
+                    - Deployed SQL db<br />
                     - Began work on python data interaction layer<br />
 					- Added popularity data as icon heatmap<br />
                     - Added bikes out per day of the year<br />
