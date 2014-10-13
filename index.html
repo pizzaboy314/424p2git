@@ -23,10 +23,10 @@
     #graphs {
       left: 10px;
     }
-    .chartDayOfWeek rect {
+    .chartOverview rect {
       fill: #ef6548;
     }
-    .chartDayOfWeek text {
+    .chartOverview text {
       fill: black;
       font: 10px sans-serif;
       text-anchor: end;
@@ -96,6 +96,7 @@
   <script src="js/pikaday.js"></script>
   <script src="js/sunrise.js"></script>
   <script src="js/sunset.js"></script>
+  <script src="js/chartDayOfWeek.js"></script>
 </head>
 <body>
     <div id="map">
@@ -118,7 +119,7 @@
                 <div id="gender" style="display: inline"></div>
                 <div id="type" style="display: inline"></div>
                 <div id="age" style="display: inline"></div>
-                <svg class="chartDayOfWeek"></svg>
+                <div id="chartDayOfWeek"></div>
                 <div id="bikes-per-year"></div>
                 
               </div>
@@ -330,62 +331,10 @@
       .get(function(error, data) {
          yearDayBar(data, "#bikes-per-year", "Date", "Count", "#ef6548");
       })
+	dayOfWeekBar("#chartDayOfWeek");
+	
     </script>
 	
-	<script>
-
-	var margin = {top: 20, right: 30, bottom: 30, left: 50},
-		width = 450 - margin.left - margin.right,
-		height = 250 - margin.top - margin.bottom;
-
-	var x = d3.scale.ordinal()
-		.rangeRoundBands([0, width], .1);
-
-	var y = d3.scale.linear()
-		.range([height, 0]);
-
-	var xAxis = d3.svg.axis()
-		.scale(x)
-		.orient("bottom");
-
-	var yAxis = d3.svg.axis()
-		.scale(y)
-		.orient("left");
-
-	var chart = d3.select(".chartDayOfWeek")
-		.attr("width", width + margin.left + margin.right)
-		.attr("height", height + margin.top + margin.bottom)
-	    .append("g")
-		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-	d3.json("static-json/day-of-week-distribution.json", function(error, data) {
-	  x.domain(data.map(function(d) { return d.range; }));
-	  y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
-
-	  chart.append("g")
-		  .attr("class", "xaxis")
-		  .attr("transform", "translate(0," + height + ")")
-		  .call(xAxis);
-
-	  chart.append("g")
-		  .attr("class", "yaxis")
-		  .call(yAxis);
-
-	  chart.selectAll(".bar")
-		  .data(data)
-		.enter().append("rect")
-		  .attr("class", "bar")
-		  .attr("x", function(d) { return x(d.range); })
-		  .attr("y", function(d) { return y(d.frequency); })
-		  .attr("height", function(d) { return height - y(d.frequency); })
-		  .attr("width", x.rangeBand()-8);
-	});
-
-	function type(d) {
-	  d.frequency = +d.frequency; // coerce to number
-	  return d;
-	}
-
-	</script>
+	
 </body>
 </html>
