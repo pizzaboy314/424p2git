@@ -1,257 +1,261 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <style>
-    html, body, #map {
-      width: 100%;
-      height: 100%;
-      font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
-    }
+    <head>
+        <style>
+            html, body, #map {
+                width: 100%;
+                height: 100%;
+                font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
+            }
 
-    body  {
-      margin:0;
-      padding:0;
-    }
- 
-    a {
-      text-decoration: none;
-      color: darkblue;
-    }
-    text {
-      z-index: 3000;
-    }
-    #graphs {
-      left: 10px;
-    }
-    .chartOverview rect {
-      fill: #EE513F;
-    }
-    .chartOverview text {
-      fill: black;
-      font: 10px sans-serif;
-      text-anchor: end;
-    }
-	.chartLabel {
-		fill: black;
-		font: 12px sans-serif;
-		text-anchor: end;
-		text-indent: 54px;
-	}
-    .yaxis path,line {
-      fill: none; 
-      stroke: black; 
-      stroke-width; 1; 
-    }
-   .xaxis path,line {
-      fill: none;
-      stroke: black;
-      stroke-width; 1;
-    }
-    #dashes { 
-      position: absolute;
-      left: 70px; 
-      top: 116px;
-      z-index: 3000;
-    }
-    ul#day {
-      list-style: none;
-    }
-    #day li {
-      width: 300px;
-      padding-top: 7px;
-      padding-bottom: 7px;
-      padding-left: 35px;
-      border-bottom: 1px solid #aeaeae;
-    }
-    #day li.selected {
-      background-color: lightblue;
-    }
-    #sunrise {
-      position: absolute;
-      top: 305.375px;
-      left: 5px;
-      color: #666;
-      font-size: -1;
-    }
-    #sunset {
-      position: absolute;
-      top: 714.425px;
-      left: 5px;
-      color: #666;
-      font-size: -1;
-    }
+            body  {
+                margin:0;
+                padding:0;
+            }
+
+            a {
+                text-decoration: none;
+                color: darkblue;
+            }
+            text {
+                z-index: 3000;
+            }
+            #graphs {
+                left: 10px;
+            }
+            .chartOverview rect {
+                fill: #EE513F;
+            }
+            .chartOverview text {
+                fill: black;
+                font: 10px sans-serif;
+                text-anchor: end;
+            }
+            .chartLabel {
+                fill: black;
+                font: 12px sans-serif;
+                text-anchor: end;
+                text-indent: 54px;
+            }
+            .yaxis path,line {
+                fill: none; 
+                stroke: black; 
+                stroke-width; 1; 
+            }
+            .xaxis path,line {
+                fill: none;
+                stroke: black;
+                stroke-width; 1;
+            }
+            #dashes { 
+                position: absolute;
+                left: 70px; 
+                top: 116px;
+                z-index: 3000;
+            }
+            ul#day {
+                list-style: none;
+            }
+            #day li {
+                width: 300px;
+                padding-top: 7px;
+                padding-bottom: 7px;
+                padding-left: 35px;
+                border-bottom: 1px solid #aeaeae;
+            }
+            #day li.selected {
+                background-color: lightblue;
+            }
+            #sunrise {
+                position: absolute;
+                top: 305.375px;
+                left: 5px;
+                color: #666;
+                font-size: -1;
+            }
+            #sunset {
+                position: absolute;
+                top: 714.425px;
+                left: 5px;
+                color: #666;
+                font-size: -1;
+            }
 
 
-  </style>
-  <title>CS424 - P2 - Divvy Map</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        </style>
+        <title>CS424 - P2 - Divvy Map</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/leaflet.css" />
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/leaflet.css" />
 
-  <link rel="stylesheet" href="css/leaflet-sidebar.css" />
-  <link rel="stylesheet" href="css/pikaday.css" />
-  <script src="js/d3.v3.min.js"></script>
-  <script src="js/leaflet.js"></script>
-  <script src="js/pie.js"></script>
-  <script src="js/yearDayBar.js"></script>
-  <script src="js/stationPop.js"></script>
-  <script src="js/icons.js"></script>
-  <script src="js/moment.js"></script>
-  <script src="js/pikaday.js"></script>
-  <script src="js/sunrise.js"></script>
-  <script src="js/sunset.js"></script>
-  <script src="js/chartDayOfWeek.js"></script>
-</head>
-<body>
-    <div id="map">
-    </div>
-    
-    <div id="sidebar-right" class="sidebar collapsed">
-        <!-- Nav tabs -->
-        <ul class="sidebar-tabs" role="tablist">
-            <li><a href="#home" role="tab" onclick="repopulate()"><i class="fa fa-bar-chart"></i></a></li>
-            <li><a href="#messages" role="tab" onclick="removeAllMarkers()"><i class="fa fa-play"></i></a></li>
-            <li><a href="#profile" role="tab" onclick="repopulate()"><i class="fa fa-users"></i></a></li>
-            <li><a href="#settings" role="tab" onclick="repopulate()"><i class="fa fa-plug"></i></a></li>
-        </ul>
+        <link rel="stylesheet" href="css/leaflet-sidebar.css" />
+        <link rel="stylesheet" href="css/pikaday.css" />
+        <script src="js/d3.v3.min.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/pie.js"></script>
+        <script src="js/yearDayBar.js"></script>
+        <script src="js/stationPop.js"></script>
+        <script src="js/icons.js"></script>
+        <script src="js/moment.js"></script>
+        <script src="js/pikaday.js"></script>
+        <script src="js/sunrise.js"></script>
+        <script src="js/sunset.js"></script>
+        <script src="js/chartDayOfWeek.js"></script>
+        <script src="js/chartHourOfDay.js"></script>
+        <script src="js/chartDistancesOverall.js"></script>
+    </head>
+    <body>
+        <div id="map">
+        </div>
 
-        <!-- Tab panes -->
-        <div class="sidebar-content">
-            <div class="sidebar-pane" id="home">
-                <h1>Overview Data</h1>
-              <div id="graphs">
-                <div id="gender" style="display: inline"></div>
-                <div id="type" style="display: inline"></div>
-                <div id="age" style="display: inline"></div>
-                <div id="chartDayOfWeek">
-					<p class="chartLabel"> Number of bikes out by day of the week</p>
-				</div>
-                <div id="bikes-per-year"></div>
-                
-              </div>
-            </div>
-            <div class="sidebar-pane" id="profile">
-              <div id="contact">
-                <h1>Weekly activity:</h1>
-                  <h2><a href="mailto:mt@trustdarkness.com">Mike Thompson</a></h2>
-                    <h3>Week 1</h3>
-                    - Setup initial map and sidebar<br />
-                    - Setup Git for collaboration
-                    <h3>Week 2</h3>
-                    - sidebar to the right with working controls<br />
-                    - Added rider breakdown demographics graphs<br />
-                    - Deployed SQL db<br />
-                    - Began work on python data interaction layer<br />
-					- Added popularity data as icon heatmap<br />
-                    - Added bikes out per day of the year<br />
-                    <h3>Week 3</h3>
-                    - Built front and backend for daily playback<br />
-                    - Updated UI, Icons, and layout<br />
-                    - Made markers dynamically removable
-                  <h2><a href="mailto:bspahr314@gmail.com">Bryan Spahr</a></h2>
-                  <h3>Week 1</h3>
-                    - Began data analysis<br />
-					- Built test sqllite db for divvy data
-				  <h3>Week 2</h3>
-                    - Started work on SVG overview graphs
-                  <h2><a href="mailto:ddesut2@uic.edu">Dane DeSutter</a><br /></h2>
-                  <h3>Week 1</h3>
-                    - Made vector mockups of application interface and icons <br />
- 		    - Constructed planning / organization spreadsheet <br />
-                    - Conceptualized / designed graphical representations with necessary features to display Divvy datasets <br />
-                    - Researched Leaflet.js libraries necessary for desired functionality <br />
-                  <h3>Week 2</h3>
-                    - Ran Excel analyses on data corpus to create frequency distributions and determine what x-axis ranges and step sizes would best display the dataset <br />
-                    - Wrote a document detailing necessary data structures and the calls that would need to be placed to the database <br />
-                    - Wrote psuedo code to construct the necessary data structures <br />
-                    - Exported data from Excel analyses as JSON files matching the desired data structures to enable parallel d3 development <br />
-              </div>
-            </div>
-            <div class="sidebar-pane" id="messages">
-              <h1>Playback A Day's Rides</h1>
-              <input type="text" id="datepicker" value="Aug 24 2013">
-              <script>
-                var picker = new Pikaday({
-                  field: document.getElementById('datepicker'),
-                  format: 'ddd MMM DD YYYY',
-                  trigger: document.getElementById('datepicker'),
-                  minDate: new Date('2013-06-27'),
-                  maxDate: new Date('2013-12-31'),
-                  yearRange: [2013,2013],
-                  onSelect: function() {
-                    ourDate = this.getMoment().format("YYYY-MM-DD")
-                    console.log("date selected: "+ourDate);
-                    sr = sunrise.get(ourDate);
-                    ss = sunset.get(ourDate);
-                    srh = sr.substr(0,1);
-                    ssh = ss.substr(0,2);
-                    srm = sr.substr(2,3);
-                    ssm = ss.substr(3,4);
-                    srp = srm/60;
-                    srtp = parseFloat(srh)+parseFloat(srp);
-                    ssp = ssm/60;
-                    sstp = parseFloat(ssh)+parseFloat(ssp);
-                    ss12 = ssh-12+":"+ssm;
-                    console.log("sunrise: "+srh+" sunset: "+ssh); 
-                    srtoppad = 116 + 30.2*srtp;
-                    sstoppad = 116 + 30.4*sstp;
-                    d3.select("#sunrise")
-                      .html(" "+sr+"am")
-                      .style("top", srtoppad+"px");
-                    d3.select("#sunset")
-                      .html(ss12+"pm")
-                      .style("top", sstoppad+"px");
-                  }
-                });
-              </script>
-              <ul id="day">
-                <i id="sunrise" class="fa fa-sun-o"> 6:15am</i>
-                <i id="sunset" class="fa fa-moon-o"> 7:41pm</i>
-                <li id="0">12 am</li>
-                <li id="1"> 1 am</li>
-                <li id="2"> 2 am</li>
-                <li id="3"> 3 am</li>
-                <li id="4"> 4 am</li>
-                <li id="5"> 5 am</li>
-                <li id="6"> 6 am</li>
-                <li id="7"> 7 am</li>
-                <li id="8"> 8 am</li>
-                <li id="9"> 9 am</li>
-                <li id="10">10 am</li>
-                <li id="11">11 am</li>
-                <li id="12"class="selected">12 pm</li>
-                <li id="13"> 1 pm</li>
-                <li id="14"> 2 pm</li>
-                <li id="15"> 3 pm</li>
-                <li id="16"> 4 pm</li>
-                <li id="17"> 5 pm</li>
-                <li id="18"> 6 pm</li>
-                <li id="19"> 7 pm</li>
-                <li id="20"> 8 pm</li>
-                <li id="21"> 9 pm</li>
-                <li id="22">10 pm</li>
-                <li id="23">11 pm</li>
-                <li is="24">12 am</li>
-                <img id="dashes" src="images/vert-dashes.png" />    
-              </ul>
-            </div>
-            <div class="sidebar-pane" id="settings">
-              <h1>Libraries Used:</h1>
-              <p>Third party libraries we used include the following:</p>
-              <h3>d3</h3>
-              <h3>leaflet</h3>
-              <h3>leaflet-sidebar</h3>
-              <h3>font awesome icons</h3>
-              <h3>pikaday calendar</h3>
+        <div id="sidebar-right" class="sidebar collapsed">
+            <!-- Nav tabs -->
+            <ul class="sidebar-tabs" role="tablist">
+                <li><a href="#home" role="tab" onclick="repopulate()"><i class="fa fa-bar-chart"></i></a></li>
+                <li><a href="#messages" role="tab" onclick="removeAllMarkers()"><i class="fa fa-play"></i></a></li>
+                <li><a href="#profile" role="tab" onclick="repopulate()"><i class="fa fa-users"></i></a></li>
+                <li><a href="#settings" role="tab" onclick="repopulate()"><i class="fa fa-plug"></i></a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="sidebar-content">
+                <div class="sidebar-pane" id="home">
+                    <h1>Overview Data</h1>
+                    <div id="graphs">
+                        <div id="gender" style="display: inline"></div>
+                        <div id="type" style="display: inline"></div>
+                        <div id="age" style="display: inline"></div>
+                        <div id="chartDayOfWeek">
+                            <p class="chartLabel"> Number of bikes out by day of the week</p>
+                        </div>
+                        <div id="chartHourOfDay">
+                            <p class="chartLabel"> Number of bikes out by hour of the day</p>
+                        </div>
+                        <div id="bikes-per-year"></div>
+
+                    </div>
+                </div>
+                <div class="sidebar-pane" id="profile">
+                    <div id="contact">
+                        <h1>Weekly activity:</h1>
+                        <h2><a href="mailto:mt@trustdarkness.com">Mike Thompson</a></h2>
+                        <h3>Week 1</h3>
+                        - Setup initial map and sidebar<br />
+                        - Setup Git for collaboration
+                        <h3>Week 2</h3>
+                        - sidebar to the right with working controls<br />
+                        - Added rider breakdown demographics graphs<br />
+                        - Deployed SQL db<br />
+                        - Began work on python data interaction layer<br />
+                        - Added popularity data as icon heatmap<br />
+                        - Added bikes out per day of the year<br />
+                        <h3>Week 3</h3>
+                        - Built front and backend for daily playback<br />
+                        - Updated UI, Icons, and layout<br />
+                        - Made markers dynamically removable
+                        <h2><a href="mailto:bspahr314@gmail.com">Bryan Spahr</a></h2>
+                        <h3>Week 1</h3>
+                        - Began data analysis<br />
+                        - Built test sqllite db for divvy data
+                        <h3>Week 2</h3>
+                        - Started work on SVG overview graphs
+                        <h2><a href="mailto:ddesut2@uic.edu">Dane DeSutter</a><br /></h2>
+                        <h3>Week 1</h3>
+                        - Made vector mockups of application interface and icons <br />
+                        - Constructed planning / organization spreadsheet <br />
+                        - Conceptualized / designed graphical representations with necessary features to display Divvy datasets <br />
+                        - Researched Leaflet.js libraries necessary for desired functionality <br />
+                        <h3>Week 2</h3>
+                        - Ran Excel analyses on data corpus to create frequency distributions and determine what x-axis ranges and step sizes would best display the dataset <br />
+                        - Wrote a document detailing necessary data structures and the calls that would need to be placed to the database <br />
+                        - Wrote psuedo code to construct the necessary data structures <br />
+                        - Exported data from Excel analyses as JSON files matching the desired data structures to enable parallel d3 development <br />
+                    </div>
+                </div>
+                <div class="sidebar-pane" id="messages">
+                    <h1>Playback A Day's Rides</h1>
+                    <input type="text" id="datepicker" value="Aug 24 2013">
+                    <script>
+                        var picker = new Pikaday({
+                            field: document.getElementById('datepicker'),
+                            format: 'ddd MMM DD YYYY',
+                            trigger: document.getElementById('datepicker'),
+                            minDate: new Date('2013-06-27'),
+                            maxDate: new Date('2013-12-31'),
+                            yearRange: [2013, 2013],
+                            onSelect: function () {
+                                ourDate = this.getMoment().format("YYYY-MM-DD")
+                                console.log("date selected: " + ourDate);
+                                sr = sunrise.get(ourDate);
+                                ss = sunset.get(ourDate);
+                                srh = sr.substr(0, 1);
+                                ssh = ss.substr(0, 2);
+                                srm = sr.substr(2, 3);
+                                ssm = ss.substr(3, 4);
+                                srp = srm / 60;
+                                srtp = parseFloat(srh) + parseFloat(srp);
+                                ssp = ssm / 60;
+                                sstp = parseFloat(ssh) + parseFloat(ssp);
+                                ss12 = ssh - 12 + ":" + ssm;
+                                console.log("sunrise: " + srh + " sunset: " + ssh);
+                                srtoppad = 116 + 30.2 * srtp;
+                                sstoppad = 116 + 30.4 * sstp;
+                                d3.select("#sunrise")
+                                        .html(" " + sr + "am")
+                                        .style("top", srtoppad + "px");
+                                d3.select("#sunset")
+                                        .html(ss12 + "pm")
+                                        .style("top", sstoppad + "px");
+                            }
+                        });
+                    </script>
+                    <ul id="day">
+                        <i id="sunrise" class="fa fa-sun-o"> 6:15am</i>
+                        <i id="sunset" class="fa fa-moon-o"> 7:41pm</i>
+                        <li id="0">12 am</li>
+                        <li id="1"> 1 am</li>
+                        <li id="2"> 2 am</li>
+                        <li id="3"> 3 am</li>
+                        <li id="4"> 4 am</li>
+                        <li id="5"> 5 am</li>
+                        <li id="6"> 6 am</li>
+                        <li id="7"> 7 am</li>
+                        <li id="8"> 8 am</li>
+                        <li id="9"> 9 am</li>
+                        <li id="10">10 am</li>
+                        <li id="11">11 am</li>
+                        <li id="12"class="selected">12 pm</li>
+                        <li id="13"> 1 pm</li>
+                        <li id="14"> 2 pm</li>
+                        <li id="15"> 3 pm</li>
+                        <li id="16"> 4 pm</li>
+                        <li id="17"> 5 pm</li>
+                        <li id="18"> 6 pm</li>
+                        <li id="19"> 7 pm</li>
+                        <li id="20"> 8 pm</li>
+                        <li id="21"> 9 pm</li>
+                        <li id="22">10 pm</li>
+                        <li id="23">11 pm</li>
+                        <li is="24">12 am</li>
+                        <img id="dashes" src="images/vert-dashes.png" />    
+                    </ul>
+                </div>
+                <div class="sidebar-pane" id="settings">
+                    <h1>Libraries Used:</h1>
+                    <p>Third party libraries we used include the following:</p>
+                    <h3>d3</h3>
+                    <h3>leaflet</h3>
+                    <h3>leaflet-sidebar</h3>
+                    <h3>font awesome icons</h3>
+                    <h3>pikaday calendar</h3>
+                </div>
             </div>
         </div>
-    </div>
-    <div id="sidebar-map" class="sidebar-map"></div>
+        <div id="sidebar-map" class="sidebar-map"></div>
 
-    <script src="js/leaflet-sidebar.js"></script>
-
+        <script src="js/leaflet-sidebar.js"></script>
     <script>
         mapLink = 
           '<a href="http://openstreetmap.org">OpenStreetMap</a>';
@@ -361,8 +365,10 @@
       .get(function(error, data) {
          yearDayBar(data, "#bikes-per-year", "Date", "Count", "#ef6548");
       })
-	dayOfWeekBar("#chartDayOfWeek");
-	
+    dayOfWeekBar("#chartDayOfWeek"); 
+    hourOfDayBar("#chartHourOfDay");
+    distancesOverallBar("#chartDistancesOverall");
+
     </script>
 	
 	

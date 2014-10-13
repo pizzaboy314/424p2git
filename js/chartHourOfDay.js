@@ -1,4 +1,4 @@
-function dayOfWeekBar(display_div) {
+function hourOfDayBar(display_div) {
 	var margin = {top: 20, right: 30, bottom: 30, left: 50},
 		width = 450 - margin.left - margin.right,
 		height = 250 - margin.top - margin.bottom;
@@ -25,7 +25,7 @@ function dayOfWeekBar(display_div) {
 	    .append("g")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-	d3.json("static-json/day-of-week-distribution.json", function(error, data) {
+	d3.json("static-json/hour-of-day-distribution.json", function(error, data) {
 	  x.domain(data.map(function(d) { return d.range; }));
 	  y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
 
