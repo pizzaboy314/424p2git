@@ -103,6 +103,7 @@
   <script src="js/sunrise.js"></script>
   <script src="js/sunset.js"></script>
   <script src="js/chartDayOfWeek.js"></script>
+  <script src="js/chartHourOfDay.js"></script>
 </head>
 <body>
     <div id="map">
@@ -127,6 +128,9 @@
                 <div id="age" style="display: inline"></div>
                 <div id="chartDayOfWeek">
 					<p class="chartLabel"> Number of bikes out by day of the week</p>
+				</div>
+				<div id="chartHourOfDay">
+					<p class="chartLabel"> Number of bikes out by hour of the day</p>
 				</div>
                 <div id="bikes-per-year"></div>
                 
@@ -340,6 +344,7 @@
          yearDayBar(data, "#bikes-per-year", "Date", "Count", "#ef6548");
       })
 	dayOfWeekBar("#chartDayOfWeek");
+	hourOfDayBar("#chartHourOfDay");
 	
     </script>
 	
