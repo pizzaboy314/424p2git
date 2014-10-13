@@ -17,13 +17,7 @@ function dayOfWeekBar(display_div) {
 		.scale(y)
 		.orient("left");
 		
-	display_div.append("text")
-		.attr("x", 0)
-		.attr("y", -10)
-		.style("text-anchor", "left")
-		.style('font-family', 'Helvetica,Arial,sans-serif')
-		.style('font-size', '60pt')
-		.text("Number of bikes out by day of the week");
+	
 
 	d3.select(display_div).select("svg").remove()
 	var chart = d3.select(display_div).append("svg")
@@ -33,9 +27,15 @@ function dayOfWeekBar(display_div) {
 	    .append("g")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 		
-	
+	chart.append("text")
+		.attr("x", 0)
+		.attr("y", -10)
+		.style("text-anchor", "left")
+		.style('font-family', 'Helvetica,Arial,sans-serif')
+		.style('font-size', '60pt')
+		.text("Number of bikes out by day of the week");
 
-	d3.json("static-json/day-of-week-distribution.json", function(error, data) {
+	d3.json("/static-json/day-of-week-distribution.json", function(error, data) {
 	  x.domain(data.map(function(d) { return d.range; }));
 	  y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
 
