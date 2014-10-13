@@ -163,7 +163,7 @@
                         - Began data analysis<br />
                         - Built test sqllite db for divvy data
                         <h3>Week 2</h3>
-                        - Started work on SVG overview graphs
+                        - SVG overview graphs in sidebar 
                         <h2><a href="mailto:ddesut2@uic.edu">Dane DeSutter</a><br /></h2>
                         <h3>Week 1</h3>
                         - Made vector mockups of application interface and icons <br />
@@ -261,95 +261,95 @@
         <script src="js/leaflet-sidebar.js"></script>
 
         <script>
-                        mapLink =
-                                '<a href="http://openstreetmap.org">OpenStreetMap</a>';
-                        var osm = L.tileLayer(
-                                'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                                    attribution: 'Map data &copy; ' + mapLink,
-                                });
-                        var sat = L.tileLayer(
-                                'http://oatile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
-                                    attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency',
-                                    subdomains: '1234'
-                                });
+			mapLink =
+					'<a href="http://openstreetmap.org">OpenStreetMap</a>';
+			var osm = L.tileLayer(
+					'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+						attribution: 'Map data &copy; ' + mapLink,
+					});
+			var sat = L.tileLayer(
+					'http://oatile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
+						attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency',
+						subdomains: '1234'
+					});
 
-                        var map = L.map('map', {//).setView([41.85, -87.65], 13);
-                            center: [41.90, -87.60],
-                            zoom: 13,
-                            layers: [osm]
-                        });
-                        var baseMaps = {
-                            "OpenStreetMaps": osm,
-                            "Satellite": sat
-                        }
+			var map = L.map('map', {//).setView([41.85, -87.65], 13);
+				center: [41.90, -87.60],
+				zoom: 13,
+				layers: [osm]
+			});
+			var baseMaps = {
+				"OpenStreetMaps": osm,
+				"Satellite": sat
+			}
 
-                        mapLink =
-                                '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+			mapLink =
+					'<a href="http://openstreetmap.org">OpenStreetMap</a>';
 
-                        //var zoomcontrol = L.control.zoom({ position: 'topright' }).addTo(map);
-                        var sidebar = L.control.sidebar('sidebar-right', {position: 'right'});
-                        //sidebar.addTo(map);
-                        map.addControl(sidebar);
-                        var url = 'csv/divvy.csv'
-                        var stations = []
-                        var icons = [
-                            i1, i2, i3, i4, i5, i6, i7
-                        ]
-                        var markers = new L.FeatureGroup();
-                        function populate() {
-                            csv = d3.csv(url)
-                                    .get(function (error, data) {
-                                        stations = data;
-                                        var badcount = 0;
-                                        for (i = 0; i < stations.length; i++) {
-                                            n = stationPop.get(stations[i].name);
-                                            if (!n) {
-                                                badcount++;
-                                            }
-                                            //console.log("stationPop: "+stationPop.get(stations[i].name) + stations[i].name);
-                                            //console.log("icon: "+icons[stationPop.get(stations[i].name)].iconUrl);
-                                            var marker = L.marker([parseFloat(stations[i].latitude), parseFloat(stations[i].longitude)], {icon: icons[stationPop.get(stations[i].name)]})
-                                            marker.bindPopup(stations[i].name + "<br />capacity: " + stations[i].dpcapacity);
-                                            markers.addLayer(marker);
-                                        }
-                                    })
-                            return false;
-                        }
-                        function removeAllMarkers() {
-                            window.removed = true;
-                            map.removeLayer(markers);
-                        }
-                        function repopulate() {
-                            if (window.removed) {
-                                map.addLayer(markers);
-                            }
-                        }
-                        map.addLayer(markers);
-                        populate();
-                        var layercontrol = L.control.layers(baseMaps, null, {position: 'bottomleft'}).addTo(map);
-                        var url = 'csv/gender_all.csv'
-                        ourCsv = d3.text(url)
-                                .get(function (error, data) {
-                                    renderPieChart(data, "#gender", "blue");
-                                })
-                        var url = 'csv/type_all.csv'
-                        ourCsv = d3.text(url)
-                                .get(function (error, data) {
-                                    renderPieChart(data, "#type", "green");
-                                })
-                        var url = 'http://trustdarkness.com/py/age'
-                        ourCsv = d3.text(url)
-                                .get(function (error, data) {
-                                    renderPieChart(data, "#age", "red");
-                                })
-                        var url = 'http://trustdarkness.com/py/rides_by_day_of_year'
-                        ourCsv = d3.text(url)
-                                .get(function (error, data) {
-                                    yearDayBar(data, "#bikes-per-year", "Date", "Count", "#ef6548");
-                                })
-                        dayOfWeekBar("#chartDayOfWeek");
-                        hourOfDayBar("#chartHourOfDay");
-						distancesOverallBar("#chartDistancesOverall");
+			//var zoomcontrol = L.control.zoom({ position: 'topright' }).addTo(map);
+			var sidebar = L.control.sidebar('sidebar-right', {position: 'right'});
+			//sidebar.addTo(map);
+			map.addControl(sidebar);
+			var url = 'csv/divvy.csv'
+			var stations = []
+			var icons = [
+				i1, i2, i3, i4, i5, i6, i7
+			]
+			var markers = new L.FeatureGroup();
+			function populate() {
+				csv = d3.csv(url)
+						.get(function (error, data) {
+							stations = data;
+							var badcount = 0;
+							for (i = 0; i < stations.length; i++) {
+								n = stationPop.get(stations[i].name);
+								if (!n) {
+									badcount++;
+								}
+								//console.log("stationPop: "+stationPop.get(stations[i].name) + stations[i].name);
+								//console.log("icon: "+icons[stationPop.get(stations[i].name)].iconUrl);
+								var marker = L.marker([parseFloat(stations[i].latitude), parseFloat(stations[i].longitude)], {icon: icons[stationPop.get(stations[i].name)]})
+								marker.bindPopup(stations[i].name + "<br />capacity: " + stations[i].dpcapacity);
+								markers.addLayer(marker);
+							}
+						})
+				return false;
+			}
+			function removeAllMarkers() {
+				window.removed = true;
+				map.removeLayer(markers);
+			}
+			function repopulate() {
+				if (window.removed) {
+					map.addLayer(markers);
+				}
+			}
+			map.addLayer(markers);
+			populate();
+			var layercontrol = L.control.layers(baseMaps, null, {position: 'bottomleft'}).addTo(map);
+			var url = 'csv/gender_all.csv'
+			ourCsv = d3.text(url)
+					.get(function (error, data) {
+						renderPieChart(data, "#gender", "blue");
+					})
+			var url = 'csv/type_all.csv'
+			ourCsv = d3.text(url)
+					.get(function (error, data) {
+						renderPieChart(data, "#type", "green");
+					})
+			var url = 'http://trustdarkness.com/py/age'
+			ourCsv = d3.text(url)
+					.get(function (error, data) {
+						renderPieChart(data, "#age", "red");
+					})
+			var url = 'http://trustdarkness.com/py/rides_by_day_of_year'
+			ourCsv = d3.text(url)
+					.get(function (error, data) {
+						yearDayBar(data, "#bikes-per-year", "Date", "Count", "#ef6548");
+					})
+			dayOfWeekBar("#chartDayOfWeek");
+			hourOfDayBar("#chartHourOfDay");
+			distancesOverallBar("#chartDistancesOverall");
 
         </script>
 
