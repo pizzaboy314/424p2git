@@ -106,6 +106,7 @@
         <script src="js/chartHourOfDay.js"></script>
         <script src="js/chartDistancesOverall.js"></script>
         <script src="js/chartTimesOverall.js"></script>
+        <script src="js/playback.js"></script>
     </head>
     <body>
         <div id="map">
@@ -216,6 +217,7 @@
                                 d3.select("#sunset")
                                         .html(ss12 + "pm")
                                         .style("top", sstoppad + "px");
+                                playback(ourData);
                             }
                         });
                     </script>
