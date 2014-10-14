@@ -57,7 +57,7 @@
                 list-style: none;
             }
             #day li {
-                width: 300px;
+                width: 500px;
                 padding-top: 7px;
                 padding-bottom: 7px;
                 padding-left: 35px;
@@ -79,6 +79,9 @@
                 left: 5px;
                 color: #666;
                 font-size: -1;
+            }
+            .tripdata {
+                display: inline;
             }
 
 
@@ -187,6 +190,7 @@
                     <h1>Playback A Day's Rides</h1>
                     <input type="text" id="datepicker" value="Aug 24 2013">
                     <script>
+                        var dateData;
                         var picker = new Pikaday({
                             field: document.getElementById('datepicker'),
                             format: 'ddd MMM DD YYYY',
@@ -217,38 +221,38 @@
                                 d3.select("#sunset")
                                         .html(ss12 + "pm")
                                         .style("top", sstoppad + "px");
-                                playback(ourData);
+                                playback(ourDate);
                             }
                         });
                     </script>
                     <ul id="day">
                         <i id="sunrise" class="fa fa-sun-o"> 6:15am</i>
                         <i id="sunset" class="fa fa-moon-o"> 7:41pm</i>
-                        <li id="0">12 am</li>
-                        <li id="1"> 1 am</li>
-                        <li id="2"> 2 am</li>
-                        <li id="3"> 3 am</li>
-                        <li id="4"> 4 am</li>
-                        <li id="5"> 5 am</li>
-                        <li id="6"> 6 am</li>
-                        <li id="7"> 7 am</li>
-                        <li id="8"> 8 am</li>
-                        <li id="9"> 9 am</li>
-                        <li id="10">10 am</li>
-                        <li id="11">11 am</li>
-                        <li id="12"class="selected">12 pm</li>
-                        <li id="13"> 1 pm</li>
-                        <li id="14"> 2 pm</li>
-                        <li id="15"> 3 pm</li>
-                        <li id="16"> 4 pm</li>
-                        <li id="17"> 5 pm</li>
-                        <li id="18"> 6 pm</li>
-                        <li id="19"> 7 pm</li>
-                        <li id="20"> 8 pm</li>
-                        <li id="21"> 9 pm</li>
-                        <li id="22">10 pm</li>
-                        <li id="23">11 pm</li>
-                        <li is="24">12 am</li>
+                        <li id="i0">12 am<div class="tripdata"></div></li>
+                        <li id="i1"> 1 am<div class="tripdata"></div></li>
+                        <li id="i2"> 2 am<div class="tripdata"></div></li>
+                        <li id="i3"> 3 am<div class="tripdata"></div></li>
+                        <li id="i4"> 4 am<div class="tripdata"></div></li>
+                        <li id="i5"> 5 am<div class="tripdata"></div></li>
+                        <li id="i6"> 6 am<div class="tripdata"></div></li>
+                        <li id="i7"> 7 am<div class="tripdata"></div></li>
+                        <li id="i8"> 8 am<div class="tripdata"></div></li>
+                        <li id="i9"> 9 am<div class="tripdata"></div></li>
+                        <li id="i10">10 am<div class="tripdata"></div></li>
+                        <li id="i11">11 am<div class="tripdata"></div></li>
+                        <li id="i12">12 pm<div class="tripdata"></div></li>
+                        <li id="i13"> 1 pm<div class="tripdata"></div></li>
+                        <li id="i14"> 2 pm<div class="tripdata"></div></li>
+                        <li id="i15"> 3 pm<div class="tripdata"></div></li>
+                        <li id="i16"> 4 pm<div class="tripdata"></div></li>
+                        <li id="i17"> 5 pm<div class="tripdata"></div></li>
+                        <li id="i18"> 6 pm<div class="tripdata"></div></li>
+                        <li id="i19"> 7 pm<div class="tripdata"></div></li>
+                        <li id="i20"> 8 pm<div class="tripdata"></div></li>
+                        <li id="i21"> 9 pm<div class="tripdata"></div></li>
+                        <li id="i22">10 pm<div class="tripdata"></div></li>
+                        <li id="i23">11 pm<div class="tripdata"></div></li>
+                        <li id="i24">12 am<div class="tripdata"></div></li>
                         <img id="dashes" src="images/vert-dashes.png" />    
                     </ul>
                 </div>

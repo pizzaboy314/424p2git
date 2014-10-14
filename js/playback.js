@@ -1,9 +1,35 @@
 function playback(date) {
-  var ourData;
   url = 'http://trustdarkness.com/py/get_day/'+date
-  csv = d3.csv(url);
+  var i = 0;
+    setInterval(function() {
+    csv = d3.csv(url)
     .get(function(error,data) {
-      ourData = data;
-      console.log("our Data: " +ourData);
-  })
+      dateData = data;
+      console.log("our Data: " +data);
+        if (dateData[i]) {
+          tsa = dateData[i].timestamp.split(" ");
+          time = tsa[1];
+          hour = time.split(":")[0];
+          var tripstring = " "+time+" - From: "+dateData[i].from+" To: "+dateData[i].to;
+          console.log("trying to replay trip "+tripstring);
+          d3.selectAll(".tripdata")
+            .html(" ");
+          d3.select("#i"+hour)
+            .attr("class", "selected");
+          d3.select("#i"+hour).select(".tripdata")
+            .html(tripstring);
+        }
+    }); 
+    i++;
+    if (i == dateData.length) { return null; };
+  }, 50)
+ }
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
 }
