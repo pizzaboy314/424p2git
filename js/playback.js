@@ -22,7 +22,7 @@ function playback(date) {
     }); 
     i++;
     if (i == dateData.length) { return null; };
-  }, 50)
+  }, 100)
  }
 
 function sleep(milliseconds) {
