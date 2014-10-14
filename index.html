@@ -275,6 +275,16 @@
     <script>
         mapLink = 
           '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+        var td = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/terrain.day/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
+	attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
+	subdomains: '1234',
+	mapID: 'newest',
+	app_id: '<insert your app_id here>',
+	app_code: '<insert your app_code here>',
+	base: 'aerial',
+	minZoom: 0,
+	maxZoom: 20
+});
         var osm = L.tileLayer(
           'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: 'Map data &copy; ' + mapLink,
@@ -291,7 +301,7 @@
        var map = L.map('map', { //).setView([41.85, -87.65], 13);
           center: [41.90, -87.60],
 	  zoom: 13,
-          layers: [osm]
+          layers: [td]
         });
     var neighborhoods = new L.FeatureGroup();
     json = d3.json('static-json/boundaries.json')
@@ -310,6 +320,7 @@
         }
       });    
        var baseMaps = {
+         "Terrain Day (default)": td,
          "OpenStreetMaps": osm, 
          "Satellite": sat
        }
