@@ -1,5 +1,5 @@
 function timesOverallBar(display_div) {
-	var margin = {top: 20, right: 30, bottom: 30, left: 50},
+	var margin = {top: 20, right: 30, bottom: 50, left: 50},
 		width = 800 - margin.left - margin.right,
 		height = 250 - margin.top - margin.bottom;
 
@@ -24,8 +24,6 @@ function timesOverallBar(display_div) {
 		.attr("height", height + margin.top + margin.bottom)
 	    .append("g")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-	var i = -1;
 		
 	d3.json("static-json/time-distribution.json", function(error, data) {
 	  x.domain(data.map(function(d) { return d.range; }));
@@ -34,7 +32,14 @@ function timesOverallBar(display_div) {
 	  chart.append("g")
 		  .attr("class", "xaxis")
 		  .attr("transform", "translate(0," + height + ")")
-		  .call(xAxis);
+		  .call(xAxis)
+		  .selectAll("text")  
+          .style("text-anchor", "end")
+          .attr("dx", "-.8em")
+          .attr("dy", ".15em")
+          .attr("transform", function(d) {
+				return "rotate(-45)" 
+			});
 
 	  chart.append("g")
 		  .attr("class", "yaxis")
