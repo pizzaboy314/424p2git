@@ -1,8 +1,8 @@
         // setup heatmap icons
-        var iS = [26, 40]; // size of the icon
-        var sS = [26, 32]; // size of the shadow
-        var iA = [13, 42]; // point of the icon which will correspond to marker's location
-        var sA = [4, 31];  // the same for the shadow
+        var iS = [13, 20]; // size of the icon
+        var sS = [10, 16]; // size of the shadow
+        var iA = [13, 20]; // point of the icon which will correspond to marker's location
+        var sA = [5, 13];  // the same for the shadow
         var pA =  [-1, -38]; // point from which the popup should open relative to the iconAnchor
         var i1 = L.icon({ 
           iconUrl: 'images/divy-0.png',
