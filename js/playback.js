@@ -1,12 +1,20 @@
 function playback(date) {
   url = 'http://trustdarkness.com/py/get_day/'+date
+  csv = d3.csv(url)
+  .get(function(error,data) {
+    dateData = data;
+  })
   var i = 0;
     setInterval(function() {
-    csv = d3.csv(url)
-    .get(function(error,data) {
-      dateData = data;
-      console.log("our Data: " +data);
-        if (dateData[i]) {
+      if (dateData[i]) {
+        if (window.running.has(dateData[i].trip_id)) {
+          console.log("trying to remove trip #"+dateData[i].trip_id);
+          window.running.get(dateData[i].trip_id).hide();
+          window.running.get(dateData[i].trip_id).spliceWaypoints(0,2);
+          //map.removeLayer(window.running.get(dateData[i].trip_id).getPlan());
+          window.running.delete(dateData[i].trip_id);
+          i++;
+        } else {
           tsa = dateData[i].timestamp.split(" ");
           time = tsa[1];
           hour = time.split(":")[0];
@@ -18,15 +26,31 @@ function playback(date) {
             .attr("class", "selected");
           d3.select("#i"+hour).select(".tripdata")
             .html(tripstring);
-          L.Routing.control({ 
+          var trip = L.Routing.control({ 
             waypoints: [
               L.latLng(dateData[i].flat,dateData[i].flong),
-	      L.latLng(dateData[i].tlat,dateData[i].tlong)
-            ]
-          }).addTo(map);
+              L.latLng(dateData[i].tlat,dateData[i].tlong)
+            ],
+            fitSelectedRoutes: false
+          });
+          window.running.set(dateData[i].trip_id, trip); 
+          //L.Routing.line(trip, { styles: { color: "blue" } } );
+          trip.addTo(map);
+          i++;
         }
-    }); 
-    i++;
-    if (i == dateData.length) { return null; };
-  }, 100)
- }
+      }
+      if (window.running.size == 0) {
+        d3.selectAll("path").remove()
+      }
+    if (i == dateData.length-1) { clearInterval(); };
+  }, 300);
+}
+
+function sameSrcDst(trip) {
+  if (trip.flat == trip.tlat) {
+    if (trip.flong == trip.tlong) {
+      return true;
+    }
+  }
+  return false;
+}
