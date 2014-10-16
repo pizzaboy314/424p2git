@@ -110,6 +110,8 @@
         <script src="js/chartDistancesOverall.js"></script>
         <script src="js/chartTimesOverall.js"></script>
         <script src="js/playback.js"></script>
+        <link rel="stylesheet" href="css/leaflet-routing-machine.css" />
+        <script src="js/leaflet-routing-machine.js"></script>
     </head>
     <body>
         <div id="map">
@@ -191,6 +193,7 @@
                     <input type="text" id="datepicker" value="Aug 24 2013">
                     <script>
                         var dateData;
+                        window.running = new Map;
                         var picker = new Pikaday({
                             field: document.getElementById('datepicker'),
                             format: 'ddd MMM DD YYYY',
@@ -279,8 +282,8 @@
 	attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
 	subdomains: '1234',
 	mapID: 'newest',
-	app_id: '<insert your app_id here>',
-	app_code: '<insert your app_code here>',
+	app_id: 'xP4bpKAjWH0VB9JGLJGY',
+	app_code: '5LxaBGbamsXQdTeEKw_m3Q',
 	base: 'aerial',
 	minZoom: 0,
 	maxZoom: 20

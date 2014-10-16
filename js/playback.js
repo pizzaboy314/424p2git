@@ -18,6 +18,12 @@ function playback(date) {
             .attr("class", "selected");
           d3.select("#i"+hour).select(".tripdata")
             .html(tripstring);
+          L.Routing.control({ 
+            waypoints: [
+              L.latLng(dateData[i].flat,dateData[i].flong),
+	      L.latLng(dateData[i].tlat,dateData[i].tlong)
+            ]
+          }).addTo(map);
         }
     }); 
     i++;
