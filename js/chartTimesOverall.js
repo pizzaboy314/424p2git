@@ -29,7 +29,7 @@ function timesOverallBar(display_div) {
 		
 	d3.json("static-json/time-distribution.json", function(error, data) {
 	  x.domain(data.map(function(d) { return d.range; }));
-	  y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+	  y.domain([0, d3.max(data, function(d) { return +d.frequency; })]);
 
 	  chart.append("g")
 		  .attr("class", "xaxis")
@@ -45,8 +45,8 @@ function timesOverallBar(display_div) {
 		.enter().append("rect")
 		  .attr("class", "bar")
 		  .attr("x", function(d) { return x(d.range); })
-		  .attr("y", function(d) { return y(d.frequency); })
-		  .attr("height", function(d) { return height - y(d.frequency); })
+		  .attr("y", function(d) { return y(+d.frequency); })
+		  .attr("height", function(d) { return height - y(+d.frequency); })
 		  .attr("width", x.rangeBand()-8);
 	});
 }
