@@ -1,47 +1,48 @@
 function playback(date) {
+  d3.select("#playLoading").html("<img src='images/spinner.gif' />");
   url = 'http://trustdarkness.com/py/get_day/'+date
   csv = d3.csv(url)
   .get(function(error,data) {
     dateData = data;
   })
-  var i = 0;
   var removed = 0;
   var added = 0;
-    var repeat = setInterval(function() {
-      if (dateData[i]) {
-        tsa = dateData[i].timestamp.split(" ");
+    window.repeat = setInterval(function() {
+      if (dateData[window.playbackEvent]) {
+        d3.select("#playLoading").html("");
+        tsa = dateData[window.playbackEvent].timestamp.split(" ");
         time = tsa[1];
         hour = time.split(":")[0];
-        if (window.running.has(dateData[i].trip_id)) {
-          console.log("trying to remove trip #"+dateData[i].trip_id);
-          window.running.get(dateData[i].trip_id).hide();
-          window.running.get(dateData[i].trip_id).spliceWaypoints(0,2);
-          window.running.delete(dateData[i].trip_id);
-          d3.select("#i"+hour+" #i"+hour-1)
-            .attr("class", "");
+        if (window.running.has(dateData[window.playbackEvent].trip_id)) {
+          console.log("trying to remove trip #"+dateData[window.playbackEvent].trip_id);
+          window.running.get(dateData[window.playbackEvent].trip_id).hide();
+          window.running.get(dateData[window.playbackEvent].trip_id).spliceWaypoints(0,2);
+          window.running.delete(dateData[window.playbackEvent].trip_id);
           removed++;
-          i++;
+          window.playbackEvent++;
         } else {
-          var tripstring = " "+time+" - From: "+dateData[i].from+" To: "+dateData[i].to;
+	  d3.select("#playLoading").html("");
+          var tripstring = " "+time+" - From: "+dateData[window.playbackEvent].from+" To: "+dateData[i].to;
           console.log("trying to replay trip "+tripstring);
           d3.selectAll(".tripdata")
             .html(" ");
+          d3.select("#day").selectAll(".selected").attr("class", "");
           d3.select("#i"+hour)
             .attr("class", "selected");
           d3.select("#i"+hour).select(".tripdata")
             .html(tripstring);
           var trip = L.Routing.control({ 
             waypoints: [
-              L.latLng(dateData[i].flat,dateData[i].flong),
-              L.latLng(dateData[i].tlat,dateData[i].tlong)
+              L.latLng(dateData[window.playbackEvent].flat,dateData[window.playbackEvent].flong),
+              L.latLng(dateData[window.playbackEvent].tlat,dateData[window.playbackEvent].tlong)
             ],
             fitSelectedRoutes: false
           });
-          window.running.set(dateData[i].trip_id, trip); 
+          window.running.set(dateData[window.playbackEvent].trip_id, trip); 
           //L.Routing.line(trip, { styles: { color: "blue" } } );
           trip.addTo(map);
           added++;
-          i++;
+          window.playbackEvent++;
         }
       }
       if (window.running.size == 0) {
@@ -50,9 +51,13 @@ function playback(date) {
       } else {
         console.log("window.running.size: "+window.running.size);
       }
-    console.log("final playback: touched: "+i+" added: "+added+" removed: "+removed);
-    if (i == dateData.length) { console.log("trying to clearInterval"); window.clearInterval(repeat); };
-  }, 300);
+    console.log("final playback: touched: "+window.playbackEvent+" added: "+added+" removed: "+removed);
+    if (window.playbackEvent == dateData.length+1) { 
+      console.log("trying to clearInterval"); 
+      window.clearInterval(repeat); 
+      d3.selectAll(".tripdata").html("");
+    };
+  }, 400);
 }
 
 function sameSrcDst(trip) {
@@ -62,4 +67,20 @@ function sameSrcDst(trip) {
     }
   }
   return false;
+}
+
+function resetPlayback() {
+  window.playing = false;
+  window.started = false;
+  window.running = new Map;
+  window.playbackEvent = 0;
+  clearInterval(window.repeat);
+  d3.selectAll(".tripdata").html("");
+  d3.select("#day").selectAll("li").attr("class", "");
+  d3.selectAll("path").remove();
+  d3.selectAll(".leaflet-marker-pane").selectAll("img").remove();
+  d3.selectAll(".leaflet-shadow-pane").selectAll("img").remove();
+  d3.select("#playbutton").html("Play");
+  d3.selectAll("path").remove();
+ 
 }

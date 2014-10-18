@@ -83,6 +83,9 @@
             .tripdata {
                 display: inline;
             }
+            .leaflet-routing-container {
+                display: none;
+            }
 
 
         </style>
@@ -191,8 +194,12 @@
                 <div class="sidebar-pane" id="messages">
                     <h1>Playback A Day's Rides</h1>
                     <input type="text" id="datepicker" value="Aug 24 2013">
+                    <button id="playbutton">Play</button>
+                    <button id="resetbutton">Reset</button>
+                    <div style="display: inline" id="playLoading"></div>
                     <script>
                         var dateData;
+                        ourDate = '2013-06-26';
                         window.running = new Map;
                         var picker = new Pikaday({
                             field: document.getElementById('datepicker'),
@@ -202,6 +209,9 @@
                             maxDate: new Date('2013-12-31'),
                             yearRange: [2013, 2013],
                             onSelect: function () {
+                                if (window.started) {
+                                  resetPlayback();
+                                }
                                 ourDate = this.getMoment().format("YYYY-MM-DD")
                                 console.log("date selected: " + ourDate);
                                 sr = sunrise.get(ourDate);
@@ -224,9 +234,30 @@
                                 d3.select("#sunset")
                                         .html(ss12 + "pm")
                                         .style("top", sstoppad + "px");
-                                playback(ourDate);
                             }
                         });
+                        d3.select("#playbutton").on("click", function() {
+                          if (window.playing) {
+                            window.playing = false;
+                            d3.select("#playbutton").html("Play"); 
+                            console.log("I'M TRYING TO CLEAR IT!");
+                            clearInterval(window.repeat);
+                          } else if (window.started) {
+                            window.playing = true;
+                            playback(ourDate);
+                            d3.select("#playbutton").html("Pause");
+                          } else {
+                            window.started = true; 
+                            window.playing = true;
+                            window.playbackEvent = 0;
+                            playback(ourDate)
+                            d3.select("#playbutton").html("Pause");
+                          }
+                        });
+                        d3.select("#resetbutton").on("click", function() {
+                          resetPlayback(); 
+                        });
+
                     </script>
                     <ul id="day">
                         <i id="sunrise" class="fa fa-sun-o"> 6:15am</i>
