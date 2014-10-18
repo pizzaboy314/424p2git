@@ -18,6 +18,11 @@ db = MySQLdb.connect(
   db="divvy"
 )
 
+if subprocess.check_output("hostname") == "praxis\n":
+  PATH = ""
+else:
+  PATH = "/var/www/cs424/p2/py"
+
 c = db.cursor()
  
 def store_popularity_groups():
@@ -141,7 +146,7 @@ class Root(object):
   
   def get_day(self, date):
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
-    with open("/var/www/cs424/p2/py/station_lat_long.pickle", "rb") as f:
+    with open(PATH+"station_lat_long.pickle", "rb") as f:
       stat_lat_long = pickle.load(f)
     q = """
         SELECT 
@@ -195,6 +200,8 @@ class Root(object):
       for j, keylookup, in keylist.items():
         if key == keylookup:
           l.extend(data[j])
+          keylist.pop(j)
+          break
       l = tuple(l)
       ret.append("%s,%s,%s,%s,%s,%s,%s,%s,%s" % l)
     return "\n".join(ret)
