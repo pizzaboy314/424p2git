@@ -8,6 +8,7 @@ import MySQLdb
 import pickle
 import subprocess
 from collections import OrderedDict
+from dateutil import parser
 
 db = MySQLdb.connect(
   host="127.0.0.1",
@@ -92,22 +93,16 @@ class Root(object):
       GROUP BY
         age_in_2014 
     """
-#    kids = 0
-#    teens = 0
     undertwenty = 0
     twenties = 0
     thirties = 0
     forties = 0
     fifties = 0
     sixtyplus = 0
-#    seventies = 0
-#    eightyplus = 0
     c.execute(q)
     for row in c.fetchall():
       if row[0] < 20 and row[0] > 0:
         undertwenty += row[1]
-#      elif 20 > row[0] and row[0] > 12:
-#        teens += row[1]
       elif 30 > row[0] and row[0] > 19:
         twenties += row[1]
       elif 40 > row[0] and row[0] > 29:
@@ -116,10 +111,6 @@ class Root(object):
         forties += row[1]
       elif 60 > row[0] and row[0] > 49:
         fifties += row[1]
-#      elif 70 > row[0] and row[0] > 59:
-#        sixties += row[1]
-#      elif 80 > row[0] and row[0] > 69:
-#        seventies += row[1]
       elif row[0] > 59:
         sixtyplus += row[1]
 
@@ -169,7 +160,7 @@ class Root(object):
     c.execute(q)
     data = OrderedDict()
     for row in c.fetchall():
-      data[row[0]] = ( # start timestamp
+      data[parser.parse(row[0])] = ( # start timestamp
         row[2], # trip id
         "start",
         stat_lat_long[row[3]][0], # from station name
@@ -180,7 +171,7 @@ class Root(object):
         stat_lat_long[row[4]][2]  # from long
       )
       # now we do the same thing again but for the end of the trip
-      data[row[1]] = ( # start timestamp
+      data[parser.parse(row[1])] = ( # start timestamp
         row[2], # trip id
         "end",
         stat_lat_long[row[3]][0], # from station name
@@ -191,7 +182,7 @@ class Root(object):
         stat_lat_long[row[4]][2]  # from long
       )
     for key in sorted(data): 
-      l = [key]
+      l = [key.strftime('%m/%d/%Y %I:%M')]
       l.extend(data[key])
       l = tuple(l)
       ret.append("%s,%s,%s,%s,%s,%s,%s,%s,%s" % l)
