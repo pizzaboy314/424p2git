@@ -141,7 +141,7 @@ class Root(object):
   
   def get_day(self, date):
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
-    with open("/var/www/cs424/p2/py/station_lat_long.pickle", "rb") as f:
+    with open("station_lat_long.pickle", "rb") as f:
       stat_lat_long = pickle.load(f)
     q = """
         SELECT 
@@ -160,8 +160,11 @@ class Root(object):
     ret.append("timestamp,trip_id,start/end,from,flat,flong,to,tlat,tlong")
     c.execute(q)
     data = OrderedDict()
+    keylist = []
+    i = 0
     for row in c.fetchall():
-      data[parser.parse(row[0])] = ( # start timestamp
+      keylist.append(parser.parse(row[0]))
+      data[i] = ( # start timestamp
         row[2], # trip id
         "start",
         stat_lat_long[row[3]][0], # from station name
@@ -171,8 +174,10 @@ class Root(object):
         stat_lat_long[row[4]][1], # from lat
         stat_lat_long[row[4]][2]  # from long
       )
+      i = i+1
       # now we do the same thing again but for the end of the trip
-      data[parser.parse(row[1])] = ( # start timestamp
+      keylist.append(parser.parse(row[1]))
+      data[i] = ( # start timestamp
         row[2], # trip id
         "end",
         stat_lat_long[row[3]][0], # from station name
@@ -182,7 +187,7 @@ class Root(object):
         stat_lat_long[row[4]][1], # from lat
         stat_lat_long[row[4]][2]  # from long
       )
-    keylist = data.keys()
+      i = i+1
     unix = []
     for dt in keylist:
       unix.append(int(dt.strftime("%s")))
@@ -190,9 +195,9 @@ class Root(object):
     keylist = []
     for ut in unix:
       keylist.append(datetime.fromtimestamp(ut))
-    for key in keylist: 
+    for j, key in enumerate(keylist): 
       l = [key.strftime('%m/%d/%Y %H:%M%p')]
-      l.extend(data[key])
+      l.extend(data[j])
       l = tuple(l)
       ret.append("%s,%s,%s,%s,%s,%s,%s,%s,%s" % l)
     return "\n".join(ret)
