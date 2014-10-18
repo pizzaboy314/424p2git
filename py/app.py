@@ -181,7 +181,9 @@ class Root(object):
         stat_lat_long[row[4]][1], # from lat
         stat_lat_long[row[4]][2]  # from long
       )
-    for key in sorted(data): 
+    keylist = data.keys()
+    keylist.sort()
+    for key in keylist: 
       l = [key.strftime('%m/%d/%Y %I:%M')]
       l.extend(data[key])
       l = tuple(l)
