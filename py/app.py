@@ -191,7 +191,7 @@ class Root(object):
     for ut in unix:
       keylist.append(datetime.fromtimestamp(ut))
     for key in keylist: 
-      l = [key.strftime('%m/%d/%Y %I:%M')]
+      l = [key.strftime('%m/%d/%Y %I:%M%p')]
       l.extend(data[key])
       l = tuple(l)
       ret.append("%s,%s,%s,%s,%s,%s,%s,%s,%s" % l)
