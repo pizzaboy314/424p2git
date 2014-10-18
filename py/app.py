@@ -1,6 +1,7 @@
 import sys
 sys.stdout = sys.stderr
 
+import os
 import atexit
 import threading
 import cherrypy
@@ -146,7 +147,7 @@ class Root(object):
   
   def get_day(self, date):
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
-    with open(PATH+"station_lat_long.pickle", "rb") as f:
+    with open(os.path.join(PATH, "station_lat_long.pickle"), "rb") as f:
       stat_lat_long = pickle.load(f)
     q = """
         SELECT 
