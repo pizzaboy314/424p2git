@@ -141,7 +141,7 @@ class Root(object):
   
   def get_day(self, date):
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
-    with open("station_lat_long.pickle", "rb") as f:
+    with open("/var/www/cs424/p2/py/station_lat_long.pickle", "rb") as f:
       stat_lat_long = pickle.load(f)
     q = """
         SELECT 
