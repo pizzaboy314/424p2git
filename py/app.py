@@ -166,7 +166,7 @@ class Root(object):
          WHERE  
            startdate like '%s' 
          ORDER BY 
-           starttime ASC""" % date
+           stoptime ASC""" % date
     ret = []
     ret.append("timestamp,trip_id,start/end,from,flat,flong,to,tlat,tlong")
     c.execute(q)
