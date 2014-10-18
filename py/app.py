@@ -188,10 +188,13 @@ class Root(object):
         stat_lat_long[row[4]][2]  # from long
       )
       i = i+1
-    keylist = {value: key for key, value in keylist.items()}
-    for key in sorted(keylist): 
+    keys = keylist.values()
+    keys.sort()
+    for key in keys: 
       l = [key.strftime('%m/%d/%Y %H:%M%p')]
-      l.extend(data[keylist[key]])
+      for j, keylookup, in keylist.items():
+        if key == keylookup:
+          l.extend(data[j])
       l = tuple(l)
       ret.append("%s,%s,%s,%s,%s,%s,%s,%s,%s" % l)
     return "\n".join(ret)
