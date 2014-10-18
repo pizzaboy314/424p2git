@@ -154,7 +154,18 @@ class Root(object):
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     with open("/var/www/cs424/p2/py/station_lat_long.pickle", "rb") as f:
       stat_lat_long = pickle.load(f)
-    q = "select starttime, stoptime, trip_id, from_station_id, to_station_id from divvy_trips_distances where startdate like '%s' order by startdate" % date
+    q = "select 
+           starttime, 
+           stoptime, 
+           trip_id, 
+           from_station_id, 
+           to_station_id 
+         FROM 
+           divvy_trips_distances 
+         WHERE  
+           startdate like '%s' 
+         ORDER BY 
+           startdate ASC" % date
     ret = []
     ret.append("timestamp,trip_id,start/end,from,flat,flong,to,tlat,tlong")
     c.execute(q)

@@ -7,17 +7,18 @@ function playback(date) {
   var i = 0;
     setInterval(function() {
       if (dateData[i]) {
+        tsa = dateData[i].timestamp.split(" ");
+        time = tsa[1];
+        hour = time.split(":")[0];
         if (window.running.has(dateData[i].trip_id)) {
           console.log("trying to remove trip #"+dateData[i].trip_id);
           window.running.get(dateData[i].trip_id).hide();
           window.running.get(dateData[i].trip_id).spliceWaypoints(0,2);
-          //map.removeLayer(window.running.get(dateData[i].trip_id).getPlan());
           window.running.delete(dateData[i].trip_id);
+          d3.select("#i"+hour)
+            .attr("class", "");
           i++;
         } else {
-          tsa = dateData[i].timestamp.split(" ");
-          time = tsa[1];
-          hour = time.split(":")[0];
           var tripstring = " "+time+" - From: "+dateData[i].from+" To: "+dateData[i].to;
           console.log("trying to replay trip "+tripstring);
           d3.selectAll(".tripdata")
@@ -41,6 +42,7 @@ function playback(date) {
       }
       if (window.running.size == 0) {
         d3.selectAll("path").remove()
+        d3.select("#day").selectAll("li").attr("class", "");
       }
     if (i == dateData.length-1) { clearInterval(); };
   }, 300);
