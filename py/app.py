@@ -7,6 +7,7 @@ import cherrypy
 import MySQLdb
 import pickle
 import subprocess
+from collections import OrderedDict
 
 db = MySQLdb.connect(
   host="127.0.0.1",
@@ -124,15 +125,11 @@ class Root(object):
 
     ret = [
       "Age,Count",
-#      "0-12,%s" % kids,
-#      "12-19,%s" % teens,
       "Under 20,%s" % undertwenty,
       "20-29,%s" % twenties,
       "30-39,%s" % thirties,
       "40-49,%s" % forties,
       "50-59,%s" % fifties,
-#      "60-69,%s" % sixties,
-#      "70-79,%s" % seventies,
       "60+,%s" % sixtyplus,
     ]
     return "\n".join(ret)
@@ -170,9 +167,9 @@ class Root(object):
     ret = []
     ret.append("timestamp,trip_id,start/end,from,flat,flong,to,tlat,tlong")
     c.execute(q)
+    data = OrderedDict()
     for row in c.fetchall():
-      ret.append("%s,%s,%s,%s,%s,%s,%s,%s,%s" % (
-        row[0], # start timestamp
+      data[row[0]] = ( # start timestamp
         row[2], # trip id
         "start",
         stat_lat_long[row[3]][0], # from station name
@@ -181,10 +178,9 @@ class Root(object):
         stat_lat_long[row[4]][0], # to station name
         stat_lat_long[row[4]][1], # from lat
         stat_lat_long[row[4]][2]  # from long
-      ))
+      )
       # now we do the same thing again but for the end of the trip
-      ret.append("%s,%s,%s,%s,%s,%s,%s,%s,%s" % (
-        row[1], # start timestamp
+      data[row[1]] = ( # start timestamp
         row[2], # trip id
         "end",
         stat_lat_long[row[3]][0], # from station name
@@ -193,7 +189,12 @@ class Root(object):
         stat_lat_long[row[4]][0], # to station name
         stat_lat_long[row[4]][1], # from lat
         stat_lat_long[row[4]][2]  # from long
-      ))
+      )
+    for key in sorted(data): 
+      l = [key]
+      l.extend(data[key])
+      l = tuple(l)
+      ret.append("%s,%s,%s,%s,%s,%s,%s,%s,%s" % l)
     return "\n".join(ret)
   get_day.exposed = True
 
