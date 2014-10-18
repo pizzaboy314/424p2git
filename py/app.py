@@ -8,6 +8,7 @@ import MySQLdb
 import pickle
 import subprocess
 from collections import OrderedDict
+from datetime import datetime
 from dateutil import parser
 
 db = MySQLdb.connect(
@@ -182,7 +183,13 @@ class Root(object):
         stat_lat_long[row[4]][2]  # from long
       )
     keylist = data.keys()
-    keylist.sort()
+    unix = []
+    for dt in keylist:
+      unix.append(int(dt.strftime("%s")))
+    unix.sort()
+    keylist = []
+    for ut in unix:
+      keylist.append(datetime.fromtimestamp(ut))
     for key in keylist: 
       l = [key.strftime('%m/%d/%Y %I:%M')]
       l.extend(data[key])
