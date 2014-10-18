@@ -160,10 +160,10 @@ class Root(object):
     ret.append("timestamp,trip_id,start/end,from,flat,flong,to,tlat,tlong")
     c.execute(q)
     data = OrderedDict()
-    keylist = []
+    keylist = {}
     i = 0
     for row in c.fetchall():
-      keylist.append(parser.parse(row[0]))
+      keylist[i] = parser.parse(row[0])
       data[i] = ( # start timestamp
         row[2], # trip id
         "start",
@@ -176,7 +176,7 @@ class Root(object):
       )
       i = i+1
       # now we do the same thing again but for the end of the trip
-      keylist.append(parser.parse(row[1]))
+      keylist[i] = parser.parse(row[1])
       data[i] = ( # start timestamp
         row[2], # trip id
         "end",
@@ -188,16 +188,10 @@ class Root(object):
         stat_lat_long[row[4]][2]  # from long
       )
       i = i+1
-    unix = []
-    for dt in keylist:
-      unix.append(int(dt.strftime("%s")))
-    unix.sort()
-    keylist = []
-    for ut in unix:
-      keylist.append(datetime.fromtimestamp(ut))
-    for j, key in enumerate(keylist): 
+    keylist = {value: key for key, value in keylist.items()}
+    for key in sorted(keylist): 
       l = [key.strftime('%m/%d/%Y %H:%M%p')]
-      l.extend(data[j])
+      l.extend(data[keylist[key]])
       l = tuple(l)
       ret.append("%s,%s,%s,%s,%s,%s,%s,%s,%s" % l)
     return "\n".join(ret)
