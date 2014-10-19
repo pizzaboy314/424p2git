@@ -106,3 +106,15 @@ ul#day {
 #rootwizardbottom img {
   height: 35px;
 }
+
+.leaflet-control-layers {
+  display: inline;
+  position: absolute;
+  bottom: 3px;
+}
+.leaflet-control-scale {
+  display: inline;
+  position: absolute;
+  bottom: 8px;
+  left: 75px;
+}

@@ -349,6 +349,7 @@
        var sidebar = L.control.sidebar('sidebar-right', { position: 'right' });
        //sidebar.addTo(map);
        map.addControl(sidebar);
+       L.control.scale().addTo(map);
        var url = 'csv/divvy.csv'
        var stations = []
        var icons = [
