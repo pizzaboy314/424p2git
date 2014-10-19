@@ -181,7 +181,7 @@ class Root(object):
       if gender:
         where_stmts.append("gender like '%s'" % gender)
       if subscriber:
-        where_stmts.append("usertype like '%s'" % subscriber)
+        where_stmts.append("usertype like '%s%%'" % subscriber)
       if age_group:
         bottom, top = parse_age_group(age_group)
         where_stmts.append("age_in_2014 < %d" % top)

@@ -274,7 +274,7 @@
             <img id="dashes" src="images/vert-dashes.png" />    
             <form id="gender_play_form">
               (Optional) Limit by Gender:<br /><br />
-              <div id="radio">
+              <div id="radiogender">
                 <input type="radio" id="male_select" name="radio"><label for="male_select">Male</label>
                 <input type="radio" id="female_select" name="radio"><label for="female_select">Female</label>
               </div>
@@ -286,10 +286,30 @@
               d3.select("#female_select").on("click", function() {
                 window.genderLimit = "Female";
               });
-$(function() {
-    $( "#radio" ).buttonset();
-  });
+              $(function() {
+                $( "#radiogender" ).buttonset();
+              });
             </script>
+            <form id="usertype_play_form">
+              (Optional) Limit by Usertype:<br /><br />
+              <div id="radiousertype">
+                <input type="radio" id="subscriber_select" name="radio"><label for="subscriber_select">Subscriber</label>
+                <input type="radio" id="customer_select" name="radio"><label for="customer_select">Customer</label>
+              </div>
+            </form>
+            <script>
+              d3.select("#subscriber_select").on("click", function() {
+                window.usertypeLimit = "Subscriber";
+              });
+              d3.select("#customer_select").on("click", function() {
+                window.usertypeLimit = "Customer";
+              });
+              $(function() {
+                $( "#radiousertype" ).buttonset();
+              });
+
+            </script>
+
           </ul>
         </div>
         <div class="sidebar-pane" id="settings">
@@ -298,8 +318,9 @@ $(function() {
           <h3>d3</h3>
           <h3>leaflet</h3>
           <h3>leaflet-sidebar</h3>
-          <h3>jquery (layout only)</h3>
-          <h3>bootstrap (layout only)</h3>
+          <h3>jquery (layout + UI only)</h3>
+          <h3>jquery UI (layout + UI only)</h3>
+          <h3>bootstrap (layout + UI only)</h3>
           <h3>font awesome icons</h3>
           <h3>pikaday calendar</h3>
           <h3>moment.js</h3>

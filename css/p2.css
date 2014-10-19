@@ -126,3 +126,10 @@ ul#day {
   display: inline;
 }
 
+#usertype_play_form {
+  position: absolute;
+  top: 120px;
+  left: 600px;
+  display: inline;
+}
+
