@@ -36,6 +36,8 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.bootstrap.wizard.js"></script>
     <script src="js/leaflet-routing-machine.js"></script>
+    <script src="js/stations.js"></script>
+    <script src="js/selections.js"></script>
   </head>
   <body>
     <div id="map">
@@ -319,18 +321,38 @@
        });
 
        var neighborhoods = new L.FeatureGroup();
+       window.selected = {
+         "color": "#ff7800",
+         "weight": 5,
+         "opacity": 0.65
+       };
+       window.unselected = {
+         'color': '#222',
+         'opacity': .5,
+         'weight': 1,
+         'fillColor': 'aeaeae',
+         'fillOpacity': 0.1
+       };
        json = d3.json('static-json/boundaries.json')
        .get(function(error, data) {
          d = data.slice();
          for (i = 0; i < d.length; i++) {
            var neighborhood = L.geoJson(d[i].geometry, {
-           "style": {
-             'color': '#222',
-             'opacity': .5,
-             'weight': 1,
-             'fillColor': 'aeaeae',
-             'fillOpacity': 0.1
-           }});
+           "style": window.unselected
+           });
+           neighborhood.name = d[i].properties.name;
+           neighborhood.slug = d[i].properties.slug;
+           neighborhood.on("click", function() {
+             if (this.selected == true) {
+               this.selected = false;
+               this.setStyle(window.unselected);
+             } else {
+               this.selected = true;
+               this.setStyle(window.selected);
+               addNeighborhoodToSelection(this);
+             }
+           });
+;
            neighborhoods.addLayer(neighborhood);
          }
        });    
