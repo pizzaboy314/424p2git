@@ -57,132 +57,130 @@
       <!-- Tab panes -->
       <div class="sidebar-content">
         <div class="sidebar-pane" id="home">
-          <div id="graphs">
-            <div id="rootwizardtop" class="tabbable tabs-left">
-              <ul>
-                <li><a href="#gender_tab" data-toggle="tab">Gender</a></li>
-                <li><a href="#subscriber_status_tab" data-toggle="tab">Subscriber Status</a></li>
-                <li><a href="#age_tab" data-toggle="tab">Age</a></li>
-              </ul>
-              <div class="tab-content">
-                <div class="tab-pane" id="gender_tab">
-                  <div id="gender" style="display: inline"></div>
-                </div>
-                <div class="tab-pane" id="subscriber_status_tab">
-                  <div id="type" style="display: inline"></div>
-                </div>
-                <div class="tab-pane" id="age_tab">
-                  <div id="age" style="display: inline"></div>
-                </div>
-              </div>	
-            </div>
-            <div id="rootwizardbottom" class="tabbable tabs-left">
-              <ul>
-                <li><a href="#day_of_week_tab" data-toggle="tab">Bikes Out By Day</a></li>
-                <li><a href="#hour_of_day_tab" data-toggle="tab">Bikes Out By Hour</a></li>
-                <li><a href="#distance_by_bike_tab" data-toggle="tab">Distance Travelled by Bike</a></li>
-                <li><a href="#times_travelled_tab" data-toggle="tab">Times Travelled</a></li>
-                <li><a href="#day_of_year" data-toggle="tab">Bikes Out by Day of Year</a></li>
-              </ul>
-              <div class="tab-content">
-                <div class="tab-pane" id="day_of_week_tab">
-                  <div id="chartDayOfWeek">
-                    <p class="chartLabel"> 
-                      Number of bikes out by day of the week
-                    </p>
-                  </div>
-                </div>
-                <div class="tab-pane" id="hour_of_day_tab">
-                  <div id="chartHourOfDay">
-                    <p class="chartLabel"> 
-                      Number of bikes out by hour of the day
-                    </p>
-                  </div>
-                </div>
-                <div class="tab-pane" id="distance_by_bike_tab">
-                  <div id="chartDistancesOverall">
-                    <p class="chartLabel">  
-                      Average distances travelled by bikes overall
-                    </p>
-                  </div>
-                </div>
-                <div class="tab-pane" id="times_travelled_tab">
-                  <div id="chartTimesOverall">
-                    <p class="chartLabel"> 
-                      Average times travelled by bikes overall
-                    </p>
-                  </div>
-                </div>
-                <div class="tab-pane" id="day_of_year">
-                  <div id="bikes-per-year"></div>
-                </div>     
+          <div id="rootwizardtop" class="tabbable tabs-left">
+            <ul>
+              <li><a href="#gender_tab" data-toggle="tab">Gender</a></li>
+              <li><a href="#subscriber_status_tab" data-toggle="tab">Subscriber Status</a></li>
+              <li><a href="#age_tab" data-toggle="tab">Age</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane" id="gender_tab">
+                <div id="gender" style="display: inline"></div>
               </div>
-            </div>
-            <script>
-              $(document).ready(function() {
-                $('#rootwizardtop').bootstrapWizard({'tabClass': 'nav nav-tabs'});
-              });
-              $(document).ready(function() {
-                $('#rootwizardbottom').bootstrapWizard({'tabClass': 'nav nav-tabs'});
-              });
- 
-            </script> 
-            <div class="sidebar-pane" id="profile">
-            <div id="contact">
-              <h1>Weekly activity:</h1>
-              <h2><a href="mailto:mt@trustdarkness.com">Mike Thompson</a></h2>
-              <h3>Week 1</h3>
-              - Setup initial map and sidebar<br />
-              - Setup Git for collaboration
-              <h3>Week 2</h3>
-              - sidebar to the right with working controls<br />
-              - Added rider breakdown demographics graphs<br />
-              - Deployed SQL db<br />
-              - Began work on python data interaction layer<br />
-              - Added popularity data as icon heatmap<br />
-              - Added bikes out per day of the year<br />
-              <h3>Week 3</h3>
-              - Built front and backend for daily playback<br />
-              - Updated UI, Icons, and layout<br />
-              - Made markers dynamically removable<br />
-              - added chicago neighborhood and border overlays
-              <h2><a href="mailto:bspahr314@gmail.com">Bryan Spahr</a></h2>
-              <h3>Week 1</h3>
-              - Began data analysis<br />
-              - Built test sqllite db for divvy data
-              <h3>Week 2</h3>
-              - SVG overview graphs in sidebar 
-              <h2><a href="mailto:ddesut2@uic.edu">Dane DeSutter</a><br /></h2>
-              <h3>Week 1</h3>
-              - Made vector mockups of application interface and icons <br />
-              - Constructed planning / organization spreadsheet <br />
-              - Conceptualized / designed graphical representations with necessary features to display Divvy datasets <br />
-              - Researched Leaflet.js libraries necessary for desired functionality <br />
-              <h3>Week 2</h3>
-              - Ran Excel analyses on data corpus to create frequency distributions and determine what x-axis ranges and step sizes would best display the dataset <br />
-              - Wrote a document detailing necessary data structures and the calls that would need to be placed to the database <br />
-              - Wrote psuedo code to construct the necessary data structures <br />
-              - Exported data from Excel analyses as JSON files matching the desired data structures to enable parallel d3 development <br />
+              <div class="tab-pane" id="subscriber_status_tab">
+                <div id="type" style="display: inline"></div>
+              </div>
+              <div class="tab-pane" id="age_tab">
+                <div id="age" style="display: inline"></div>
+              </div>
+            </div>	
+          </div>
+          <div id="rootwizardbottom" class="tabbable tabs-left">
+            <ul>
+              <li><a href="#day_of_week_tab" data-toggle="tab">Bikes Out By Day</a></li>
+              <li><a href="#hour_of_day_tab" data-toggle="tab">Bikes Out By Hour</a></li>
+              <li><a href="#distance_by_bike_tab" data-toggle="tab">Distance Travelled by Bike</a></li>
+              <li><a href="#times_travelled_tab" data-toggle="tab">Times Travelled</a></li>
+              <li><a href="#day_of_year" data-toggle="tab">Bikes Out by Day of Year</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane" id="day_of_week_tab">
+                <div id="chartDayOfWeek">
+                  <p class="chartLabel"> 
+                    Number of bikes out by day of the week
+                  </p>
+                </div>
+              </div>
+              <div class="tab-pane" id="hour_of_day_tab">
+                <div id="chartHourOfDay">
+                  <p class="chartLabel"> 
+                    Number of bikes out by hour of the day
+                  </p>
+                </div>
+              </div>
+              <div class="tab-pane" id="distance_by_bike_tab">
+                <div id="chartDistancesOverall">
+                 <p class="chartLabel">  
+                    Average distances travelled by bikes overall
+                  </p>
+                </div>
+              </div>
+              <div class="tab-pane" id="times_travelled_tab">
+                <div id="chartTimesOverall">
+                  <p class="chartLabel"> 
+                    Average times travelled by bikes overall
+                  </p>
+                </div>
+              </div>
+              <div class="tab-pane" id="day_of_year">
+                <div id="bikes-per-year"></div>
+              </div>     
             </div>
           </div>
-          <div class="sidebar-pane" id="messages">
-            <h1>Playback A Day's Rides</h1>
-            <input type="text" id="datepicker" value="Aug 24 2013">
-            <button id="playbutton">Play</button>
-            <button id="resetbutton">Reset</button>
-            <div style="display: inline" id="playLoading"></div>
-            <script>
-              var dateData;
-              ourDate = '2013-06-26';
-              window.running = new Map;
-              var picker = new Pikaday({
-                field: document.getElementById('datepicker'),
-                format: 'ddd MMM DD YYYY',
-                trigger: document.getElementById('datepicker'),
-                minDate: new Date('2013-06-27'),
-                maxDate: new Date('2013-12-31'),
-                yearRange: [2013, 2013],
-                onSelect: function () {
+          <script>
+            $(document).ready(function() {
+              $('#rootwizardtop').bootstrapWizard({'tabClass': 'nav nav-tabs'});
+            });
+            $(document).ready(function() {
+              $('#rootwizardbottom').bootstrapWizard({'tabClass': 'nav nav-tabs'});
+            });
+
+          </script> 
+        </div>
+        <div class="sidebar-pane" id="profile">
+          <h1>Weekly activity:</h1>
+          <h2><a href="mailto:mt@trustdarkness.com">Mike Thompson</a></h2>
+          <h3>Week 1</h3>
+          - Setup initial map and sidebar<br />
+          - Setup Git for collaboration
+          <h3>Week 2</h3>
+          - sidebar to the right with working controls<br />
+          - Added rider breakdown demographics graphs<br />
+          - Deployed SQL db<br />
+          - Began work on python data interaction layer<br />
+          - Added popularity data as icon heatmap<br />
+          - Added bikes out per day of the year<br />
+          <h3>Week 3</h3>
+          - Built front and backend for daily playback<br />
+          - Updated UI, Icons, and layout<br />
+          - Made markers dynamically removable<br />
+          - added chicago neighborhood and border overlays
+          <h2><a href="mailto:bspahr314@gmail.com">Bryan Spahr</a></h2>
+          <h3>Week 1</h3>
+          - Began data analysis<br />
+          - Built test sqllite db for divvy data
+          <h3>Week 2</h3>
+          - SVG overview graphs in sidebar 
+          <h2><a href="mailto:ddesut2@uic.edu">Dane DeSutter</a><br /></h2>
+          <h3>Week 1</h3>
+          - Made vector mockups of application interface and icons <br />
+          - Constructed planning / organization spreadsheet <br />
+          - Conceptualized / designed graphical representations with necessary features to display Divvy datasets <br />
+          - Researched Leaflet.js libraries necessary for desired functionality <br />
+          <h3>Week 2</h3>
+          - Ran Excel analyses on data corpus to create frequency distributions and determine what x-axis ranges and step sizes would best display the dataset <br />
+          - Wrote a document detailing necessary data structures and the calls that would need to be placed to the database <br />
+          - Wrote psuedo code to construct the necessary data structures <br />
+          - Exported data from Excel analyses as JSON files matching the desired data structures to enable parallel d3 development <br />
+        </div>
+        <div class="sidebar-pane" id="messages">
+          <h1>Playback A Day's Rides</h1>
+          <input type="text" id="datepicker" value="Aug 24 2013">
+          <button id="playbutton">Play</button>
+          <button id="resetbutton">Reset</button>
+          <div style="display: inline" id="playLoading"></div>
+          <script>
+            var dateData;
+            ourDate = '2013-06-26';
+            window.running = new Map;
+            var picker = new Pikaday({
+              field: document.getElementById('datepicker'),
+              format: 'ddd MMM DD YYYY',
+              trigger: document.getElementById('datepicker'),
+              minDate: new Date('2013-06-27'),
+              maxDate: new Date('2013-12-31'),
+              yearRange: [2013, 2013],
+              onSelect: function () {
                 if (window.started) {
                   resetPlayback();
                 }
@@ -232,74 +230,74 @@
             });
           </script>
           <ul id="day">
-             <i id="sunrise" class="fa fa-sun-o"> 6:15am</i>
-             <i id="sunset" class="fa fa-moon-o"> 7:41pm</i>
-             <li id="i00">12 am<div class="tripdata"></div></li>
-             <li id="i01"> 1 am<div class="tripdata"></div></li>
-             <li id="i02"> 2 am<div class="tripdata"></div></li>
-             <li id="i03"> 3 am<div class="tripdata"></div></li>
-             <li id="i04"> 4 am<div class="tripdata"></div></li>
-             <li id="i05"> 5 am<div class="tripdata"></div></li>
-             <li id="i06"> 6 am<div class="tripdata"></div></li>
-             <li id="i07"> 7 am<div class="tripdata"></div></li>
-             <li id="i08"> 8 am<div class="tripdata"></div></li>
-             <li id="i09"> 9 am<div class="tripdata"></div></li>
-             <li id="i10">10 am<div class="tripdata"></div></li>
-             <li id="i11">11 am<div class="tripdata"></div></li>
-             <li id="i12">12 pm<div class="tripdata"></div></li>
-             <li id="i13"> 1 pm<div class="tripdata"></div></li>
-             <li id="i14"> 2 pm<div class="tripdata"></div></li>
-             <li id="i15"> 3 pm<div class="tripdata"></div></li>
-             <li id="i16"> 4 pm<div class="tripdata"></div></li>
-             <li id="i17"> 5 pm<div class="tripdata"></div></li>
-             <li id="i18"> 6 pm<div class="tripdata"></div></li>
-             <li id="i19"> 7 pm<div class="tripdata"></div></li>
-             <li id="i20"> 8 pm<div class="tripdata"></div></li>
-             <li id="i21"> 9 pm<div class="tripdata"></div></li>
-             <li id="i22">10 pm<div class="tripdata"></div></li>
-             <li id="i23">11 pm<div class="tripdata"></div></li>
-             <li id="i24">12 am<div class="tripdata"></div></li>
-             <img id="dashes" src="images/vert-dashes.png" />    
-           </ul>
-         </div>
-         <div class="sidebar-pane" id="settings">
-           <h1>Libraries Used:</h1>
-           <p>Third party libraries we used include the following:</p>
-           <h3>d3</h3>
-           <h3>leaflet</h3>
-           <h3>leaflet-sidebar</h3>
-           <h3>jquery (layout only)</h3>
-           <h3>bootstrap (layout only)</h3>
-           <h3>font awesome icons</h3>
-           <h3>pikaday calendar</h3>
-           <h3>moment.js</h3>
-           <h3>chicago tribune border tiles and neighborhood json</h3>
-         </div>
-       </div>
-     </div>
-     <div id="sidebar-map" class="sidebar-map"></div>
-     <script src="js/leaflet-sidebar.js"></script>
-     <script>
-        mapLink = 
-          '<a href="http://openstreetmap.org">OpenStreetMap</a>';
-        var td = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/terrain.day/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
-	attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
-	subdomains: '1234',
-	mapID: 'newest',
-	app_id: 'xP4bpKAjWH0VB9JGLJGY',
-	app_code: '5LxaBGbamsXQdTeEKw_m3Q',
-	base: 'aerial',
-	minZoom: 0,
-	maxZoom: 20
-});
-        var osm = L.tileLayer(
-          'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: 'Map data &copy; ' + mapLink,
-        });
-        var sat = L.tileLayer(
-	  'http://oatile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
-	  attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency',
-	  subdomains: '1234'
+            <i id="sunrise" class="fa fa-sun-o"> 6:15am</i>
+            <i id="sunset" class="fa fa-moon-o"> 7:41pm</i>
+            <li id="i00">12 am<div class="tripdata"></div></li>
+            <li id="i01"> 1 am<div class="tripdata"></div></li>
+            <li id="i02"> 2 am<div class="tripdata"></div></li>
+            <li id="i03"> 3 am<div class="tripdata"></div></li>
+            <li id="i04"> 4 am<div class="tripdata"></div></li>
+            <li id="i05"> 5 am<div class="tripdata"></div></li>
+            <li id="i06"> 6 am<div class="tripdata"></div></li>
+            <li id="i07"> 7 am<div class="tripdata"></div></li>
+            <li id="i08"> 8 am<div class="tripdata"></div></li>
+            <li id="i09"> 9 am<div class="tripdata"></div></li>
+            <li id="i10">10 am<div class="tripdata"></div></li>
+            <li id="i11">11 am<div class="tripdata"></div></li>
+            <li id="i12">12 pm<div class="tripdata"></div></li>
+            <li id="i13"> 1 pm<div class="tripdata"></div></li>
+            <li id="i14"> 2 pm<div class="tripdata"></div></li>
+            <li id="i15"> 3 pm<div class="tripdata"></div></li>
+            <li id="i16"> 4 pm<div class="tripdata"></div></li>
+            <li id="i17"> 5 pm<div class="tripdata"></div></li>
+            <li id="i18"> 6 pm<div class="tripdata"></div></li>
+            <li id="i19"> 7 pm<div class="tripdata"></div></li>
+            <li id="i20"> 8 pm<div class="tripdata"></div></li>
+            <li id="i21"> 9 pm<div class="tripdata"></div></li>
+            <li id="i22">10 pm<div class="tripdata"></div></li>
+            <li id="i23">11 pm<div class="tripdata"></div></li>
+            <li id="i24">12 am<div class="tripdata"></div></li>
+            <img id="dashes" src="images/vert-dashes.png" />    
+          </ul>
+        </div>
+        <div class="sidebar-pane" id="settings">
+          <h1>Libraries Used:</h1>
+          <p>Third party libraries we used include the following:</p>
+          <h3>d3</h3>
+          <h3>leaflet</h3>
+          <h3>leaflet-sidebar</h3>
+          <h3>jquery (layout only)</h3>
+          <h3>bootstrap (layout only)</h3>
+          <h3>font awesome icons</h3>
+          <h3>pikaday calendar</h3>
+          <h3>moment.js</h3>
+          <h3>chicago tribune border tiles and neighborhood json</h3>
+        </div>
+      </div>
+    </div>
+    <div id="sidebar-map" class="sidebar-map"></div>
+    <script src="js/leaflet-sidebar.js"></script>
+    <script>
+       mapLink = 
+         '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+       var td = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/terrain.day/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
+         attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
+         subdomains: '1234',
+         mapID: 'newest',
+         app_id: 'xP4bpKAjWH0VB9JGLJGY',
+         app_code: '5LxaBGbamsXQdTeEKw_m3Q',
+         base: 'aerial',
+         minZoom: 0,
+         maxZoom: 20
+       });
+       var osm = L.tileLayer(
+         'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+         attribution: 'Map data &copy; ' + mapLink,
+       });
+       var sat = L.tileLayer(
+         'http://oatile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
+         attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency',
+         subdomains: '1234'
        });
        var chicagoBorder = L.tileLayer(
          "http://media.apps.chicagotribune.com/maptiles/chicago-mask/{z}/{x}/{y}.png",
@@ -309,105 +307,104 @@
           center: [41.90, -87.60],
 	  zoom: 13,
           layers: [td]
-        });
+       });
 
-      var neighborhoods = new L.FeatureGroup();
-      json = d3.json('static-json/boundaries.json')
-      .get(function(error, data) {
-        d = data.slice();
-        for (i = 0; i < d.length; i++) {
-          var neighborhood = L.geoJson(d[i].geometry, {
-          "style": {
-            'color': '#222',
-            'opacity': .5,
-            'weight': 1,
-            'fillColor': 'aeaeae',
-            'fillOpacity': 0.1
-          }});
-          neighborhoods.addLayer(neighborhood);
-        }
-      });    
-      var baseMaps = {
-        "Terrain Day (default)": td,
-        "OpenStreetMaps": osm, 
-        "Satellite": sat
-      }
-      var overlayMaps = {
-        "Chicago Border": chicagoBorder, 
-        "Neighborhoods": neighborhoods
-      }
-      mapLink = 
-           '<a href="http://openstreetmap.org">OpenStreetMap</a>';
-      //var zoomcontrol = L.control.zoom({ position: 'topright' }).addTo(map);
-      var sidebar = L.control.sidebar('sidebar-right', { position: 'right' });
-      //sidebar.addTo(map);
-      map.addControl(sidebar);
-      var url = 'csv/divvy.csv'
-      var stations = []
-      var icons = [
-        i1, i2, i3, i4, i5, i6, i7
-      ]
-      var markers = new L.FeatureGroup();
-      function populate() {
-        csv = d3.csv(url)
-          .get(function(error, data) {
-            stations = data;
-            var badcount = 0;
-            for (i=0; i<stations.length; i++) {
-              n = stationPop.get(stations[i].name);
-              if (!n) {
-                badcount++;
-              }
-              var marker = L.marker([parseFloat(stations[i].latitude), 
-                                     parseFloat(stations[i].longitude)], 
-                {icon: icons[stationPop.get(stations[i].name)]})
-              marker.bindPopup(stations[i].name +
-                               "<br />capacity: "
-                               +stations[i].dpcapacity);
-              markers.addLayer(marker);
-            }
-          })
-        return false;
-      }
+       var neighborhoods = new L.FeatureGroup();
+       json = d3.json('static-json/boundaries.json')
+       .get(function(error, data) {
+         d = data.slice();
+         for (i = 0; i < d.length; i++) {
+           var neighborhood = L.geoJson(d[i].geometry, {
+           "style": {
+             'color': '#222',
+             'opacity': .5,
+             'weight': 1,
+             'fillColor': 'aeaeae',
+             'fillOpacity': 0.1
+           }});
+           neighborhoods.addLayer(neighborhood);
+         }
+       });    
+       var baseMaps = {
+         "Terrain Day (default)": td,
+         "OpenStreetMaps": osm, 
+         "Satellite": sat
+       }
+       var overlayMaps = {
+         "Chicago Border": chicagoBorder, 
+         "Neighborhoods": neighborhoods
+       }
+       mapLink = 
+            '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+       //var zoomcontrol = L.control.zoom({ position: 'topright' }).addTo(map);
+       var sidebar = L.control.sidebar('sidebar-right', { position: 'right' });
+       //sidebar.addTo(map);
+       map.addControl(sidebar);
+       var url = 'csv/divvy.csv'
+       var stations = []
+       var icons = [
+         i1, i2, i3, i4, i5, i6, i7
+       ]
+       var markers = new L.FeatureGroup();
+       function populate() {
+         csv = d3.csv(url)
+           .get(function(error, data) {
+             stations = data;
+             var badcount = 0;
+             for (i=0; i<stations.length; i++) {
+               n = stationPop.get(stations[i].name);
+               if (!n) {
+                 badcount++;
+               }
+               var marker = L.marker([parseFloat(stations[i].latitude), 
+                                      parseFloat(stations[i].longitude)], 
+                 {icon: icons[stationPop.get(stations[i].name)]})
+               marker.bindPopup(stations[i].name +
+                                "<br />capacity: "
+                                +stations[i].dpcapacity);
+               markers.addLayer(marker);
+             }
+           })
+         return false;
+       }
 
-      function removeAllMarkers(){
-        window.removed = true;
-        map.removeLayer(markers);
-      } 
-
-      function repopulate() {
-        if (window.removed) {
-          map.addLayer(markers);
-        }
-      }
-      map.addLayer(markers);
-      populate();
-      var layercontrol = L.control.layers(baseMaps, overlayMaps, {position: 'bottomleft'}).addTo(map);
-      var url = 'csv/gender_all.csv'
-      ourCsv = d3.text(url)
-        .get(function(error, data) {
-           renderPieChart(data, "#gender", "blue");
-        })
-      var url = 'csv/type_all.csv'
-      ourCsv = d3.text(url)
-        .get(function(error, data) {
-           renderPieChart(data, "#type", "green");
-        })
-      var url = 'http://trustdarkness.com/py/age'
-      ourCsv = d3.text(url)
-        .get(function(error, data) {
-           renderPieChart(data, "#age", "red");
-        })
-      var url = 'http://trustdarkness.com/py/rides_by_day_of_year'
-      ourCsv = d3.text(url)
-        .get(function(error, data) {
-           yearDayBar(data, "#bikes-per-year", "Date", "Count", "#ef6548");
-        })
-      dayOfWeekBar("#chartDayOfWeek"); 
-      hourOfDayBar("#chartHourOfDay");
-      distancesOverallBar("#chartDistancesOverall");
-      timesOverallBar("#chartTimesOverall");
-
+       function removeAllMarkers(){
+         window.removed = true;
+         map.removeLayer(markers);
+       } 
+ 
+       function repopulate() {
+         if (window.removed) {
+           map.addLayer(markers);
+         }
+       }
+       map.addLayer(markers);
+       populate();
+       var layercontrol = L.control.layers(baseMaps, overlayMaps, {position: 'bottomleft'}).addTo(map);
+       var url = 'csv/gender_all.csv'
+       ourCsv = d3.text(url)
+         .get(function(error, data) {
+            renderPieChart(data, "#gender", "blue");
+         })
+       var url = 'csv/type_all.csv'
+       ourCsv = d3.text(url)
+         .get(function(error, data) {
+            renderPieChart(data, "#type", "green");
+         })
+       var url = 'http://trustdarkness.com/py/age'
+       ourCsv = d3.text(url)
+         .get(function(error, data) {
+            renderPieChart(data, "#age", "red");
+         })
+       var url = 'http://trustdarkness.com/py/rides_by_day_of_year'
+       ourCsv = d3.text(url)
+         .get(function(error, data) {
+            yearDayBar(data, "#bikes-per-year", "Date", "Count", "#ef6548");
+         })
+       dayOfWeekBar("#chartDayOfWeek"); 
+       hourOfDayBar("#chartHourOfDay");
+       distancesOverallBar("#chartDistancesOverall");
+       timesOverallBar("#chartTimesOverall");
     </script>	
   </body>
 </html>
