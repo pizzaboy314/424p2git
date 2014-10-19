@@ -1,0 +1,101 @@
+html, body, #map {
+  width: 100%;
+  height: 100%;
+  font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+body  {
+  margin:0;
+  padding:0;
+}
+
+a {
+  text-decoration: none;
+  color: darkblue;
+}
+
+text {
+  z-index: 3000;
+}
+
+#graphs {
+  left: 10px;
+}
+
+.chartOverview rect {
+  fill: #EE513F;
+}
+
+.chartOverview text {
+  fill: black;
+  font: 10px sans-serif;
+  text-anchor: end;
+}
+
+.chartLabel {
+  fill: black;
+  font: 12px sans-serif;
+  text-anchor: end;
+  text-indent: 54px;
+}
+
+.yaxis path,line {
+  fill: none; 
+  stroke: black; 
+  stroke-width; 1; 
+}
+
+.xaxis path,line {
+  fill: none;
+  stroke: black;
+  stroke-width; 1;
+}
+
+#dashes { 
+  position: absolute;
+  left: 70px; 
+  top: 116px;
+  z-index: 3000;
+}
+
+ul#day {
+  list-style: none;
+}
+
+#day li {
+  width: 500px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 35px;
+  border-bottom: 1px solid #aeaeae;
+}
+
+#day li.selected {
+  background-color: lightblue;
+}
+
+#sunrise {
+  position: absolute;
+  top: 305.375px;
+  left: 5px;
+  color: #666;
+  font-size: -1;
+}
+
+#sunset {
+  position: absolute;
+  top: 714.425px;
+  left: 5px;
+  color: #666;
+  font-size: -1;
+}
+
+.tripdata {
+  display: inline;
+}
+
+.leaflet-routing-container {
+  display: none;
+}
+
+

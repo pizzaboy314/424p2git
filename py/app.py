@@ -25,6 +25,28 @@ else:
   PATH = "/var/www/cs424/p2/py"
 
 c = db.cursor()
+
+def parse_age_group(age_group):
+  if age_group == "Under 20":
+    return (0, 20)
+  elif age_group == "20-29":
+    return (19,30)
+  elif age_group == "30-39":
+    return (29, 40)
+  elif age_group == "40-49":
+    return (39, 50)
+  elif age_group == "50-59":
+    return (49, 60)
+  elif age_group == "60+":
+    return (59, 180)
+
+def parse_time_of_day(time_of_day):
+  if time_of_day == "morning":
+    return(6, 9)
+  elif time_of_day == "lunch":
+    return(11,13)
+  elif time_of_day == "evening":
+    return(4, 7)
  
 def store_popularity_groups():
   with open("stations.pickle", "rb") as f:
@@ -207,5 +229,80 @@ class Root(object):
       ret.append("%s,%s,%s,%s,%s,%s,%s,%s,%s" % l)
     return "\n".join(ret)
   get_day.exposed = True
+
+  def avg_days_of_week(start='2013-06-26', 
+                       end='2013-12-31',
+                       time_of_day=None, 
+                       gender=None,
+                       subscriber=None,
+                       age_group=None,
+                       stations=None):
+    pass
+
+  def avg_dist_traveled(start='2013-06-26', 
+                       end='2013-12-31', 
+                       time_of_day=None,
+                       gender=None,
+                       subscriber=None,
+                       age_group=None,
+                       stations=None):
+    pass
+
+  def avg_trip_length(start='2013-06-26', 
+                       end='2013-12-31', 
+                       time_of_day=None,
+                       gender=None,
+                       subscriber=None,
+                       age_group=None,
+                       stations=None):
+    pass
+
+  def bikes_out_by_day(time_of_day=None,
+                       gender=None,
+                       subscriber=None,
+                       age_group=None,
+                       stations=None):
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+    base_q = """
+      SELECT
+        startdate, 
+        count(*)
+      FROM
+        divvy_trips_distances
+    """
+    if time_of_day or gender or subscriber or age_group or stations:
+      where = "WHERE "
+      where_stmts = []
+    if time_of_day:  
+      #TODO: implement
+      pass
+    if gender:
+      where_stmts.append("gender like '%s'" % gender)
+    if subscriber:
+      where_stmts.append("usertype like '%s'" % subscriber)
+    if age_group:
+      bottom, top = parse_age_group(age_group)
+      where_stmts.append("age_in_2014 < %d" % top)
+      where_stmts.append("age_in_2014 > %d" % bottom)
+    if stations:
+      # since its bikes out, we'll only look at the depating station
+      where_stmts.append("from_station_id in ('%s')" % \
+        "', '".join([str(i) for i in stations]))
+    where = where + where_stmts[0]
+    for stmt in where_stmts[1:]:
+      where += "AMD " + stmt + " "
+    group_by = """
+      GROUP BY
+        startdate
+    """
+    c.execute(q)
+    ret = []
+    ret.append("Date,Count")
+    for row in c.fetchall():
+      ret.append("%s,%s" % (row[0], row[1]))
+    return "\n".join(ret)
+
+  bikes_out_by_day.exposed = True
+
 
 application = cherrypy.Application(Root(), script_name=None, config=None)

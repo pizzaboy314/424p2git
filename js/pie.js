@@ -27,7 +27,7 @@ function renderPieChart(ourData, ourDiv, colorBase)  {
 
   var canvas = d3.select(ourDiv)
     .append('svg')
-    .attr({'width':210,'height': 220})
+    .attr({'width':310,'height': 250})
     .style("padding-left", "70px")
     .style("padding-top", "25px");
 

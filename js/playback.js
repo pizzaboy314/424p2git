@@ -14,15 +14,16 @@ function playback(date) {
         time = tsa[1];
         hour = time.split(":")[0];
         if (window.running.has(dateData[window.playbackEvent].trip_id)) {
-          console.log("trying to remove trip #"+dateData[window.playbackEvent].trip_id);
           window.running.get(dateData[window.playbackEvent].trip_id).hide();
-          window.running.get(dateData[window.playbackEvent].trip_id).spliceWaypoints(0,2);
+          window.running.get(
+            dateData[window.playbackEvent].trip_id).spliceWaypoints(0,2);
           window.running.delete(dateData[window.playbackEvent].trip_id);
           removed++;
           window.playbackEvent++;
         } else {
 	  d3.select("#playLoading").html("");
-          var tripstring = " "+time+" - From: "+dateData[window.playbackEvent].from+" To: "+dateData[i].to;
+          var tripstring = " "+time+" - From: "+
+            dateData[window.playbackEvent].from+" To: "+dateData[i].to;
           console.log("trying to replay trip "+tripstring);
           d3.selectAll(".tripdata")
             .html(" ");
@@ -33,25 +34,25 @@ function playback(date) {
             .html(tripstring);
           var trip = L.Routing.control({ 
             waypoints: [
-              L.latLng(dateData[window.playbackEvent].flat,dateData[window.playbackEvent].flong),
-              L.latLng(dateData[window.playbackEvent].tlat,dateData[window.playbackEvent].tlong)
+              L.latLng(dateData[window.playbackEvent].flat,
+                dateData[window.playbackEvent].flong),
+              L.latLng(dateData[window.playbackEvent].tlat,
+                dateData[window.playbackEvent].tlong)
             ],
             fitSelectedRoutes: false
           });
           window.running.set(dateData[window.playbackEvent].trip_id, trip); 
-          //L.Routing.line(trip, { styles: { color: "blue" } } );
           trip.addTo(map);
           added++;
           window.playbackEvent++;
         }
       }
       if (window.running.size == 0) {
-        d3.selectAll("path").remove()
+        //d3.select("map").selectAll("path").remove()
         d3.select("#day").selectAll("li").attr("class", "");
       } else {
         console.log("window.running.size: "+window.running.size);
       }
-    console.log("final playback: touched: "+window.playbackEvent+" added: "+added+" removed: "+removed);
     if (window.playbackEvent == dateData.length+1) { 
       console.log("trying to clearInterval"); 
       window.clearInterval(repeat); 
@@ -82,5 +83,4 @@ function resetPlayback() {
   d3.selectAll(".leaflet-shadow-pane").selectAll("img").remove();
   d3.select("#playbutton").html("Play");
   d3.selectAll("path").remove();
- 
 }
