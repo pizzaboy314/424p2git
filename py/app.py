@@ -167,23 +167,61 @@ class Root(object):
         return str(group)
   station_popularity.exposed = True
   
-  def get_day(self, date):
+  def get_day(self, date, gender=None,
+                       subscriber=None,
+                       age_group=None,
+                       stations=None):
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     with open(os.path.join(PATH, "station_lat_long.pickle"), "rb") as f:
       stat_lat_long = pickle.load(f)
-    q = """
-        SELECT 
-           starttime, 
-           stoptime, 
-           trip_id, 
-           from_station_id, 
-           to_station_id 
-         FROM 
-           divvy_trips_distances 
-         WHERE  
-           startdate like '%s' 
-         ORDER BY 
-           stoptime ASC""" % date
+
+    where = ""
+    if gender or subscriber or age_group or stations:
+      where_stmts = []
+      if gender:
+        where_stmts.append("gender like '%s'" % gender)
+      if subscriber:
+        where_stmts.append("usertype like '%s'" % subscriber)
+      if age_group:
+        bottom, top = parse_age_group(age_group)
+        where_stmts.append("age_in_2014 < %d" % top)
+        where_stmts.append("age_in_2014 > %d" % bottom)
+      if stations:
+        # since its bikes out, we'll only look at the depating station
+        where_stmts.append("from_station_id in ('%s')" % \
+          "', '".join([str(i) for i in stations]))
+      where = where + where_stmts[0]
+      for stmt in where_stmts[1:]:
+        where += "AND " + stmt + " "
+    if not where:
+      q = """
+          SELECT 
+             starttime, 
+             stoptime, 
+             trip_id, 
+             from_station_id, 
+             to_station_id 
+           FROM 
+             divvy_trips_distances 
+           WHERE  
+             startdate like '%s' 
+           ORDER BY 
+             stoptime ASC""" % date
+    else:
+      q = """
+          SELECT 
+             starttime, 
+             stoptime, 
+             trip_id, 
+             from_station_id, 
+             to_station_id 
+           FROM 
+             divvy_trips_distances 
+           WHERE  
+             startdate like '%s' AND %s
+           ORDER BY 
+             stoptime ASC""" % (date, where)
+
     ret = []
     ret.append("timestamp,trip_id,start/end,from,flat,flong,to,tlat,tlong")
     c.execute(q)
@@ -273,8 +311,8 @@ class Root(object):
     if time_of_day or gender or subscriber or age_group or stations:
       where = "WHERE "
       where_stmts = []
-    if time_of_day:  
-      #TODO: implement
+    if time_of_day: 
+      #TODO: do we need this?
       pass
     if gender:
       where_stmts.append("gender like '%s'" % gender)
@@ -295,7 +333,7 @@ class Root(object):
       GROUP BY
         startdate
     """
-    c.execute(q)
+    c.execute(" ".join((base_q, where, group_by)))
     ret = []
     ret.append("Date,Count")
     for row in c.fetchall():

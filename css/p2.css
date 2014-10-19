@@ -106,7 +106,7 @@ ul#day {
 #rootwizardbottom img {
   height: 35px;
 }
-
+/*
 .leaflet-control-layers {
   display: inline;
   position: absolute;
@@ -118,3 +118,11 @@ ul#day {
   bottom: 8px;
   left: 75px;
 }
+*/
+#gender_play_form {
+  position: absolute;
+  top: 20px;
+  left: 600px;
+  display: inline;
+}
+

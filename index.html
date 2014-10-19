@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="css/leaflet-routing-machine.css" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/p2.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+
 
     <script src="js/d3.v3.min.js"></script>
     <script src="js/leaflet.js"></script>
@@ -38,6 +40,7 @@
     <script src="js/leaflet-routing-machine.js"></script>
     <script src="js/stations.js"></script>
     <script src="js/selections.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
   </head>
   <body>
     <div id="map">
@@ -269,6 +272,24 @@
             <li id="i23">11 pm<div class="tripdata"></div></li>
             <li id="i24">12 am<div class="tripdata"></div></li>
             <img id="dashes" src="images/vert-dashes.png" />    
+            <form id="gender_play_form">
+              (Optional) Limit by Gender:<br /><br />
+              <div id="radio">
+                <input type="radio" id="male_select" name="radio"><label for="male_select">Male</label>
+                <input type="radio" id="female_select" name="radio"><label for="female_select">Female</label>
+              </div>
+            </form>
+            <script>
+              d3.select("#male_select").on("click", function() {
+                window.genderLimit = "Male";
+              });
+              d3.select("#female_select").on("click", function() {
+                window.genderLimit = "Female";
+              });
+$(function() {
+    $( "#radio" ).buttonset();
+  });
+            </script>
           </ul>
         </div>
         <div class="sidebar-pane" id="settings">
