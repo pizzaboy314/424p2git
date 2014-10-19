@@ -98,4 +98,11 @@ ul#day {
   display: none;
 }
 
+#rootwizardtop img {
+  width: 35px;
+  height: 35px;
+}
 
+#rootwizardbottom img {
+  height: 35px;
+}
