@@ -74,39 +74,60 @@
                 <div class="tab-pane" id="age_tab">
                   <div id="age" style="display: inline"></div>
                 </div>
-                <ul class="pager wizard">
-                  <li class="previous first" style="display:none;"><a href="#">First</a></li>
-                  <li class="previous"><a href="#">Previous</a></li>
-                  <li class="next last" style="display:none;"><a href="#">Last</a></li>
-                  <li class="next"><a href="#">Next</a></li>
-                </ul>
               </div>	
             </div>
-            <div id="chartDayOfWeek">
-              <p class="chartLabel"> Number of bikes out by day of the week</p>
+            <div id="rootwizardbottom" class="tabbable tabs-left">
+              <ul>
+                <li><a href="#day_of_week_tab" data-toggle="tab">Bikes Out By Day</a></li>
+                <li><a href="#hour_of_day_tab" data-toggle="tab">Bikes Out By Hour</a></li>
+                <li><a href="#distance_by_bike_tab" data-toggle="tab">Distance Travelled by Bike</a></li>
+                <li><a href="#times_travelled_tab" data-toggle="tab">Times Travelled</a></li>
+                <li><a href="#day_of_year" data-toggle="tab">Bikes Out by Day of Year</a></li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane" id="day_of_week_tab">
+                  <div id="chartDayOfWeek">
+                    <p class="chartLabel"> 
+                      Number of bikes out by day of the week
+                    </p>
+                  </div>
+                </div>
+                <div class="tab-pane" id="hour_of_day_tab">
+                  <div id="chartHourOfDay">
+                    <p class="chartLabel"> 
+                      Number of bikes out by hour of the day
+                    </p>
+                  </div>
+                </div>
+                <div class="tab-pane" id="distance_by_bike_tab">
+                  <div id="chartDistancesOverall">
+                    <p class="chartLabel">  
+                      Average distances travelled by bikes overall
+                    </p>
+                  </div>
+                </div>
+                <div class="tab-pane" id="times_travelled_tab">
+                  <div id="chartTimesOverall">
+                    <p class="chartLabel"> 
+                      Average times travelled by bikes overall
+                    </p>
+                  </div>
+                </div>
+                <div class="tab-pane" id="day_of_year">
+                  <div id="bikes-per-year"></div>
+                </div>     
+              </div>
             </div>
-            <div id="chartHourOfDay">
-              <p class="chartLabel"> Number of bikes out by hour of the day</p>
-            </div>
-            <div id="chartDistancesOverall">
-	      <p class="chartLabel">  
-                Average distances travelled by bikes overall
-              </p>
-	    </div>
-	    <div id="chartTimesOverall">
-	      <p class="chartLabel"> 
-                Average times travelled by bikes overall
-              </p>
-	    </div>
-            <div id="bikes-per-year"></div>
-            </div>
-          </div>
-          <script>
-            $(document).ready(function() {
-              $('#rootwizardtop').bootstrapWizard({'tabClass': 'nav nav-tabs'});
-            });
-          </script>
-          <div class="sidebar-pane" id="profile">
+            <script>
+              $(document).ready(function() {
+                $('#rootwizardtop').bootstrapWizard({'tabClass': 'nav nav-tabs'});
+              });
+              $(document).ready(function() {
+                $('#rootwizardbottom').bootstrapWizard({'tabClass': 'nav nav-tabs'});
+              });
+ 
+            </script> 
+            <div class="sidebar-pane" id="profile">
             <div id="contact">
               <h1>Weekly activity:</h1>
               <h2><a href="mailto:mt@trustdarkness.com">Mike Thompson</a></h2>
