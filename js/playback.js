@@ -1,6 +1,9 @@
 function playback(date) {
   d3.select("#playLoading").html("<img src='images/spinner.gif' />");
   url = 'http://trustdarkness.com/py/get_day/'+date
+  if (window.genderLimit) {
+    url += window.genderLimit
+  }
   csv = d3.csv(url)
   .get(function(error,data) {
     dateData = data;
@@ -48,7 +51,7 @@ function playback(date) {
         }
       }
       if (window.running.size == 0) {
-        //d3.select("map").selectAll("path").remove()
+        d3.select("map").selectAll("path").remove()
         d3.select("#day").selectAll("li").attr("class", "");
       } else {
         console.log("window.running.size: "+window.running.size);
@@ -71,10 +74,12 @@ function sameSrcDst(trip) {
 }
 
 function resetPlayback() {
+  d3.select("#playLoading").html("");
   window.playing = false;
   window.started = false;
   window.running = new Map;
   window.playbackEvent = 0;
+  window.genderLimit = false;
   clearInterval(window.repeat);
   d3.selectAll(".tripdata").html("");
   d3.select("#day").selectAll("li").attr("class", "");
@@ -83,4 +88,7 @@ function resetPlayback() {
   d3.selectAll(".leaflet-shadow-pane").selectAll("img").remove();
   d3.select("#playbutton").html("Play");
   d3.selectAll("path").remove();
+  $('#radio input').removeAttr('checked');
+  // Refresh the jQuery UI buttonset.                  
+  $( "#radio" ).buttonset('refresh');
 }
