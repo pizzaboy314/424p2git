@@ -2,12 +2,12 @@ function playback(date) {
   d3.select("#playLoading").html("<img src='images/spinner.gif' />");
   url = 'http://trustdarkness.com/py/get_day/'+date
   if (window.genderLimit) {
-    url += window.genderLimit;
+    url += "?gender="window.genderLimit;
     if (window.usertypeLimit) {
-      url += "/"+window.usertypeLimit;
+      url += "&subscriber="+window.usertypeLimit;
     }
   } else if (window.usertypeLimit) {
-    url += "/None/"+window.usertypeLimit;
+    url += "?subscriber="+window.usertypeLimit;
   }
   csv = d3.csv(url)
   .get(function(error,data) {
