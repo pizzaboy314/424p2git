@@ -50,7 +50,7 @@ function playback(date) {
         } else {
 	  d3.select("#playLoading").html("");
           var tripstring = " "+time+" - From: "+
-            dateData[window.playbackEvent].from+" To: "+dateData[i].to;
+            dateData[window.playbackEvent].from+" To: "+dateData[window.playbackEvent].to;
           console.log("trying to replay trip "+tripstring);
           d3.selectAll(".tripdata")
             .html(" ");
@@ -83,10 +83,11 @@ function playback(date) {
       } else {
         console.log("window.running.size: "+window.running.size);
       }
-    if (window.playbackEvent == dateData.length+1) { 
+    if (window.playbackEvent == dateData.length) { 
       console.log("trying to clearInterval"); 
       window.clearInterval(repeat); 
       d3.selectAll(".tripdata").html("");
+      resetPlayback();
     };
   }, 400);
 }
