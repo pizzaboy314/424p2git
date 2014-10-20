@@ -2,7 +2,7 @@ function playback(date) {
   d3.select("#playLoading").html("<img src='images/spinner.gif' />");
   url = 'http://trustdarkness.com/py/get_day/'+date
   if (window.genderLimit) {
-    url += "?gender="window.genderLimit;
+    url += "?gender="+window.genderLimit;
     if (window.usertypeLimit) {
       url += "&subscriber="+window.usertypeLimit;
     }
