@@ -179,13 +179,13 @@ class Root(object):
     if gender or subscriber or age or stations:
       where_stmts = []
       if gender:
-        where_stmts.append("gender like '%s'" % gender)
+        where_stmts.append("gender like '%s' " % gender)
       if subscriber:
-        where_stmts.append("usertype like '%s%%'" % subscriber)
+        where_stmts.append("usertype like '%s%%' " % subscriber)
       if age:
         bottom, top = age.split(",")
-        where_stmts.append("age_in_2014 < %s" % top)
-        where_stmts.append("age_in_2014 > %s" % bottom)
+        where_stmts.append("age_in_2014 < %s " % top)
+        where_stmts.append("age_in_2014 > %s " % bottom)
       if stations:
         # since its bikes out, we'll only look at the depating station
         stations = stations.split(",")
@@ -222,7 +222,7 @@ class Root(object):
              startdate like '%s' AND %s
            ORDER BY 
              stoptime ASC""" % (date, where)
-
+    print "assembled q = %s" % q
     ret = []
     ret.append("timestamp,trip_id,start/end,from,flat,flong,to,tlat,tlong")
     c.execute(q)
@@ -334,7 +334,9 @@ class Root(object):
       GROUP BY
         startdate
     """
-    c.execute(" ".join((base_q, where, group_by)))
+    assembled_q = " ".join((base_q, where, group_by))
+    print assembled_q
+    c.execute(assembled_q)
     ret = []
     ret.append("Date,Count")
     for row in c.fetchall():
