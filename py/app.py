@@ -188,6 +188,7 @@ class Root(object):
         where_stmts.append("age_in_2014 > %d" % bottom)
       if stations:
         # since its bikes out, we'll only look at the depating station
+        stations = stations.split(",")
         where_stmts.append("from_station_id in ('%s')" % \
           "', '".join([str(i) for i in stations]))
       where = where + where_stmts[0]

@@ -39,6 +39,7 @@
     <script src="js/jquery.bootstrap.wizard.js"></script>
     <script src="js/leaflet-routing-machine.js"></script>
     <script src="js/stations.js"></script>
+    <script src="js/neighborhoods.js"></script>
     <script src="js/selections.js"></script>
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
   </head>
@@ -388,10 +389,11 @@
              if (this.selected == true) {
                this.selected = false;
                this.setStyle(window.unselected);
+               removeNeighborhoodFromSelection(this.slug);
              } else {
                this.selected = true;
                this.setStyle(window.selected);
-               addNeighborhoodToSelection(this);
+               addNeighborhoodToSelection(this.slug);
              }
            });
 ;
@@ -441,7 +443,6 @@
            })
          return false;
        }
-
        function removeAllMarkers(){
          window.removed = true;
          map.removeLayer(markers);
@@ -480,5 +481,6 @@
        distancesOverallBar("#chartDistancesOverall");
        timesOverallBar("#chartTimesOverall");
     </script>	
+    <img src="images/scale.png" id="scale" />
   </body>
 </html>

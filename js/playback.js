@@ -5,9 +5,17 @@ function playback(date) {
     url += "?gender="+window.genderLimit;
     if (window.usertypeLimit) {
       url += "&subscriber="+window.usertypeLimit;
+      if (window.selection) {
+        url +="&stations="+window.selection;
+      }
     }
   } else if (window.usertypeLimit) {
     url += "?subscriber="+window.usertypeLimit;
+    if (window.selection) {
+      url +="&stations="+window.selection;
+    }
+  } else if (window.selection) {
+     url += "?stations="+window.selection;
   }
   csv = d3.csv(url)
   .get(function(error,data) {
