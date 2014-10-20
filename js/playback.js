@@ -62,6 +62,9 @@ function playback(date) {
           added++;
           window.playbackEvent++;
         }
+      } else {
+        d3.select("#playbackError").html("No data was found for your request.")
+        d3.select("#playLoading").html("");
       }
       if (window.running.size == 0) {
         d3.select("map").selectAll("path").remove()
@@ -106,4 +109,5 @@ function resetPlayback() {
   $('#radiousertype input').removeAttr('checked');
   // Refresh the jQuery UI buttonset.                  
   $( "#radiousertype" ).buttonset('refresh');
+  d3.select("#playbackError").html(" ");
 }
