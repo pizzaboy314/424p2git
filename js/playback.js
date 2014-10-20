@@ -5,17 +5,28 @@ function playback(date) {
     url += "?gender="+window.genderLimit;
     if (window.usertypeLimit) {
       url += "&subscriber="+window.usertypeLimit;
-      if (window.selection) {
+      if (window.selection.length > 0) {
         url +="&stations="+window.selection;
+        if (window.ageLimit) {
+          url +="&age="+window.ageLimit;
+        }
       }
     }
   } else if (window.usertypeLimit) {
     url += "?subscriber="+window.usertypeLimit;
-    if (window.selection) {
+    if (window.selection.length > 0) {
       url +="&stations="+window.selection;
+      if (window.ageLimit) {
+        url +="&age="+window.ageLimit;
+      }
     }
-  } else if (window.selection) {
+  } else if (window.selection.length > 0) {
      url += "?stations="+window.selection;
+     if (window.ageLimit) {
+        url +="&age="+window.ageLimit;
+     }
+  } else if (window.ageLimit) {
+    url +="?age="+window.ageLimit;
   }
   csv = d3.csv(url)
   .get(function(error,data) {

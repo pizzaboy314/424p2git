@@ -273,7 +273,8 @@
             <li id="i22">10 pm<div class="tripdata"></div></li>
             <li id="i23">11 pm<div class="tripdata"></div></li>
             <li id="i24">12 am<div class="tripdata"></div></li>
-            <img id="dashes" src="images/vert-dashes.png" />    
+            <img id="dashes" src="images/vert-dashes.png" />   
+          </ul> 
             <form id="gender_play_form">
               (Optional) Limit by Gender:<br /><br />
               <div id="radiogender">
@@ -311,8 +312,30 @@
               });
 
             </script>
-
-          </ul>
+	     <script>
+  $(function() {
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 1,
+      max: 127,
+      values: [ 1, 127 ],
+      slide: function( event, ui ) {
+        console.log("firing slide event "+ui.values[0]+" "+ui.values[1] );
+        $( "#age_select" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+        window.ageLimit = [ui.values[0], ui.values[1]];
+      }
+    });
+    $( "#age_select" ).val($( "#slider-range" ).slider( "values", 0 ) +
+      " - " + $( "#slider-range" ).slider( "values", 1 ) );
+  });
+  </script>  
+          <div id="age_play_form">
+            <p>
+              <label for="age_selecct">Age range:</label>
+              <input type="text" id="age_select" readonly style="border:0; color:#f6931f; font-weight:bold; background-color: rgba(255, 255, 255, 0.75);">
+           </p>
+           <div id="slider-range"></div>
+          </div>
         </div>
         <div class="sidebar-pane" id="settings">
           <h1>Libraries Used:</h1>
@@ -482,6 +505,5 @@
        distancesOverallBar("#chartDistancesOverall");
        timesOverallBar("#chartTimesOverall");
     </script>	
-    <img src="images/scale.png" id="scale" />
   </body>
 </html>

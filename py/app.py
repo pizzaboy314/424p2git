@@ -26,18 +26,18 @@ else:
 
 c = db.cursor()
 
-def parse_age_group(age_group):
-  if age_group == "Under 20":
+def parse_age(age):
+  if age == "Under 20":
     return (0, 20)
-  elif age_group == "20-29":
+  elif age == "20-29":
     return (19,30)
-  elif age_group == "30-39":
+  elif age == "30-39":
     return (29, 40)
-  elif age_group == "40-49":
+  elif age == "40-49":
     return (39, 50)
-  elif age_group == "50-59":
+  elif age == "50-59":
     return (49, 60)
-  elif age_group == "60+":
+  elif age == "60+":
     return (59, 180)
 
 def parse_time_of_day(time_of_day):
@@ -169,23 +169,23 @@ class Root(object):
   
   def get_day(self, date, gender=None,
                        subscriber=None,
-                       age_group=None,
+                       age=None,
                        stations=None):
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     with open(os.path.join(PATH, "station_lat_long.pickle"), "rb") as f:
       stat_lat_long = pickle.load(f)
 
     where = ""
-    if gender or subscriber or age_group or stations:
+    if gender or subscriber or age or stations:
       where_stmts = []
       if gender:
         where_stmts.append("gender like '%s'" % gender)
       if subscriber:
         where_stmts.append("usertype like '%s%%'" % subscriber)
-      if age_group:
-        bottom, top = parse_age_group(age_group)
-        where_stmts.append("age_in_2014 < %d" % top)
-        where_stmts.append("age_in_2014 > %d" % bottom)
+      if age:
+        bottom, top = age.split(",")
+        where_stmts.append("age_in_2014 < %s" % top)
+        where_stmts.append("age_in_2014 > %s" % bottom)
       if stations:
         # since its bikes out, we'll only look at the depating station
         stations = stations.split(",")
@@ -274,7 +274,7 @@ class Root(object):
                        time_of_day=None, 
                        gender=None,
                        subscriber=None,
-                       age_group=None,
+                       age=None,
                        stations=None):
     pass
 
@@ -283,7 +283,7 @@ class Root(object):
                        time_of_day=None,
                        gender=None,
                        subscriber=None,
-                       age_group=None,
+                       age=None,
                        stations=None):
     pass
 
@@ -292,14 +292,14 @@ class Root(object):
                        time_of_day=None,
                        gender=None,
                        subscriber=None,
-                       age_group=None,
+                       age=None,
                        stations=None):
     pass
 
   def bikes_out_by_day(time_of_day=None,
                        gender=None,
                        subscriber=None,
-                       age_group=None,
+                       age=None,
                        stations=None):
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     base_q = """
@@ -309,7 +309,7 @@ class Root(object):
       FROM
         divvy_trips_distances
     """
-    if time_of_day or gender or subscriber or age_group or stations:
+    if time_of_day or gender or subscriber or age or stations:
       where = "WHERE "
       where_stmts = []
     if time_of_day: 
@@ -319,8 +319,8 @@ class Root(object):
       where_stmts.append("gender like '%s'" % gender)
     if subscriber:
       where_stmts.append("usertype like '%s'" % subscriber)
-    if age_group:
-      bottom, top = parse_age_group(age_group)
+    if age:
+      bottom, top = parse_age(age)
       where_stmts.append("age_in_2014 < %d" % top)
       where_stmts.append("age_in_2014 > %d" % bottom)
     if stations:
