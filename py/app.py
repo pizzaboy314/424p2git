@@ -45,8 +45,10 @@ def parse_time_of_day(time_of_day):
     return(6, 9)
   elif time_of_day == "lunch":
     return(11,13)
-  elif time_of_day == "evening":
+  elif time_of_day == "after work":
     return(4, 7)
+  elif time_of_day == "evening":
+    return(7,9)
  
 def store_popularity_groups():
   with open("stations.pickle", "rb") as f:
@@ -110,16 +112,61 @@ class Root(object):
     return "\n".join(ret)
   rides_by_day_of_year.exposed = True
     
+  def gender(self,
+          gender=None,
+          subscriber=None,
+          age=None,
+          stations=None):
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+    where = "WHERE "
+    if gender or subscriber or age or stations:
+      where_stmts = []
+      if gender:
+        where_stmts.append("gender like '%s' " % gender)
+      if subscriber:
+        where_stmts.append("usertype like '%s%%' " % subscriber)
+      if age:
+        bottom, top = age.split(",")
+        where_stmts.append("age_in_2014 < %s " % top)
+        where_stmts.append("age_in_2014 > %s " % bottom)
+      if stations:
+        # since its bikes out, we'll only look at the depating station
+        stations = stations.split(",")
+        where_stmts.append("from_station_id in ('%s')" % \
+          "', '".join(stations))
+      if where_stmts:
+        where = where + where_stmts[0]
+        for stmt in where_stmts[1:]:
+          where += "AND " + stmt + " "
+    else:
+      where = ""
+    q = """
+      SELECT
+        gender,
+        count(*)
+      FROM
+        divvy_trips_distances
+      %s
+      GROUP BY
+        gender
+    """ % where
+    c.execute(q)
+    ret = []
+    ret.append("Gender,Count")
+    for row in c.fetchall():
+      if not row[0]:
+        ret.append("Unknown,%d" % row[1])
+      else:
+        ret.append("%s,%d" % (row[0], row[1]))
+    return "\n".join(ret)
+  gender.exposed = True
 
   def age(self,
           gender=None,
           subscriber=None,
           age=None,
           stations=None):
-
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
-    with open(os.path.join(PATH, "station_lat_long.pickle"), "rb") as f:
-      stat_lat_long = pickle.load(f)
 
     where = "WHERE "
     if gender or subscriber or age or stations:
