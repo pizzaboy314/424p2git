@@ -118,7 +118,7 @@ function selectionUpdate() {
     usertypeUrl = buildUrl('http://trustdarkness.com/py/usertype/');
     ourCsv = d3.text(usertypeUrl)
       .get(function(error, data) {
-        renderPieChart(data, "#type-selected", "greem");
+        renderPieChart(data, "#type-selected", "green");
     });
   }
   
