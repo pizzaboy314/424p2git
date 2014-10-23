@@ -110,6 +110,11 @@ function selectionUpdate() {
       .get (function(error, data) {
          renderPieChart(data, "#age-selected", "#fdbb84");
     });
+    genderUrl = buildUrl('http://trustdarkness.com/py/gender/');
+    ourCsv = d3.text(genderUrl)
+      .get (function(error, data) {
+        renderPieChart(data, "#gender-selected", "blue");
+    });
   }
   
 }
