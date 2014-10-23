@@ -103,7 +103,7 @@ function selectionUpdate() {
     yearDayUrl = buildUrl('http://trustdarkness.com/py/bikes_out_by_day/');
     ourCsv = d3.text(yearDayUrl)
       .get (function(error, data) {
-        yearDayBar(data, "#bikes-per-year-selected", "Date", "Count", "#ef6548", 200);
+        yearDayBar(data, "#bikes-per-year-selected", "Date", "Count", "#fdbb84", 200);
     });
   }
   
