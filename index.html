@@ -8,7 +8,7 @@
                initial-scale=1.0, 
                maximum-scale=1.0, 
                user-scalable=no">
-
+    
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="css/leaflet.css" />
     <link rel="stylesheet" href="css/leaflet-sidebar.css" />
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="css/p2.css" />
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 
-
+    <script src="js/stations_ids.js"></script>
     <script src="js/d3.v3.min.js"></script>
     <script src="js/leaflet.js"></script>
     <script src="js/pie.js"></script>
@@ -462,6 +462,9 @@
                marker.bindPopup(stations[i].name +
                                 "<br />capacity: "
                                 +stations[i].dpcapacity);
+               marker.on("dblclick", doTheSelect);
+               marker.name = stations[i].name;
+               marker.station_id = stations_ids.get(stations[i]);
                markers.addLayer(marker);
              }
            })
@@ -470,6 +473,12 @@
        function removeAllMarkers(){
          window.removed = true;
          map.removeLayer(markers);
+         // betrayse the function name, but we don't have time to care
+         if (window.selected_markers) {
+           for (i=0; i<selected_markers.length; i++) {
+             selected_markers[i].addTo(map)
+           }
+         }
        } 
  
        function repopulate() {

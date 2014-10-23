@@ -71,24 +71,24 @@ function playback(date) {
           window.running.set(dateData[window.playbackEvent].trip_id, trip); 
           trip.addTo(map);
           added++;
-          window.playbackEvent++;
-        }
+          if (window.running.size == 0) {
+            d3.select("map").selectAll("path").remove()
+            d3.select("#day").selectAll("li").attr("class", "");
+          } else {
+            console.log("window.running.size: "+window.running.size);
+          }
+            window.playbackEvent++;
+          }
+          if (window.playbackEvent == dateData.length) { 
+            console.log("trying to clearInterval"); 
+            window.clearInterval(repeat); 
+            d3.selectAll(".tripdata").html("");
+            resetPlayback();
+          };
       } else {
         d3.select("#playbackError").html("No data was found for your request.")
         d3.select("#playLoading").html("");
       }
-      if (window.running.size == 0) {
-        d3.select("map").selectAll("path").remove()
-        d3.select("#day").selectAll("li").attr("class", "");
-      } else {
-        console.log("window.running.size: "+window.running.size);
-      }
-    if (window.playbackEvent == dateData.length) { 
-      console.log("trying to clearInterval"); 
-      window.clearInterval(repeat); 
-      d3.selectAll(".tripdata").html("");
-      resetPlayback();
-    };
   }, 400);
 }
 

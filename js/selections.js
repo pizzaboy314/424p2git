@@ -27,7 +27,21 @@ function removeNeighborhoodFromSelection(neighborhood_slug) {
   console.log("selection now has "+window.selection.length+" items");
 }
 
+function doTheSelect(e) {
+  var ourMarker = this;
+  ourMarker.oldIcon = ourMarker._icon;
+  ourMarker.setIcon(defaultIcon);
+  window.tmp3 = ourMarker;
+  window.selection.push(this.station_id);
+  window.selected_markers.push(ourMarker);
+}
+
 function clearSelection() {
+  window.selection = new Array;
+  for (i=0; i<window.selected_markers; i++) {
+    window.selected_markers.setIcon(window.selected_markers.oldIcon);
+  }
+  window.selected_markers = new Array;
 }
 
 function splitMap(map) {
@@ -40,3 +54,4 @@ function splitMap(map) {
 }
 
 window.selection = new Array;
+window.selected_markers = new Array;
