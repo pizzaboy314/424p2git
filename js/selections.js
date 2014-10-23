@@ -105,6 +105,11 @@ function selectionUpdate() {
       .get (function(error, data) {
         yearDayBar(data, "#bikes-per-year-selected", "Date", "Count", "#fdbb84", 200);
     });
+    ageUrl = buildUrl('http://trustdarkness.com/py/age/');
+    ourCsv = d3.text(ageUrl)
+      .get (function(error, data) {
+         renderPieChart(data, "#age-selected", "#fdbb84");
+    });
   }
   
 }
