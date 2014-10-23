@@ -159,6 +159,7 @@ class Root(object):
     forties = 0
     fifties = 0
     sixtyplus = 0
+    print "q looks like %s" % q
     c.execute(q)
     for row in c.fetchall():
       if row[0] < 20 and row[0] > 0:
