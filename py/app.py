@@ -121,7 +121,7 @@ class Root(object):
     with open(os.path.join(PATH, "station_lat_long.pickle"), "rb") as f:
       stat_lat_long = pickle.load(f)
 
-    where = ""
+    where = "WHERE"
     if gender or subscriber or age or stations:
       where_stmts = []
       if gender:
