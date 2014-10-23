@@ -111,17 +111,48 @@ class Root(object):
   rides_by_day_of_year.exposed = True
     
 
-  def age(self):
+  def age(self,
+          gender=None,
+          subscriber=None,
+          age=None,
+          stations=None):
+
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+    with open(os.path.join(PATH, "station_lat_long.pickle"), "rb") as f:
+      stat_lat_long = pickle.load(f)
+
+    where = ""
+    if gender or subscriber or age or stations:
+      where_stmts = []
+      if gender:
+        where_stmts.append("gender like '%s' " % gender)
+      if subscriber:
+        where_stmts.append("usertype like '%s%%' " % subscriber)
+      if age:
+        bottom, top = age.split(",")
+        where_stmts.append("age_in_2014 < %s " % top)
+        where_stmts.append("age_in_2014 > %s " % bottom)
+      if stations:
+        # since its bikes out, we'll only look at the depating station
+        stations = stations.split(",")
+        where_stmts.append("from_station_id in ('%s')" % \
+          "', '".join(stations))
+      if where_stmts:
+        where = where + where_stmts[0]
+        for stmt in where_stmts[1:]:
+          where += "AND " + stmt + " "
+      else:
+        where = ""
     q = """
       SELECT 
         age_in_2014,
         count(*)
       FROM
         divvy_trips_distances
+      %s
       GROUP BY
         age_in_2014 
-    """
+    """ % where
     undertwenty = 0
     twenties = 0
     thirties = 0
