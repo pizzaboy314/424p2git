@@ -115,6 +115,11 @@ function selectionUpdate() {
       .get (function(error, data) {
         renderPieChart(data, "#gender-selected", "blue");
     });
+    usertypeUrl = buildUrl('http://trustdarkness.com/py/usertype/');
+    ourCsv = d3.text(usertypeUrl)
+      .get(function(error, data) {
+        renderPieChart(data, "#type-selected", "greem");
+    });
   }
   
 }
