@@ -280,6 +280,86 @@ class Root(object):
     return "\n".join(ret)
   age.exposed = True
 
+  def outflow(self, station_id,
+          gender=None,
+          subscriber=None,
+          age=None):
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+
+    where = ""
+    if gender or subscriber or age:
+      where_stmts = []
+      if gender:
+        where_stmts.append("gender like '%s' " % gender)
+      if subscriber:
+        where_stmts.append("usertype like '%s%%' " % subscriber)
+      if age:
+        bottom, top = age.split(",")
+        where_stmts.append("age_in_2014 < %s " % top)
+        where_stmts.append("age_in_2014 > %s " % bottom)
+      if where_stmts:
+        for stmt in where_stmts:
+          where += "AND " + stmt + " "
+    else:
+      where = ""
+    q = """
+      SELECT 
+        to_station_id,
+        count(*)
+      FROM
+        divvy_trips_distances
+      WHERE from_station_id = '%s'
+        %s 
+      GROUP BY
+        to_station_id
+    """ % (station_id, where)
+    ret = []
+    ret.append("to_station,count")
+    c.execute(q)
+    for row in c.fetchall():
+      ret.append("%s,%d" % (row[0],row[1]))
+    return "\n".join(ret)
+
+  def inflow(self, station_id,
+          gender=None,
+          subscriber=None,
+          age=None):
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+
+    where = ""
+    if gender or subscriber or age:
+      where_stmts = []
+      if gender:
+        where_stmts.append("gender like '%s' " % gender)
+      if subscriber:
+        where_stmts.append("usertype like '%s%%' " % subscriber)
+      if age:
+        bottom, top = age.split(",")
+        where_stmts.append("age_in_2014 < %s " % top)
+        where_stmts.append("age_in_2014 > %s " % bottom)
+      if where_stmts:
+        for stmt in where_stmts:
+          where += "AND " + stmt + " "
+    else:
+      where = ""
+    q = """
+      SELECT 
+        from_station_id,
+        count(*)
+      FROM
+        divvy_trips_distances
+      WHERE to_station_id = '%s'
+        %s 
+      GROUP BY
+        from_station_id
+    """ % (station_id, where)
+    ret = []
+    ret.append("from_station,count")
+    c.execute(q)
+    for row in c.fetchall():
+      ret.append("%s,%d" % (row[0],row[1]))
+    return "\n".join(ret)
+
   def station_popularity(self, station_name):
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     try:
