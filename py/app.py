@@ -326,7 +326,7 @@ class Root(object):
     if stations:
       # since its bikes out, we'll only look at the depating station
       where_stmts.append("from_station_id in ('%s')" % \
-        "', '".join([str(i) for i in stations]))
+        "', '".join(stations)
     if where_stmts:
       where = where + where_stmts[0]
       for stmt in where_stmts[1:]:
