@@ -324,7 +324,7 @@ class Root(object):
       where_stmts.append("age_in_2014 < %d" % top)
       where_stmts.append("age_in_2014 > %d" % bottom)
     if stations:
-      stations.split(",")
+      stations = stations.split(",")
       # since its bikes out, we'll only look at the depating station
       where_stmts.append("from_station_id in ('%s')" % \
         "', '".join(stations))
