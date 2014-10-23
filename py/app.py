@@ -121,7 +121,7 @@ class Root(object):
     with open(os.path.join(PATH, "station_lat_long.pickle"), "rb") as f:
       stat_lat_long = pickle.load(f)
 
-    where = "WHERE"
+    where = "WHERE "
     if gender or subscriber or age or stations:
       where_stmts = []
       if gender:
@@ -141,8 +141,8 @@ class Root(object):
         where = where + where_stmts[0]
         for stmt in where_stmts[1:]:
           where += "AND " + stmt + " "
-      else:
-        where = ""
+    else:
+      where = ""
     q = """
       SELECT 
         age_in_2014,
