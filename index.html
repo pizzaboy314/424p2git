@@ -63,6 +63,7 @@
       <!-- Tab panes -->
       <div class="sidebar-content">
         <div class="sidebar-pane" id="home">
+          <h2 class="sidebar-header">Divvy Demographics</h2>
           <div id="rootwizardtop" class="tabbable tabs-left">
             <ul>
               <li><a href="#gender_tab" data-toggle="tab">
@@ -84,6 +85,8 @@
               </div>
             </div>	
           </div>
+
+          <h2 class="sidebar-header">Divvy Statistics</h2>
           <div id="rootwizardbottom" class="tabbable tabs-left">
             <ul>
               <li><a href="#day_of_week_tab" data-toggle="tab">
@@ -92,38 +95,48 @@
               <li><a href="#hour_of_day_tab" data-toggle="tab">
                 <img src="images/bikes_by_hour.png" alt="Bikes Out By Hour" /></a></li>
               <li><a href="#distance_by_bike_tab" data-toggle="tab">
-                <img src="images/bikes_by_distance.png" alt="Distance Travelled by Bike" /></a></li>
+                <img src="images/bikes_by_distance.png" alt="Distribution of Distances Travelled" /></a></li>
               <li><a href="#times_travelled_tab" data-toggle="tab">
-                <img src="images/times_traveled.png" alt="Times Travelled" /></a></li>
+                <img src="images/time_distribution.png" alt="Distribution of Times Travelled" /></a></li>
+              <li><a href="#distance_per_bike" data-toggle="tab">
+                <img src="images/distribution_per_bike.png" alt="Distance Distribution Per Bike"/></a></li>
               <li><a href="#day_of_year" data-toggle="tab">
                 <img src="images/calendar.png" alt="Bikes Out by Day of Year"/></a></li>
+
             </ul>
             <div class="tab-content">
               <div class="tab-pane" id="day_of_week_tab">
                 <div id="chartDayOfWeek">
                   <p class="chartLabel"> 
-                    Number of bikes out by day of the week
+                    <h3>Number of Bikes out by Day of the Week</h3>
                   </p>
                 </div>
               </div>
               <div class="tab-pane" id="hour_of_day_tab">
                 <div id="chartHourOfDay">
                   <p class="chartLabel"> 
-                    Number of bikes out by hour of the day
+                    <h3>Number of Bikes out by Hour of the Day</h3>
                   </p>
                 </div>
               </div>
               <div class="tab-pane" id="distance_by_bike_tab">
                 <div id="chartDistancesOverall">
                  <p class="chartLabel">  
-                    Average distances travelled by bikes overall
+                    <h3>Distribution of Distances Biked</h3>
                   </p>
                 </div>
               </div>
               <div class="tab-pane" id="times_travelled_tab">
                 <div id="chartTimesOverall">
                   <p class="chartLabel"> 
-                    Average times travelled by bikes overall
+                    <h3>Distribution of Times Travelled</h3>
+                  </p>
+                </div>
+              </div>
+              <div class="tab-pane" id="distance_per_bike">
+                <div id="distancePerBike">
+                  <p class="chartLabel"> 
+                    <h3>Distribution of Distance Travelled by Individual Bikes</h3>
                   </p>
                 </div>
               </div>
@@ -177,6 +190,11 @@
           - Wrote a document detailing necessary data structures and the calls that would need to be placed to the database <br />
           - Wrote psuedo code to construct the necessary data structures <br />
           - Exported data from Excel analyses as JSON files matching the desired data structures to enable parallel d3 development <br />
+          <h3>Week 3</h3>
+          - Redesigned interface to match later project requirements
+          - Created icons and other UI elements necessary to enact redesign
+          - Ran analyses to determine the proper metric for "imbalanced" stations
+          - Produced data structures for d3 development to display individual bike distributions
         </div>
         <div class="sidebar-pane" id="messages">
           <h1>Playback A Day's Rides</h1>
