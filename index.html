@@ -141,7 +141,8 @@
                 </div>
               </div>
               <div class="tab-pane" id="day_of_year">
-                <div id="bikes-per-year"></div>
+                <div id="bikes-per-year" class="inline"></div>
+                <div id="bikes-per-year-selected" class="inline selection_graph"></div>
               </div>     
             </div>
           </div>
@@ -480,9 +481,10 @@
                marker.bindPopup(stations[i].name +
                                 "<br />capacity: "
                                 +stations[i].dpcapacity);
-               marker.on("dblclick", doTheSelect);
+               console.log("applying "+window.stations_ids.get(stations[i].name)+" as station_id");
+               marker.station_id = window.stations_ids.get(stations[i].name);
                marker.name = stations[i].name;
-               marker.station_id = stations_ids.get(stations[i]);
+               marker.on("dblclick", doTheSelect);
                markers.addLayer(marker);
              }
            })
@@ -525,7 +527,7 @@
        var url = 'http://trustdarkness.com/py/rides_by_day_of_year'
        ourCsv = d3.text(url)
          .get(function(error, data) {
-            yearDayBar(data, "#bikes-per-year", "Date", "Count", "#ef6548");
+            yearDayBar(data, "#bikes-per-year", "Date", "Count", "#ef6548", 350);
          })
        dayOfWeekBar("#chartDayOfWeek"); 
        hourOfDayBar("#chartHourOfDay");

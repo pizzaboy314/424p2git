@@ -168,3 +168,7 @@ ul#day {
   padding:0.3em;
 }
 */
+
+.inline {
+  display: inline;
+}

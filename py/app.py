@@ -340,6 +340,7 @@ class Root(object):
       assembled_q = " ".join((base_q, where, group_by))
     else:
       assembled_q = " ".join((base_q, group_by))
+
     print assembled_q
     c.execute(assembled_q)
     ret = []

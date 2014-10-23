@@ -1,5 +1,5 @@
 
-function yearDayBar(csv, display_div, xname, yname, color) {
+function yearDayBar(csv, display_div, xname, yname, color, width) {
   var data = d3.csv.parse(csv);
   var valueLabelWidth = 40; // space reserved for value labels (right)
   var barHeight = 8 // height of one bar
@@ -7,7 +7,7 @@ function yearDayBar(csv, display_div, xname, yname, color) {
   var barLabelPadding = 8; // padding between bar and bar labels (left)
   var gridLabelHeight = 40 // space reserved for gridline labels
   var gridChartOffset = 3; // space between start of grid and first bar
-  var maxBarWidth = 400 // width of the bar with the max value
+  var maxBarWidth = width // width of the bar with the max value
 
   // accessor functions 
   var barLabel = function(d) { return d[xname]; };
