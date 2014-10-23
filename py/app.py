@@ -327,14 +327,18 @@ class Root(object):
       # since its bikes out, we'll only look at the depating station
       where_stmts.append("from_station_id in ('%s')" % \
         "', '".join([str(i) for i in stations]))
-    where = where + where_stmts[0]
-    for stmt in where_stmts[1:]:
-      where += "AMD " + stmt + " "
+    if where_stmts:
+      where = where + where_stmts[0]
+      for stmt in where_stmts[1:]:
+        where += "AMD " + stmt + " "
     group_by = """
       GROUP BY
         startdate
     """
-    assembled_q = " ".join((base_q, where, group_by))
+    if where_stmts:
+      assembled_q = " ".join((base_q, where, group_by))
+    else:
+      assembled_q = " ".join((base_q, group_by))
     print assembled_q
     c.execute(assembled_q)
     ret = []
