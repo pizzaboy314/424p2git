@@ -672,58 +672,195 @@ class Root(object):
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     where = ""
     if date or gender or subscriber or age or stations:
-      where = "WHERE "
-      where_stmts = []
+    # lets do some ghetto caching
+      cache_string = ""
       if date:
-        where_stmts.append("startdate like '%s'" % date)
+        cache_string += date.replace(" ", "").replace("/", "")
       if gender:
-        where_stmts.append("gender like '%s'" % gender)
+        cache_string += gender
       if subscriber:
-        where_stmts.append("usertype like '%s'" % subscriber)
+        cache_string += subscriber
       if age:
-        bottom, top = parse_age(age)
-        where_stmts.append("age_in_2014 < %d" % top)
-        where_stmts.append("age_in_2014 > %d" % bottom)
-      if stations:
-        stations = stations.split(",")
-        # since its bikes out, we'll only look at the depating station
-        where_stmts.append("from_station_id in (%s)" % \
-          ", ".join(stations))
-      if where_stmts:
-        where = where + where_stmts[0]
-        for stmt in where_stmts[1:]:
-          where += "AND " + stmt + " "
-      else:
-        where = ""
-    q = """
-      SELECT
-        trip_id,
-        starttime
-      FROM
-        divvy_trips_distances
-      %s
-      GROUP BY
-        trip_id
-    """ % where
-    c.execute(q)
+        cache_string += age
+      if stations: cache_string += stations
+      try:
+        with open ("%s/%s_trip_id_starttime_hours.json" % \
+          (os.path.join(PATH,"cache"), cache_string), "rb") as f:
+            return f.read()
+      except:
+        pass
+      try:
+        with open ("%s/%s_trip_id_starttime.pickle" % \
+          (os.path.join(PATH,"cache"), cache_string), "rb") as f:
+          sql = pickle.load(f)
+        print "running from cached version"
+      except:
+        print "running from SQL"
+        where = "WHERE "
+        where_stmts = []
+        if date:
+          where_stmts.append("startdate like '%s'" % date)
+        if gender:
+          where_stmts.append("gender like '%s'" % gender)
+        if subscriber:
+          where_stmts.append("usertype like '%s'" % subscriber)
+        if age:
+          bottom, top = parse_age(age)
+          where_stmts.append("age_in_2014 < %d" % top)
+          where_stmts.append("age_in_2014 > %d" % bottom)
+        if stations:
+          stations = stations.split(",")
+          # since its bikes out, we'll only look at the depating station
+          where_stmts.append("from_station_id in (%s)" % \
+            ", ".join(stations))
+        if where_stmts:
+          where = where + where_stmts[0]
+          for stmt in where_stmts[1:]:
+            where += "AND " + stmt + " "
+        else:
+          where = ""
+      q = """
+        SELECT
+          trip_id,
+          starttime
+        FROM
+          divvy_trips_distances
+        %s
+        GROUP BY
+          trip_id
+      """ % where
+      c.execute(q)
+
+      sql = []
+      for row in c.fetchall():
+        sql.append((row[0],parser.parse(row[1])))
+      with open ("%s/%s_trip_id_starttime.pickle" % \
+        (os.path.join(PATH,"cache"), cache_string), "wb") as f:
+
+        pickle.dump(sql, f)
+      
     ret = []
     ret.append("[")
-    l = []
-    print q
-    sql = []
-    for row in c.fetchall():
-      sql.append((row[0],row[1]))
-    for i in range(0, 24):
+    d = {}
+    for i in range(0, 24):      
       count = 0
-      for row in sql:
-        dt = parser.parse(row[1])
-        l.append([row[0], row[1]])
-        if i == dt.hour:
-          count += 1
-      ret.append('{"range":"%d", "frequency":"%d"},' % (i, count))
+      d[i] = count
+    for row in sql:
+      for i in range(0,24):
+        if i == row[1].hour:
+          d[i] += 1
+    for i in range(0, 24):
+      ret.append('{"range":"%d", "frequency":"%d"},' % (i, d[i]))
     ret[len(ret)-1] = ret[len(ret)-1].rstrip(",")
     ret.append("]")
+    with open ("%s/%s_trip_id_starttime_hours.json" % \
+      (os.path.join(PATH,"cache"), cache_string), "wb") as f:
+      f.write("\n".join(ret))
+
     return "\n".join(ret)
   hour_of_day.exposed = True
+
+  def day_of_week(self, date=None,
+                  gender=None,
+                  subscriber=None,
+                  age=None,
+                  stations=None):
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+    # lets do some ghetto caching
+    where = ""
+    if date or gender or subscriber or age or stations:
+    # lets do some ghetto caching
+      cache_string = ""
+      if date:
+        cache_string += date.replace(" ", "").replace("/", "")
+      if gender:
+        cache_string += gender
+      if subscriber:
+        cache_string += subscriber
+      if age:
+        cache_string += age
+      if stations: cache_string += stations
+      try:
+        with open ("%s/%s_trip_id_starttime_days.json" % \
+          (os.path.join(PATH,"cache"), cache_string), "rb") as f:
+            return f.read()
+      except:
+        pass
+      try:
+        with open ("%s/%s_trip_id_starttime.pickle" % \
+          (os.path.join(PATH,"cache"), cache_string), "rb") as f:
+          sql = pickle.load(f)
+        print "running from cached version"
+      except:
+        print "running from SQL"
+
+        where = "WHERE "
+        where_stmts = []
+        if date:
+          where_stmts.append("startdate like '%s'" % date)
+        if gender:
+          where_stmts.append("gender like '%s'" % gender)
+        if subscriber:
+          where_stmts.append("usertype like '%s'" % subscriber)
+        if age:
+          bottom, top = parse_age(age)
+          where_stmts.append("age_in_2014 < %d" % top)
+          where_stmts.append("age_in_2014 > %d" % bottom)
+        if stations:
+          stationsstr = stations
+          stations = stations.split(",")
+          # since its bikes out, we'll only look at the depating station
+          where_stmts.append("from_station_id in (%s)" % \
+            ", ".join(stations))
+        if where_stmts:
+          where = where + where_stmts[0]
+          for stmt in where_stmts[1:]:
+            where += "AND " + stmt + " "
+        else:
+          where = ""
+      q = """
+        SELECT
+          trip_id,
+          starttime
+        FROM
+          divvy_trips_distances
+        %s
+        GROUP BY
+          trip_id
+      """ % where
+      c.execute(q)
+      sql = []
+      for row in c.fetchall():
+        sql.append((row[0],parser.parse(row[1])))
+      with open ("%s/%s_trip_id_starttime.pickle" % \
+        (os.path.join(PATH,"cache"), cache_string), "wb") as f:
+
+        pickle.dump(sql, f)
+
+
+    ret = []
+    ret.append("[")
+ 
+    days =  {"Sunday":0, 
+            "Monday":0, 
+            "Tuesday":0, 
+            "Wednesday":0, 
+            "Thursday":0, 
+            "Friday":0, 
+            "Saturday":0 }
+    for row in sql:
+      days[row[1].strftime("%A")] += 1
+    for day, count in days.items():
+      ret.append('{"range":"%s", "frequency":"%d"},' % (day, count))
+    ret[len(ret)-1] = ret[len(ret)-1].rstrip(",")
+    ret.append("]")    
+    with open ("%s/%s_trip_id_starttime_days.json" % \
+      (os.path.join(PATH,"cache"), cache_string), "wb") as f:
+      f.write("\n".join(ret)) 
+ 
+    return "\n".join(ret)
+  day_of_week.exposed = True
+
+
 
 application = cherrypy.Application(Root(), script_name=None, config=None)
