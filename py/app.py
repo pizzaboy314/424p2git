@@ -27,6 +27,15 @@ else:
 c = db.cursor()
 
 def parse_age(age):
+  """Parse age groups... when you get an age, return the range as its displayed
+  in the pie chart.  This is currently unused.
+
+  Args:
+    age - int
+
+  Returns:
+    tuple - two ints, uninclusive
+  """
   if age == "Under 20":
     return (0, 20)
   elif age == "20-29":
@@ -41,6 +50,14 @@ def parse_age(age):
     return (59, 180)
 
 def parse_time_of_day(time_of_day):
+  """given a time of day string, return the time range (inclusive).
+
+  Args:
+    time_of_day - string, one of morning, lunch, "after work", or evening
+
+  Returns:
+    a two tuple of inclusive time range (low, high)
+  """
   if time_of_day == "morning":
     return(6, 9)
   elif time_of_day == "lunch":
@@ -51,6 +68,7 @@ def parse_time_of_day(time_of_day):
     return(7,9)
  
 def store_popularity_groups():
+  """Stores popularity in a pickle.  To be run offline."""
   with open("stations.pickle", "rb") as f:
     stations = pickle.load(f)
   with open("id_popularity.pickle", "rb") as f:
@@ -88,12 +106,19 @@ if cherrypy.__version__.startswith('3.0') and cherrypy.engine.state == 0:
     atexit.register(cherrypy.engine.stop)
 
 class Root(object):
+  """ Root class for the cherrypy instance running the backend """
+
   def index(self):
+    """Hello world, for index"""
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     return 'Hello World!'
   index.exposed = True
 
   def rides_by_day_of_year(self):
+    """Display the number of rides on each day of the year.
+
+    Returns a csv like Date,Count
+    """
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     q = """
       SELECT
@@ -117,6 +142,17 @@ class Root(object):
           subscriber=None,
           age=None,
           stations=None):
+    """Display the gender breakdown of riders based on filters
+  
+    Args (all optional):
+      gender - string - Male or Female
+      subscriber - string - Subscriber or Customer
+      age - a string like "low,high"
+      station - a string like "station_id1,station_id2,station_id3"
+
+    Returns:
+      a csv like Gender,Count
+    """
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     where = "WHERE "
     if gender or subscriber or age or stations:
@@ -166,6 +202,16 @@ class Root(object):
           subscriber=None,
           age=None,
           stations=None):
+    """Displays statistics on usertype.
+
+    Args (all optional):
+      gender - string - Male or Female
+      subscriber - string - Subscriber or Customer
+      age - a string like "low,high"
+      station - a string like "station_id1,station_id2,station_id3"
+
+    Returns a csv like Usertype,Count
+    """
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     where = "WHERE "
     if gender or subscriber or age or stations:
@@ -212,6 +258,16 @@ class Root(object):
           subscriber=None,
           age=None,
           stations=None):
+    """Displays statistics on age, based on filters.
+
+    Args (all optional):
+      gender - string - Male or Female
+      subscriber - string - Subscriber or Customer
+      age - a string like "low,high"
+      station - a string like "station_id1,station_id2,station_id3"
+
+    Returns a csv like Age,Count
+    """
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
 
     where = "WHERE "
@@ -284,6 +340,16 @@ class Root(object):
           gender=None,
           subscriber=None,
           age=None):
+    """Displays outflow data based on filters.
+
+    Args:
+      station_id - int - required
+      gender (optional) - string - Male or Female
+      subscriber (optional) - string - Subscriber or Customer
+      age (optional) - a string like "low,high"
+
+    Returns a csv like to_station_id,count
+    """
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
 
     where = ""
@@ -325,6 +391,16 @@ class Root(object):
           gender=None,
           subscriber=None,
           age=None):
+    """Displays inflow data based on filters.
+
+    Args:
+      station_id - int - required
+      gender (optional) - string - Male or Female
+      subscriber (optional) - string - Subscriber or Customer
+      age (optional) - a string like "low,high"
+
+    Returns a csv like from_station_id,count
+    """
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
 
     where = ""
@@ -363,6 +439,14 @@ class Root(object):
   inflow.exposed = True
 
   def station_popularity(self, station_name):
+    """Display station popularity data for a specific station.
+
+    Args:
+      station_name - string - the station name.
+   
+    Returns:
+      An int - one of 7 popularity groups.
+    """
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     try:
       with open("/var/www/cs424/p2/py/popularity.pickle", "rb") as f:
@@ -378,6 +462,17 @@ class Root(object):
                        subscriber=None,
                        age=None,
                        stations=None):
+    """Get data on an individual day for playback, based on filters.
+
+    Args (all optional):
+      gender - string - Male or Female
+      subscriber - string - Subscriber or Customer
+      age - a string like "low,high"
+      station - a string like "station_id1,station_id2,station_id3"
+  
+    Returns:
+      a csv like timestamp,trip_id,start/end,from,flat,flong,to,tlat,tlong
+    """
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     with open(os.path.join(PATH, "station_lat_long.pickle"), "rb") as f:
       stat_lat_long = pickle.load(f)
@@ -508,6 +603,17 @@ class Root(object):
                        subscriber=None,
                        age=None,
                        stations=None):
+    """Display the number of rides on each day of the year. Based on filters.
+
+    Args (all optional):
+      gender - string - Male or Female
+      subscriber - string - Subscriber or Customer
+      age - a string like "low,high"
+      station - a string like "station_id1,station_id2,station_id3"
+
+    Returns:
+      a csv like Date,Count
+    """
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     base_q = """
       SELECT
