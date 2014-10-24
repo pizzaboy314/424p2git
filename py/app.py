@@ -669,11 +669,11 @@ class Root(object):
                   subscriber=None,
                   age=None,
                   stations=None):
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     where = ""
     if date or gender or subscriber or age or stations:
       where = "WHERE "
       where_stmts = []
-      print "day:  %s" % date
       if date:
         where_stmts.append("startdate like '%s'" % date)
       if gender:
@@ -687,8 +687,8 @@ class Root(object):
       if stations:
         stations = stations.split(",")
         # since its bikes out, we'll only look at the depating station
-        where_stmts.append("from_station_id in ('%s')" % \
-          "', '".join(stations))
+        where_stmts.append("from_station_id in (%s)" % \
+          ", ".join(stations))
       if where_stmts:
         where = where + where_stmts[0]
         for stmt in where_stmts[1:]:
