@@ -721,7 +721,7 @@ class Root(object):
         if i == dt.hour:
           count += 1
       ret.append('{"range":"%d", "frequency":"%d"},' % (i, count))
-    ret[len(ret)-1].rstrip(",")
+    ret[len(ret)-1] = ret[len(ret)-1].rstrip(",")
     ret.append("]")
     return "\n".join(ret)
   hour_of_day.exposed = True
