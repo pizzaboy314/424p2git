@@ -122,4 +122,5 @@ function resetPlayback() {
   // Refresh the jQuery UI buttonset.                  
   $( "#radiousertype" ).buttonset('refresh');
   d3.select("#playbackError").html(" ");
+  clearSelection();
 }

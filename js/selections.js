@@ -33,15 +33,24 @@ function removeNeighborhoodFromSelection(neighborhood_slug) {
 
 function doTheSelect(e) {
   var ourMarker = this;
-  ourMarker.oldIcon = ourMarker._icon;
-  ourMarker.setIcon(defaultIcon);
-  window.tmp3 = ourMarker;
-  if (!ourMarker.station_id) {
-    alert("station_id missing");
-  }
-  window.selection.push(ourMarker.station_id);
-  window.selected_markers.push(ourMarker);
-  selectionUpdate();
+   for (i=0; i< window.selected_markers.length; i++) { 
+     if (window.selected_markers[i].station_id == ourMarker.station_id) {
+       console.log("trying to remove on dblclick");
+       window.selected_markers.pop(ourMarker);
+       ourMarker.setIcon(ourMarker.oldIcon);
+       window.selection.pop(ourMarker.station_id);
+       selectionUpdate();
+      }
+    }
+    ourMarker.oldIcon = ourMarker._icon;
+    ourMarker.setIcon(defaultIcon);
+    window.tmp3 = ourMarker;
+    if (!ourMarker.station_id) {
+      alert("station_id missing");
+    }
+    window.selection.push(ourMarker.station_id);
+    window.selected_markers.push(ourMarker);
+    selectionUpdate();
 }
 
 function clearSelection() {

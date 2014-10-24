@@ -319,6 +319,7 @@ class Root(object):
     for row in c.fetchall():
       ret.append("%s,%d" % (row[0],row[1]))
     return "\n".join(ret)
+  outflow.expose = True
 
   def inflow(self, station_id,
           gender=None,
@@ -359,6 +360,7 @@ class Root(object):
     for row in c.fetchall():
       ret.append("%s,%d" % (row[0],row[1]))
     return "\n".join(ret)
+  inflow.expose = True
 
   def station_popularity(self, station_name):
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"

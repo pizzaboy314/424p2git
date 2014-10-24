@@ -484,7 +484,6 @@
                marker.bindPopup(stations[i].name +
                                 "<br />capacity: "
                                 +stations[i].dpcapacity);
-               console.log("applying "+window.stations_ids.get(stations[i].name)+" as station_id");
                marker.station_id = window.stations_ids.get(stations[i].name);
                marker.name = stations[i].name;
                marker.on("dblclick", doTheSelect);
