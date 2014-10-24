@@ -1,6 +1,6 @@
-function hourOfDayBar(display_div) {
+function hourOfDayBar(url, display_div) {
 	var margin = {top: 20, right: 30, bottom: 30, left: 50},
-		width = 450 - margin.left - margin.right,
+		width = 420 - margin.left - margin.right,
 		height = 250 - margin.top - margin.bottom;
 
 	var x = d3.scale.ordinal()
@@ -17,7 +17,13 @@ function hourOfDayBar(display_div) {
 		.scale(y)
 		.orient("left");
 		
+	d3.json(url, function(error, data) {
+	  x.domain(data.map(function(d) { return d.range; }));
+	  y.domain([0, d3.max(data, function(d) { return +d.frequency; })]);
 	d3.select(display_div).select("svg").remove()
+        if (display_div.indexOf("selected") > 0) {
+          d3.select(display_div).html(" ");
+        }
 	var chart = d3.select(display_div).append("svg")
 		.attr("class", "chartOverview")
 		.attr("width", width + margin.left + margin.right)
@@ -25,9 +31,6 @@ function hourOfDayBar(display_div) {
 	    .append("g")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-	d3.json("static-json/hour-of-day-distribution.json", function(error, data) {
-	  x.domain(data.map(function(d) { return d.range; }));
-	  y.domain([0, d3.max(data, function(d) { return +d.frequency; })]);
 
 	  chart.append("g")
 		  .attr("class", "xaxis")

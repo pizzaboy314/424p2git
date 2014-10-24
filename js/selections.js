@@ -108,11 +108,14 @@ function selectionUpdate() {
     d3.selectAll(".selection_graph").html(""); 
   } else {
     d3.selectAll(".selection_graph").style("display", "inline");
-  
+    d3.selectAll(".selection_graph").html('<div class="inline" id="facebookG"><div id="blockG_1" class="facebook_blockG"></div><div id="blockG_2" class="facebook_blockG"></div><div id="blockG_3" class="facebook_blockG"></div>').style("float", "right").style("padding-right", "175px").style("padding-top", "30px"); 
     yearDayUrl = buildUrl('http://trustdarkness.com/py/bikes_out_by_day/');
     ourCsv = d3.text(yearDayUrl)
       .get (function(error, data) {
         yearDayBar(data, "#bikes-per-year-selected", "Date", "Count", "#fdbb84", 200);
+        d3.select("#bikes-per-year-selected")
+          .style("padding-right", "20px").style("padding-top", "0px")
+          .select("#facebookG").remove();
     });
     ageUrl = buildUrl('http://trustdarkness.com/py/age/');
     ourCsv = d3.text(ageUrl)
@@ -129,6 +132,8 @@ function selectionUpdate() {
       .get(function(error, data) {
         renderPieChart(data, "#type-selected", "green");
     });
+    hoursUrl = buildUrl('http://trustdarkness.com/py/hour_of_day/');
+    hourOfDayBar(hoursUrl, "#chartHourOfDay-selected");
   }
   
 }

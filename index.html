@@ -109,17 +109,20 @@
             </ul>
             <div class="tab-content">
               <div class="tab-pane" id="day_of_week_tab">
-                <div id="chartDayOfWeek">
+                <div id="chartDayOfWeek" class="inline">
                   <p class="chartLabel"> 
                     <h3>Number of Bikes out by Day of the Week</h3>
                   </p>
                 </div>
               </div>
               <div class="tab-pane" id="hour_of_day_tab">
-                <div id="chartHourOfDay">
+                <div id="chartHourOfDay" class="inline">
                   <p class="chartLabel"> 
                     <h3>Number of Bikes out by Hour of the Day</h3>
                   </p>
+                </div> 
+                 &nbsp;
+                <div id="chartHourOfDay-selected" class="inline selection_graph">
                 </div>
               </div>
               <div class="tab-pane" id="distance_by_bike_tab">
@@ -130,14 +133,14 @@
                 </div>
               </div>
               <div class="tab-pane" id="times_travelled_tab">
-                <div id="chartTimesOverall">
+                <div id="chartTimesOverall" class="inline">
                   <p class="chartLabel"> 
                     <h3>Distribution of Times Travelled</h3>
                   </p>
                 </div>
               </div>
               <div class="tab-pane" id="distance_per_bike">
-                <div id="distancePerBike">
+                <div id="distancePerBike" class="inline">
                   <p class="chartLabel"> 
                     <h3>Distribution of Distance Travelled by Individual Bikes</h3>
                   </p>
@@ -342,7 +345,6 @@
       max: 127,
       values: [ 1, 127 ],
       slide: function( event, ui ) {
-        console.log("firing slide event "+ui.values[0]+" "+ui.values[1] );
         $( "#age_select" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
         window.ageLimit = [ui.values[0], ui.values[1]];
       }
@@ -529,10 +531,10 @@
        var url = 'http://trustdarkness.com/py/rides_by_day_of_year'
        ourCsv = d3.text(url)
          .get(function(error, data) {
-            yearDayBar(data, "#bikes-per-year", "Date", "Count", "#ef6548", 350);
+            yearDayBar(data, "#bikes-per-year", "Date", "Count", "#ef6548", 330);
          })
        dayOfWeekBar("#chartDayOfWeek"); 
-       hourOfDayBar("#chartHourOfDay");
+       hourOfDayBar("static-json/hour-of-day-distribution.json", "#chartHourOfDay");
        distancesOverallBar("#chartDistancesOverall");
        timesOverallBar("#chartTimesOverall");
     </script>	
