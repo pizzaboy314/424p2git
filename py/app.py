@@ -664,5 +664,66 @@ class Root(object):
 
   bikes_out_by_day.exposed = True
 
+  def hour_of_day(self, date=None,
+                  gender=None,
+                  subscriber=None,
+                  age=None,
+                  stations=None):
+    where = ""
+    if date or gender or subscriber or age or stations:
+      where = "WHERE "
+      where_stmts = []
+      print "day:  %s" % date
+      if date:
+        where_stmts.append("startdate like '%s'" % date)
+      if gender:
+        where_stmts.append("gender like '%s'" % gender)
+      if subscriber:
+        where_stmts.append("usertype like '%s'" % subscriber)
+      if age:
+        bottom, top = parse_age(age)
+        where_stmts.append("age_in_2014 < %d" % top)
+        where_stmts.append("age_in_2014 > %d" % bottom)
+      if stations:
+        stations = stations.split(",")
+        # since its bikes out, we'll only look at the depating station
+        where_stmts.append("from_station_id in ('%s')" % \
+          "', '".join(stations))
+      if where_stmts:
+        where = where + where_stmts[0]
+        for stmt in where_stmts[1:]:
+          where += "AND " + stmt + " "
+      else:
+        where = ""
+    q = """
+      SELECT
+        trip_id,
+        starttime
+      FROM
+        divvy_trips_distances
+      %s
+      GROUP BY
+        trip_id
+    """ % where
+    c.execute(q)
+    ret = []
+    ret.append("[")
+    l = []
+    print q
+    sql = []
+    for row in c.fetchall():
+      sql.append((row[0],row[1]))
+    for i in range(0, 24):
+      count = 0
+      for row in sql:
+        dt = parser.parse(row[1])
+        l.append([row[0], row[1]])
+        if i == dt.hour:
+          count += 1
+      ret.append('{"range":"%d", "frequency":"%d"},' % (i, count))
+
+    ret.append("]")
+    return "\n".join(ret)
+  hour_of_day.exposed = True
 
 application = cherrypy.Application(Root(), script_name=None, config=None)
