@@ -1,0 +1,78 @@
+<html>
+<head>
+	<title>Div Pin</title>
+</head>
+<style type="text/css">
+
+	#pin-container {
+		width: 400px;
+	}
+
+	.pin-name {
+		background: #EE513F;
+		padding: 1em;
+	}
+
+	.pin-name span {
+		color: #F7F7F7;
+		z-index:1;
+	}
+
+	.pin-icon {
+		width:80%;
+		display:block;
+		margin-left:auto;
+		margin-right:auto;
+		margin-top:0.5em;
+		margin-bottom:0.5em;
+	}
+
+	.pin-inflow, .pin-outflow {
+		width:200px;
+		height:100px;
+		/*display:inline-block;*/
+		display: table-cell;
+	  	/*border: 1px solid black;*/
+	 	text-align: center;
+	  	vertical-align: middle;
+	}
+
+/*	.pin-inflow, .pin-outflow {
+		width: 49%;
+		height: 12em;
+		display: table-cell;
+		border: 1px solid black; 
+		text-align: center;
+		vertical-align: middle;
+		position: relative;
+		top: -4em;
+		z-index: 2;
+	}*/
+
+	.pin-inflow {
+		border-right: 1px solid #373737;
+	}
+
+	.pin-inflow span, .pin-outflow span {
+/*		display:block;
+		margin-left:auto;
+		margin-right:auto;*/
+	}
+
+	.pin-inflow.highlight, .pin-outflow.highlight {
+		background-color: #FCF9CE;
+	}
+</style>
+<body>
+
+	<div id="pin-container">
+		<div class="pin">
+			<div class="pin-name"><span>Lincoln Ave. & Belmont Ave.</span></div>
+			<img src="images/icon-inflow-outflow-pin.png" class="pin-icon"/>
+			<div class="pin-inflow highlight"><span>3,642</span></div>
+			<div class="pin-outflow"><span>4,245</span></div>
+		</div>
+	</div>
+
+</body>
+</html>
