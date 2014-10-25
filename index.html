@@ -522,9 +522,9 @@
                var marker = L.marker([parseFloat(stations[i].latitude), 
                                       parseFloat(stations[i].longitude)], 
                  {icon: icons[stationPop.get(stations[i].name)]})
-               marker.bindPopup(stations[i].name +
-                                "<br />capacity: "
-                                +stations[i].dpcapacity);
+               marker.bindPopup('        <div id="pin-container"><div class="pin"><div class="pin-name"><span>'+stations[i].name+'</span></div><img src="images/icon-inflow-outflow-pin.png" class="pin-icon"/><div class="pin-inflow highlight"><span>3,642</span></div><div class="pin-outflow"><span>4,245</span></div></div></div>'
+
+                                );
                marker.station_id = window.stations_ids.get(stations[i].name);
                marker.name = stations[i].name;
                marker.on("dblclick", doTheSelect);

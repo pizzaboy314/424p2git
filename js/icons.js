@@ -3,7 +3,7 @@
         var sS = [10, 16]; // size of the shadow
         var iA = [13, 20]; // point of the icon which will correspond to marker's location
         var sA = [5, 13];  // the same for the shadow
-        var pA =  [-1, -38]; // point from which the popup should open relative to the iconAnchor
+        var pA =  [-1, -20]; // point from which the popup should open relative to the iconAnchor
         var i1 = L.icon({ 
           iconUrl: 'images/divy-0.png',
           shadowUrl: 'images/marker-shadow.png',
