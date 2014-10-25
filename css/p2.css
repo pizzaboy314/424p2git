@@ -341,4 +341,12 @@ opacity:0.1}
  
 #overload-control .ui-button-text {
   font-size: 8pt;
+}
+
+#reset {
+  position: absolute;
+  bottom: 25px;
+  right: 20px;
+  z-index: 3001;
+  font-size: 1.75em;
 } 

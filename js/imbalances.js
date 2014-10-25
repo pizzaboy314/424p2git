@@ -6,7 +6,9 @@ var evening = Array(13,15,33,37,43,44,48,52,66,75)
 imbalance = new L.FeatureGroup();
 function showImbalance(timep) {
   removeAllMarkers()
-  var imbalanced = new Array;
+  imbalance.eachLayer(function(marker) {
+    imbalance.removeLayer(marker);
+  });
   var overloadIcon = L.icon( {
     iconUrl: 'images/overload.png',
 
@@ -21,7 +23,6 @@ function showImbalance(timep) {
     var marker = L.marker([latlon[0],latlon[1]],
       {icon:overloadIcon});
     marker.station_id = timep[i]
-    imbalanced.push(marker);
     imbalance.addLayer(marker);
   }
   imbalance.addTo(map); 

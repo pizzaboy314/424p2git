@@ -143,5 +143,11 @@ function selectionUpdate() {
   
 }
 
+function resetMap() {
+  clearSelection();
+  removeAllMarkers();
+  repopulate();
+}
+
 window.selection = new Array;
 window.selected_markers = new Array;
