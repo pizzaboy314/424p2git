@@ -22,7 +22,9 @@ function hourOfDayBar(url, display_div) {
 	  y.domain([0, d3.max(data, function(d) { return +d.frequency; })]);
 	d3.select(display_div).select("svg").remove()
         if (display_div.indexOf("selected") > 0) {
-          d3.select(display_div).html(" ");
+          d3.select(display_div).html(" ")
+            .style("padding-right", "0")
+            .style("padding-top", "0");
         }
 	var chart = d3.select(display_div).append("svg")
 		.attr("class", "chartOverview")
