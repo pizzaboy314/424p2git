@@ -44,6 +44,10 @@
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
   </head>
   <body>
+    <div id="weather">
+      <img id='wicon' src='http://icons.wxug.com/i/c/i/partlycloudy.gif'/>
+      <p id="temp" class='inline'>
+      </p><span id="date"></span></p></div>
     <div id="map">
     </div>
 
@@ -540,6 +544,22 @@
        hourOfDayBar("static-json/hour-of-day-distribution.json", "#chartHourOfDay");
        distancesOverallBar("#chartDistancesOverall");
        timesOverallBar("#chartTimesOverall");
-    </script>	
+       jQuery(document).ready(function($) { 
+         $.ajax(
+           { url : 
+             "http://api.wunderground.com/api/9d7e28be82bf1469/geolookup/conditions/q/IL/Chicago.json", 
+             dataType : "jsonp", 
+             success : function(parsed_json) { 
+               var location = parsed_json['location']['city']; 
+               var temp_f = parsed_json['current_observation']['temp_f'];
+               var wicon = parsed_json['current_observation']['icon'];
+               d3.select('#temp').html(temp_f+'&deg;'); 
+               d3.select('#date').html(moment().format('MMMM Do YYYY'));
+               d3.select('#wicon').attr('src', 'http://icons.wxug.com/i/c/i/'+wicon+'.gif');
+             } 
+           }); 
+        }); 
+    </script>
+
   </body>
 </html>

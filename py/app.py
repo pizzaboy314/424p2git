@@ -861,6 +861,17 @@ class Root(object):
     return "\n".join(ret)
   day_of_week.exposed = True
 
+  def weather(self, date, hour):
+    dt = parser.parse(date)
+    ret = ["icon,temp"]
+    with open('%s/weather/%s.pickle' % \
+      (PATH, "%s%02d%s" %(dt.year, dt.month, dt.day)), 'rb') as f:
+ 
+      winfo = pickle.load(f)
+
+    ret.append("%s,%s" % winfo[hour])
+    return "\n".join(ret)
+  weather.exposed = True
 
 
 application = cherrypy.Application(Root(), script_name=None, config=None)
