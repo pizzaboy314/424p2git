@@ -41,6 +41,7 @@
     <script src="js/stations.js"></script>
     <script src="js/neighborhoods.js"></script>
     <script src="js/selections.js"></script>
+    <script src="js/imbalances.js"></script>
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
   </head>
   <body>
@@ -48,6 +49,24 @@
       <img id='wicon' src='images/spinner.gif'/>
       <p id="temp" class='inline'>
       </p><span id="date"></span></p>
+    </div>
+	<script type="text/javascript">
+		$(function() {
+			$('#overload-control').buttonset();
+		});
+	</script>
+    <div id="overload-control">
+      Show the most imbalanced stations for:
+      	<div id="overload-selector">
+	  <input type="radio" id="morning" name="radio" onclick="showImbalance(morning)"/>
+            <label for="morning">Morning</label>
+	  <input type="radio" id="lunch" name="radio" onclick="showImbalance(lunch)" />
+            <label for="lunch">Lunch</label>
+	  <input type="radio" id="after_work" name="radio" onclick="showImbalance(after_work)"/>
+            <label for="after_work">After Work</label>
+          <input type="radio" id="evening" name="radio" onclick="showImbalance(evening)"/><label for="evening">Evening</label>
+
+	</div>
     </div>
     <div id="colorrange"><img src="images/scale.png" /></div>
     <div id="map">
@@ -372,7 +391,7 @@
         </div>
         <div class="sidebar-pane" id="settings">
           <h1>Libraries Used:</h1>
-          <p>Third party libraries we used include the following:</p>
+           <p>Third party libraries and tools we used include the following:</p>
           <h3>d3</h3>
           <h3>leaflet</h3>
           <h3>leaflet-sidebar</h3>
@@ -383,6 +402,10 @@
           <h3>pikaday calendar</h3>
           <h3>moment.js</h3>
           <h3>chicago tribune border tiles and neighborhood json</h3>
+          <h3>weather underground API</h3>
+          <h3>python and mysql for data processing</h3>
+          <h3>cherrypy for serving live data queries</h3>
+          <h3>Adobe Illustrator and Inkscape for design</h3>
         </div>
       </div>
     </div>
@@ -506,6 +529,7 @@
        function removeAllMarkers(){
          window.removed = true;
          map.removeLayer(markers);
+         map.removeLayer(window.imbalance);
          // betrayse the function name, but we don't have time to care
          if (window.selected_markers) {
            for (i=0; i<selected_markers.length; i++) {

@@ -324,3 +324,21 @@ opacity:0.1}
 #colorrange img {
   height: 30px;
 }
+
+#overload-control {
+  position: absolute;
+  bottom: 50px;
+  left: 100px;
+  z-index: 3000;
+  background-color: rgba(255, 255, 255, 0.80);
+  width: 280px
+}
+
+#overload-control .ui-button {
+  height: 22px;
+  font-size: 12pt;
+}
+ 
+#overload-control .ui-button-text {
+  font-size: 8pt;
+} 
