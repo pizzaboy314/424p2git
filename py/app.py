@@ -860,6 +860,65 @@ class Root(object):
  
     return "\n".join(ret)
   day_of_week.exposed = True
+ 
+  def distance_dist(self, date=None,
+                  gender=None,
+                  subscriber=None,
+                  age=None,
+                  stations=None):
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+    base_q = """
+      SELECT
+        meters
+      FROM
+        divvy_trips_distances
+    """
+    where = ""
+    where_stmts = []
+    if gender or subscriber or age or stations:
+      where = "WHERE "
+    if gender:
+      where_stmts.append("gender like '%s'" % gender)
+    if subscriber:
+      where_stmts.append("usertype like '%s'" % subscriber)
+    if age:
+      bottom, top = parse_age(age)
+      where_stmts.append("age_in_2014 < %d" % top)
+      where_stmts.append("age_in_2014 > %d" % bottom)
+    if stations:
+      stations = stations.split(",")
+      # since its bikes out, we'll only look at the depating station
+      where_stmts.append("from_station_id in ('%s')" % \
+        "', '".join(stations))
+    if where_stmts:
+      where = where + where_stmts[0]
+      for stmt in where_stmts[1:]:
+        where += "AMD " + stmt + " "
+    group_by = """
+      GROUP BY
+        startdate
+    """
+    if where_stmts:
+      assembled_q = " ".join((base_q, where, group_by))
+    else:
+      assembled_q = " ".join((base_q, group_by))
+    c.execute(assembled_q)
+    ranges = [(0,0.5), (0.5,1), (1,1.5), (1.5,2), (2,2.5), (2.5,3), (3,3.5), (3.5,4), (4,4.5), (4.5,5), (5,5.5), (5.5,6), (6,6.5), (6.5,7), (7,7.5), (7.5,8), (8,8.5), (8.5,9), (9,9.5), (9.5,10), (10,10.5), (10.5,11), (11,11.5), (11.5,12), (12,12.5), (12.5,13), (13,13.5), (13.5,14), (14,14.5), (14.5,15), (15,15.5), (15.5,16), (16,16.5), (16.5,17), (17,17.5), (17.5,18), (18-100),]
+    d = OrderedDict()
+    for item in ranges:
+      d[item] = 0
+    for row in c.fetchall():
+      for r in ranges:
+        if row[0] > r[0] and row[0] <= r[1]:
+          d[r] += 1
+
+    ret = ["["]
+    for r, count in d.items():  
+      set.append('{ "range": "%s", "frequency": "%s" },' % ("%f-%f" % r, count))
+    ret[len(ret)-1] = ret[len(ret)-1].rstrip(",")
+    ret.append("]")
+    return "\n".join(ret)
+  distance_dist.exposed = True
 
   def weather(self, date, hour):
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"

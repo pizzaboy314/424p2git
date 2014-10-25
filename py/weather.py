@@ -5,13 +5,20 @@ import pickle
 from dateutil import parser
 from datetime import timedelta
 from collections import OrderedDict
+import sys
 
 def daterange(start_date, end_date):
     for n in range(int ((end_date - start_date).days)):
         yield start_date + timedelta(n)
 
-startdate = '20130712'
-enddate = '20130731'
+
+if not sys.argv[1]:
+  print "uh oh"
+  startdate = '20130711'
+  enddate = '20130712'
+else:
+  startdate = sys.argv[1]
+  enddate = sys.argv[2]
 
 sdt = parser.parse(startdate)
 edt = parser.parse(enddate)

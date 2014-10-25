@@ -313,3 +313,14 @@ opacity:0.1}
   left: 67px;
 
 }
+
+#colorrange {
+  position: absolute;
+  bottom: 10px;
+  left: 100px;
+  z-index: 3000;
+}
+
+#colorrange img {
+  height: 30px;
+}
