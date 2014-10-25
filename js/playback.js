@@ -57,6 +57,16 @@ function playback(date) {
           d3.select("#day").selectAll(".selected").attr("class", "");
           d3.select("#i"+hour)
             .attr("class", "selected");
+          wchange_hours = Array(0, 6, 10, 12, 14, 17, 19, 22);
+            console.log("Yay!");
+            d3.csv("http://trustdarkness.com/py/weather/"+date+"/"+hour)
+              .get(function(error, data) {
+                wicon = data[0].icon;
+                temp_f = data[0].temp;
+                d3.select('#temp').html(temp_f+'&deg;');
+                d3.select('#date').html(moment(date).format('MMMM Do YYYY'));
+                d3.select('#wicon').attr('src', 'http://icons.wxug.com/i/c/i/'+wicon+'.gif');
+            });
           d3.select("#i"+hour).select(".tripdata")
             .html(tripstring);
           var trip = L.Routing.control({ 

@@ -10,8 +10,8 @@ def daterange(start_date, end_date):
     for n in range(int ((end_date - start_date).days)):
         yield start_date + timedelta(n)
 
-startdate = '20130701'
-enddate = '20130711'
+startdate = '20130712'
+enddate = '20130731'
 
 sdt = parser.parse(startdate)
 edt = parser.parse(enddate)
