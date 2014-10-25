@@ -865,7 +865,7 @@ class Root(object):
     dt = parser.parse(date)
     ret = ["icon,temp"]
     with open('%s/weather/%s.pickle' % \
-      (PATH, "%s%02d%s" %(dt.year, dt.month, dt.day)), 'rb') as f:
+      (PATH, "%s%02d%02d" %(dt.year, dt.month, dt.day)), 'rb') as f:
  
       winfo = pickle.load(f)
 

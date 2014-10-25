@@ -17,7 +17,7 @@ sdt = parser.parse(startdate)
 edt = parser.parse(enddate)
 
 for date in daterange(sdt, edt):
-  date = "%s%02d%s" % (date.year, date.month, date.day)
+  date = "%s%02d%02d" % (date.year, date.month, date.day)
   f = urllib2.urlopen('http://api.wunderground.com/api/9d7e28be82bf1469/history_%s/conditions/q/IL/Chicago.json' % date) 
 
   json_string = f.read() 
