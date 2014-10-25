@@ -114,6 +114,9 @@
                     <h3>Number of Bikes out by Day of the Week</h3>
                   </p>
                 </div>
+                 &nbsp;
+                <div id="chartDayOfWeek-selected" class="inline selection_graph">
+                </div>
               </div>
               <div class="tab-pane" id="hour_of_day_tab">
                 <div id="chartHourOfDay" class="inline">
@@ -533,7 +536,7 @@
          .get(function(error, data) {
             yearDayBar(data, "#bikes-per-year", "Date", "Count", "#ef6548", 330);
          })
-       dayOfWeekBar("#chartDayOfWeek"); 
+       dayOfWeekBar("static-json/day-of-week-distribution.json", "#chartDayOfWeek"); 
        hourOfDayBar("static-json/hour-of-day-distribution.json", "#chartHourOfDay");
        distancesOverallBar("#chartDistancesOverall");
        timesOverallBar("#chartTimesOverall");

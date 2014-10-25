@@ -1,6 +1,6 @@
-function dayOfWeekBar(display_div) {
+function dayOfWeekBar(url, display_div) {
 	var margin = {top: 20, right: 30, bottom: 30, left: 50},
-		width = 450 - margin.left - margin.right,
+		width = 420 - margin.left - margin.right,
 		height = 250 - margin.top - margin.bottom;
 
 	var x = d3.scale.ordinal()
@@ -17,15 +17,21 @@ function dayOfWeekBar(display_div) {
 		.scale(y)
 		.orient("left");
 		
-	d3.select(display_div).select("svg").remove()
-	var chart = d3.select(display_div).append("svg")
-		.attr("class", "chartOverview")
-		.attr("width", width + margin.left + margin.right)
-		.attr("height", height + margin.top + margin.bottom)
-	    .append("g")
-		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	d3.json(url, function(error, data) {
+          d3.select(display_div).select("svg").remove()
+        if (display_div.indexOf("selected") > 0) {
+          d3.select(display_div).html(" ")
+            .style("padding-right", "0")
+            .style("padding-top", "0");
+        }
 
-	d3.json("static-json/day-of-week-distribution.json", function(error, data) {
+          var chart = d3.select(display_div).append("svg")
+                .attr("class", "chartOverview")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
 	  x.domain(data.map(function(d) { return d.range; }));
 	  y.domain([0, d3.max(data, function(d) { return +d.frequency; })]);
 

@@ -132,8 +132,13 @@ function selectionUpdate() {
       .get(function(error, data) {
         renderPieChart(data, "#type-selected", "green");
     });
+
     hoursUrl = buildUrl('http://trustdarkness.com/py/hour_of_day/');
     hourOfDayBar(hoursUrl, "#chartHourOfDay-selected");
+
+    daysUrl = buildUrl('http://trustdarkness.com/py/day_of_week/');
+    dayOfWeekBar(daysUrl, "#chartDayOfWeek-selected");
+
   }
   
 }
