@@ -862,6 +862,7 @@ class Root(object):
   day_of_week.exposed = True
 
   def weather(self, date, hour):
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     dt = parser.parse(date)
     ret = ["icon,temp"]
     with open('%s/weather/%s.pickle' % \
