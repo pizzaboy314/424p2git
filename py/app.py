@@ -387,7 +387,7 @@ class Root(object):
       ret.append("%s,%d" % (row[0],row[1]))
       count += row[1]
     with open('/tmp/outflow', 'a') as f:
-      f.write("window.outflow.set(%s, %d)" % (station_id, count))
+      f.write("window.outflow.set(%s, %d)\n " % (station_id, count))
     return "\n".join(ret)
   outflow.exposed = True
 
@@ -441,7 +441,7 @@ class Root(object):
       ret.append("%s,%d" % (row[0],row[1]))
       count += row[1]
     with open('/tmp/inflow', 'a') as f:
-      f.write("window.inflow.set(%s, %d)" % (station_id, count))
+      f.write("window.inflow.set(%s, %d)\n " % (station_id, count))
     return "\n".join(ret)
   inflow.exposed = True
 
