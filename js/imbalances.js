@@ -12,7 +12,7 @@ function showImbalance(timep) {
   var overloadIcon = L.icon( {
     iconUrl: 'images/overload.png',
 
-    iconSize:     [25, 15], // size of the icon
+    iconSize:     [32, 35], // size of the icon
     shadowSize:   [38, 35], // size of the shadow
     iconAnchor:   [22, 35], // point of the icon which will correspond to marker's location
     shadowAnchor: [4, 34],  // the same for the shadow
