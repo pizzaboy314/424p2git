@@ -42,6 +42,8 @@
     <script src="js/neighborhoods.js"></script>
     <script src="js/selections.js"></script>
     <script src="js/imbalances.js"></script>
+    <script src="js/inflow.js"></script>
+    <script src="js/outflow.js"></script>
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
   </head>
   <body>
@@ -55,6 +57,7 @@
 		$(function() {
 			$('#overload-control').buttonset();
 		});
+
 	</script>
     <div id="overload-control">
       Show the most imbalanced stations for:
@@ -188,7 +191,6 @@
             $(document).ready(function() {
               $('#rootwizardbottom').bootstrapWizard({'tabClass': 'nav nav-tabs'});
             });
-
           </script> 
         </div>
         <div class="sidebar-pane" id="profile">
@@ -522,13 +524,12 @@
                var marker = L.marker([parseFloat(stations[i].latitude), 
                                       parseFloat(stations[i].longitude)], 
                  {icon: icons[stationPop.get(stations[i].name)]})
-               marker.bindPopup('        <div id="pin-container"><div class="pin"><div class="pin-name"><span>'+stations[i].name+'</span></div><img src="images/icon-inflow-outflow-pin.png" class="pin-icon"/><div class="pin-inflow highlight"><span>3,642</span></div><div class="pin-outflow"><span>4,245</span></div></div></div>'
-
-                                );
-               marker.station_id = window.stations_ids.get(stations[i].name);
+               station_id = window.stations_ids.get(stations[i].name);
+               marker.station_id = station_id;
                marker.name = stations[i].name;
                marker.on("dblclick", doTheSelect);
                markers.addLayer(marker);
+               marker.bindPopup('<div id="pin-container"><div class="pin"><div class="pin-name"><span>'+stations[i].name+'</span></div><img src="images/icon-inflow-outflow-pin.png" class="pin-icon"/><div class="pin-inflow highlight"><span>In: '+window.inflow.get(parseInt(station_id))+'</span></div><div class="pin-outflow"><span>Out: '+window.outflow.get(parseInt(station_id))+'</span></div></div></div>');
              }
            })
          return false;
@@ -592,6 +593,6 @@
              } 
            }); 
         }); 
-    </script>
+</script>
   </body>
 </html>
