@@ -11,7 +11,10 @@ function totalInflow(station_id) {
     });
 }
 
+
 function drawInflow(station_id) {
+  station_id = station_id.toString();
+  removeAllMarkers();
   if (map.hasLayer(window.inflowTrips)) {
     map.removeLayer(window.inflowTrips);
   }
@@ -24,16 +27,23 @@ function drawInflow(station_id) {
       for (i=0; i<data.length; i++) {
         dlatlon = stations_latlon.get(data[i].from_station);
         var trip = L.Routing.control({
-          waypoints: [
-            L.latLng([slatlon[0], slatlon[1]]),
-            L.latLng([dlatlon[0], dlatlon[1]])
-          ],
-          fitSelectedRoutes: false
-        });
+          plan: L.Routing.plan([
+              L.latLng(slatlon[0], slatlon[1]),
+              L.latLng(dlatlon[0], dlatlon[1])
+          ], 
+          { waypointIcon: function(j) {
+            if (j== 0) {
+              return inSrcIcon;
+            } else {
+              return inDestIcon;
+            }
+          }
+          }), fitSelectedRoutes: false
+         });
         window.inflowTrips.addLayer(trip);
       }
     });
-  window.inflowTrips.addTo(map);
+    window.inflowTrips.addTo(map);
 }
 
 function drawOutflow(station_id) {

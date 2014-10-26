@@ -45,6 +45,7 @@
     <script src="js/inflow.js"></script>
     <script src="js/outflow.js"></script>
     <script src="js/flow.js"></script>
+    <script src="js/label.js"></script>
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
   </head>
   <body>
@@ -530,7 +531,7 @@
                marker.name = stations[i].name;
                marker.on("dblclick", doTheSelect);
                markers.addLayer(marker);
-               marker.bindPopup('<div id="pin-container"><div class="pin"><div class="pin-name"><span>'+stations[i].name+'</span></div><img src="images/icon-inflow-outflow-pin.png" class="pin-icon"/><div class="pin-inflow highlight"><span>In: '+window.inflow.get(parseInt(station_id))+'</span></div><div class="pin-outflow"><span>Out: '+window.outflow.get(parseInt(station_id))+'</span></div></div></div>');
+               marker.bindPopup('<div id="pin-container"><div class="pin"><div class="pin-name"><span>'+stations[i].name+'</span></div><img src="images/icon-inflow-outflow-pin.png" class="pin-icon"/><div class="pin-inflow highlight" onclick="drawInflow('+station_id+')"><span>In: '+window.inflow.get(parseInt(station_id))+'</span></div><div class="pin-outflow"><span>Out: '+window.outflow.get(parseInt(station_id))+'</span></div></div></div>');
              }
            })
          return false;
@@ -538,9 +539,15 @@
        function removeAllMarkers(){
          window.removed = true;
          map.removeLayer(markers);
-         map.removeLayer(window.inflowTrips);
-         map.removeLayer(window.outflowTrips);
-         map.removeLayer(window.imbalance);
+         if (map.hasLayer(window.inflowTrips)) {
+           map.removeLayer(window.inflowTrips);
+         }
+         if (map.hasLayer(window.outflowTrips)) {
+           map.removeLayer(window.outflowTrips);
+         }
+         if (map.hasLayer(window.imbalance)) {
+           map.removeLayer(window.imbalance);
+         }
          // betrays the function name, but we don't have time to care
          if (window.selected_markers) {
            for (i=0; i<selected_markers.length; i++) {

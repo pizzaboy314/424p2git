@@ -81,4 +81,27 @@ var defaultIcon = L.icon({
     iconAnchor:   [22, 64], // point of the icon which will correspond to marker's location
     shadowAnchor: [4, 62],  // the same for the shadow
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-}); 
+});
+
+var inDestIcon = L.icon({
+  iconUrl: 'images/indest.png',
+  shadowUrl: 'images/marker-shadow.png',
+    iconSize:     iS, // size of the icon
+    shadowSize:   sS, // size of the shadow
+    iconAnchor:   iA, // point of the icon which will correspond to marker's location
+    shadowAnchor: sA,  // the same for the shadow
+    popupAnchor:  pA // point from which the popup should open relative to the iconAnchor
+
+});
+
+var inSrcIcon = L.icon({
+  iconUrl: 'images/insrc.png',
+  shadowUrl: 'images/marker-shadow.png',
+    iconSize:     [35,35], // size of the icon
+    shadowSize:   sS, // size of the shadow
+    iconAnchor:   [10,10], // point of the icon which will correspond to marker's location
+    shadowAnchor: sA,  // the same for the shadow
+    popupAnchor:  pA // point from which the popup should open relative to the iconAnchor
+
+});
+
