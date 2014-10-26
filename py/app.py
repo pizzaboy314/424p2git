@@ -381,9 +381,13 @@ class Root(object):
     """ % (station_id, where)
     ret = []
     ret.append("to_station,count")
-    c.execute(q)
+    c.execute(q) 
+    count = 0
     for row in c.fetchall():
       ret.append("%s,%d" % (row[0],row[1]))
+      count += row[1]
+    with open('/tmp/outflow', 'a') as f:
+      f.write("window.outflow.set(%d, %d)" % (station_id, count))
     return "\n".join(ret)
   outflow.exposed = True
 
@@ -436,6 +440,9 @@ class Root(object):
     for row in c.fetchall():
       ret.append("%s,%d" % (row[0],row[1]))
     return "\n".join(ret)
+      count += row[1]
+    with open('/tmp/inflow', 'a') as f:
+      f.write("window.inflow.set(%d, %d)" % (station_id, count))
   inflow.exposed = True
 
   def station_popularity(self, station_name):
