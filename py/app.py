@@ -139,7 +139,7 @@ class Root(object):
         date = 'June 27, 2013'
       elif dt.day == 1:
         print "match2"
-        date = "%s %s" % (dt.strftime("%B"), dt.year)
+        date = "%s %s" % (dt.strftime("%b"), dt.year)
       else:
         date = " "
       ret.append("%s,%s" % (date, row[1]))
@@ -680,7 +680,7 @@ class Root(object):
       if dt == parser.parse('2013-06-27').date:
         date = 'June 27, 2013'
       elif dt.day == 1:
-        date = "%s %s" % (dt.strftime("%B"), dt.year)
+        date = "%s %s" % (dt.strftime("%b"), dt.year)
       else:
         date = " "
       ret.append("%s,%s" % (date, row[1]))
