@@ -23,6 +23,7 @@ function showImbalance(timep) {
     var marker = L.marker([latlon[0],latlon[1]],
       {icon:overloadIcon});
     marker.station_id = timep[i]
+    marker.bindPopup('<div id="pin-container"><div class="pin"><div class="pin-name"><span>'+marker.station_id+'</span></div><img src="images/icon-inflow-outflow-pin.png" class="pin-icon"/><div class="pin-inflow highlight"><span>In: '+window.inflow.get(parseInt(marker.station_id))+'</span></div><div class="pin-outflow"><span>Out: '+window.outflow.get(parseInt(marker.station_id))+'</span></div></div></div>');
     imbalance.addLayer(marker);
   }
   imbalance.addTo(map); 
