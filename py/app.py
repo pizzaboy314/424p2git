@@ -437,6 +437,7 @@ class Root(object):
     ret = []
     ret.append("from_station,count")
     c.execute(q)
+    count = 0
     for row in c.fetchall():
       ret.append("%s,%d" % (row[0],row[1]))
       count += row[1]
