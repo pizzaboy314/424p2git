@@ -44,6 +44,7 @@
     <script src="js/imbalances.js"></script>
     <script src="js/inflow.js"></script>
     <script src="js/outflow.js"></script>
+    <script src="js/flow.js"></script>
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
   </head>
   <body>
@@ -537,8 +538,10 @@
        function removeAllMarkers(){
          window.removed = true;
          map.removeLayer(markers);
+         map.removeLayer(window.inflowTrips);
+         map.removeLayer(window.outflowTrips);
          map.removeLayer(window.imbalance);
-         // betrayse the function name, but we don't have time to care
+         // betrays the function name, but we don't have time to care
          if (window.selected_markers) {
            for (i=0; i<selected_markers.length; i++) {
              selected_markers[i].addTo(map)
