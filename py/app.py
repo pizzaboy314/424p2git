@@ -917,7 +917,7 @@ class Root(object):
       d[item] = 0
     for row in c.fetchall():
       for r in ranges:
-        if row > r[0] and row <= r[1]:
+        if row[0] > r[0] and row[0] <= r[1]:
           d[r] += 1
 
     ret = ["["]
