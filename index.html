@@ -531,7 +531,7 @@
                marker.name = stations[i].name;
                marker.on("dblclick", doTheSelect);
                markers.addLayer(marker);
-               marker.bindPopup('<div id="pin-container"><div class="pin"><div class="pin-name"><span>'+stations[i].name+'</span></div><img src="images/icon-inflow-outflow-pin.png" class="pin-icon"/><div class="pin-inflow highlight" onclick="drawInflow('+station_id+')"><span>In: '+window.inflow.get(parseInt(station_id))+'</span></div><div class="pin-outflow"><span>Out: '+window.outflow.get(parseInt(station_id))+'</span></div></div></div>');
+               marker.bindPopup('<div id="pin-container"><div class="pin"><div class="pin-name"><span>'+stations[i].name+'</span></div><img src="images/icon-inflow-outflow-pin.png" class="pin-icon"/><div class="pin-inflow highlight" onclick="drawInflow('+station_id+')"><span>In: '+window.inflow.get(parseInt(station_id))+'</span></div><div class="pin-outflow" onclick="drawOutflow('+station_id+')"><span>Out: '+window.outflow.get(parseInt(station_id))+'</span></div></div></div>');
              }
            })
          return false;

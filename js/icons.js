@@ -105,3 +105,23 @@ var inSrcIcon = L.icon({
 
 });
 
+var outSrcIcon = L.icon({
+  iconUrl: 'images/outsrc.png',
+  shadowUrl: 'images/marker-shadow.png',
+    iconSize:     iS, // size of the icon
+    shadowSize:   sS, // size of the shadow
+    iconAnchor:   iA, // point of the icon which will correspond to marker's location
+    shadowAnchor: sA,  // the same for the shadow
+    popupAnchor:  pA // point from which the popup should open relative to the iconAnchor
+});
+
+var outDestIcon = L.icon({
+  iconUrl: 'images/divvy-down.png',
+  shadowUrl: 'images/marker-shadow.png',
+    iconSize:     [35,35], // size of the icon
+    shadowSize:   sS, // size of the shadow
+    iconAnchor:   [10,10], // point of the icon which will correspond to marker's location
+    shadowAnchor: sA,  // the same for the shadow
+    popupAnchor:  pA // point from which the popup should open relative to the iconAnchor
+
+});

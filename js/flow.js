@@ -47,6 +47,8 @@ function drawInflow(station_id) {
 }
 
 function drawOutflow(station_id) {
+  station_id = station_id.toString();
+  removeAllMarkers();
   if (map.hasLayer(window.outflowTrips)) {
     map.removeLayer(window.outflowTrips);
   }
@@ -54,20 +56,27 @@ function drawOutflow(station_id) {
   url = 'http://trustdarkness.com/py/outflow/'+station_id
   slatlon = stations_latlon.get(station_id);
   d3.csv(url)
-      .get(function(error, data) {
+     .get(function(error, data) {
       count = 0
       for (i=0; i<data.length; i++) {
         dlatlon = stations_latlon.get(data[i].to_station);
         var trip = L.Routing.control({
-          waypoints: [
-            L.latLng([slatlon[0], slatlon[1]]),
-            L.latLng([dlatlon[0], dlatlon[1]])
+          plan: L.Routing.plan([
+              L.latLng(dlatlon[0], dlatlon[1]),
+              L.latLng(slatlon[0], slatlon[1])
           ],
-          fitSelectedRoutes: false
-        });
+          { waypointIcon: function(j) {
+            if (j == 0) {
+              return outSrcIcon;
+            } else {
+              return outDestIcon;
+            }
+          }
+          }), fitSelectedRoutes: false
+         });
         window.outflowTrips.addLayer(trip);
       }
     });
-  window.outflowTrips.addTo(map);
+    window.outflowTrips.addTo(map);
 }
 
