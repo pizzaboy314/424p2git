@@ -2,7 +2,7 @@
 function yearDayBar(csv, display_div, xname, yname, color, width) {
   var data = d3.csv.parse(csv);
   var valueLabelWidth = 40; // space reserved for value labels (right)
-  var barHeight = 8 // height of one bar
+  var barHeight = 12 // height of one bar
   var barLabelWidth = 80// space reserved for bar labels
   var barLabelPadding = 8; // padding between bar and bar labels (left)
   var gridLabelHeight = 40 // space reserved for gridline labels
@@ -39,7 +39,7 @@ function yearDayBar(csv, display_div, xname, yname, color, width) {
     .attr("text-anchor", "middle")
     //.text(String)
     .style('font-family', 'Helvetica,Arial,sans-serif')
-    .style('font-size', '7pt');
+    .style('font-size', '10pt');
 
   // vertical grid lines
   gridContainer.selectAll("line").data(x.ticks(10)).enter().append("line")
@@ -57,7 +57,7 @@ function yearDayBar(csv, display_div, xname, yname, color, width) {
     .attr('stroke', 'none')
     .attr('fill', '#494949')
     .style('font-family', 'Helvetica,Arial,sans-serif')
-    .style('font-size', '7pt')
+    .style('font-size', '10pt')
     .attr("dy", ".35em") // vertical-align: middle
     .attr('text-anchor', 'end')
     .text(barLabel);
@@ -80,7 +80,7 @@ function yearDayBar(csv, display_div, xname, yname, color, width) {
     .attr("dy", ".35em") //contentDival-align: middle
     .attr("text-anchor", "start") // text-align: right
     .style('font-family', 'Helvetica,Arial,sans-serif')
-    .style('font-size', '7pt')
+    .style('font-size', '10pt')
     .attr("fill", "#494949")
     .attr("stroke", "none")
     .text(function(d) { return d3.round(barValue(d), 2); });

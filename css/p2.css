@@ -21,7 +21,7 @@ text {
 }
 
 #graphs {
-  left: 10px;
+  left: 20px;
 }
 
 .chartOverview rect {
@@ -30,7 +30,7 @@ text {
 
 .chartOverview text {
   fill: black;
-  font: 10px sans-serif;
+  font: 12px sans-serif;
   text-anchor: end;
 }
 

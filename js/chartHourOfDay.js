@@ -1,5 +1,5 @@
 function hourOfDayBar(url, display_div) {
-	var margin = {top: 20, right: 30, bottom: 30, left: 50},
+	var margin = {top: 20, right: 30, bottom: 30, left: 60},
 		width = 420 - margin.left - margin.right,
 		height = 250 - margin.top - margin.bottom;
 

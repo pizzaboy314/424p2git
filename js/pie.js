@@ -71,7 +71,7 @@ function renderPieChart(ourData, ourDiv, colorBase)  {
     renderarcs.append('text')
 //      .style("text-anchor", "middle")
       .style('font-family', 'Helvetica,Arial,sans-serif')
-      .style('font-size', '7pt')
+      .style('font-size', '10pt')
 //      .attr('transform',function(d) { 
 //      var c = arc.centroid(d);
 //        console.log(c);
@@ -90,7 +90,7 @@ function renderPieChart(ourData, ourDiv, colorBase)  {
         h = Math.sqrt(x*x + y*y);
         rad = d.endAngle - d.startAngle
         if ((rad < 1.57) || ((d.startAngle >1.6) && (d.startAngle < 2) )) {
-          cn = 99;
+          cn = 89;
         } else {
           cn = 10;
         }

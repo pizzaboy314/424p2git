@@ -1,6 +1,6 @@
 function dayOfWeekBar(url, display_div) {
-	var margin = {top: 20, right: 30, bottom: 30, left: 50},
-		width = 420 - margin.left - margin.right,
+	var margin = {top: 20, right: 30, bottom: 30, left: 60},
+		width = 440 - margin.left - margin.right,
 		height = 250 - margin.top - margin.bottom;
 
 	var x = d3.scale.ordinal()

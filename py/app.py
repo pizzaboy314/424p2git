@@ -133,7 +133,16 @@ class Root(object):
     ret = []
     ret.append("Date,Count")
     for row in c.fetchall():
-      ret.append("%s,%s" % (row[0], row[1]))
+      print "match1 %s" % type(row[0])
+      dt = row[0]
+      if dt == parser.parse('2013-06-27').date:
+        date = 'June 27, 2013'
+      elif dt.day == 1:
+        print "match2"
+        date = "%s %s" % (dt.strftime("%B"), dt.year)
+      else:
+        date = " "
+      ret.append("%s,%s" % (date, row[1]))
     return "\n".join(ret)
   rides_by_day_of_year.exposed = True
     
@@ -667,7 +676,14 @@ class Root(object):
     ret = []
     ret.append("Date,Count")
     for row in c.fetchall():
-      ret.append("%s,%s" % (row[0], row[1]))
+      dt = row[0]
+      if dt == parser.parse('2013-06-27').date:
+        date = 'June 27, 2013'
+      elif dt.day == 1:
+        date = "%s %s" % (dt.strftime("%B"), dt.year)
+      else:
+        date = " "
+      ret.append("%s,%s" % (date, row[1]))
     return "\n".join(ret)
 
   bikes_out_by_day.exposed = True
