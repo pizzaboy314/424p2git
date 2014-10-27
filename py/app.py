@@ -933,7 +933,7 @@ class Root(object):
       d[item] = 0
     for row in c.fetchall():
       for r in ranges:
-        km = float(row[0] / 1000)
+        km = float(float(row[0]) / 1000)
         if km > r[0] and km <= r[1]:
           d[r] += 1
 

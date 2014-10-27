@@ -363,13 +363,13 @@ d3.csv("distribution-by-bike.csv", function(error, data) {
         </div>
         <div class="sidebar-pane" id="messages">
           <h1>Playback A Day's Rides</h1>
-          <input type="text" id="datepicker" value="2013-06-26">
+          <input type="text" id="datepicker" value="2013-06-27">
           <button id="playbutton">Play</button>
           <button id="resetbutton">Reset</button>
           <div style="display: inline" id="playLoading"></div>
           <script>
             var dateData;
-            ourDate = '2013-06-26';
+            ourDate = '2013-06-27';
             window.running = new Map;
             var picker = new Pikaday({
               field: document.getElementById('datepicker'),

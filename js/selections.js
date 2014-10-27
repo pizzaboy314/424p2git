@@ -145,6 +145,9 @@ function selectionUpdate() {
 
 function resetMap() {
   clearSelection();
+  if (window.playing) {
+    resetPlayback();
+  }
   removeAllMarkers();
   repopulate();
 }
