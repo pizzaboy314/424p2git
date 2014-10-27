@@ -17,10 +17,10 @@
   @media (min-width: 768px) and (max-width: 991px) {
     .sidebar {
       width: 655px; } }
-  @media (min-width: 992px) and (max-width: 1199px) {
+  @media (min-width: 992px) and (max-width: 2899px) {
     .sidebar {
-      width: 740px; } }
-  @media (min-width: 1200px) {
+      width: 940px; } }
+  @media (min-width: 2900px) {
     .sidebar {
       width: 1300px; } }
 
@@ -76,10 +76,10 @@
   @media (min-width: 768px) and (max-width: 991px) {
     .sidebar-pane {
       width: 615px; } }
-  @media (min-width: 992px) and (max-width: 1199px) {
+  @media (min-width: 992px) and (max-width: 2899px) {
     .sidebar-pane {
-      width: 700px; } }
-  @media (min-width: 1200px) {
+      width: 900px; } }
+  @media (min-width: 2900px) {
     .sidebar-pane {
       width: 1260px; } }
 

@@ -24,6 +24,11 @@ function renderPieChart(ourData, ourDiv, colorBase)  {
   } 
 
   d3.select(ourDiv).select("svg").remove()
+        if (ourDiv.indexOf("selected") > 0) {
+          d3.select(ourDiv).html(" ")
+            .style("padding-right", "0")
+            .style("padding-top", "0");
+        }
 
   var canvas = d3.select(ourDiv)
     .append('svg')

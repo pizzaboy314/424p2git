@@ -138,6 +138,12 @@ function selectionUpdate() {
 
     daysUrl = buildUrl('http://trustdarkness.com/py/day_of_week/');
     dayOfWeekBar(daysUrl, "#chartDayOfWeek-selected");
+ 
+    distanceUrl = buildUrl('http://trustdarkness.com/py/distance_dist/');
+    distancesOverallBar(distanceUrl, "#chartDistancesOverall-selected");
+    d3.selectAll(".selection_graph")
+      .style("background-color", "rgba(222,235,247,1)")
+      .style("border", "2px #ff7800");
 
   }
   
