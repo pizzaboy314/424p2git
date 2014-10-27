@@ -945,6 +945,67 @@ class Root(object):
     return "\n".join(ret)
   distance_dist.exposed = True
 
+  def time_dist(self, date=None,
+                  gender=None,
+                  subscriber=None,
+                  age=None,
+                  stations=None):
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+    base_q = """
+      SELECT
+        seconds
+      FROM
+        divvy_trips_distances
+    """
+    where = ""
+    where_stmts = []
+    if gender or subscriber or age or stations:
+      where = "WHERE "
+    if gender:
+      where_stmts.append("gender like '%s'" % gender)
+    if subscriber:
+      where_stmts.append("usertype like '%s'" % subscriber)
+    if age:
+      bottom, top = parse_age(age)
+      where_stmts.append("age_in_2014 < %d" % top)
+      where_stmts.append("age_in_2014 > %d" % bottom)
+    if stations:
+      stations = stations.split(",")
+      # since its bikes out, we'll only look at the depating station
+      where_stmts.append("from_station_id in ('%s')" % \
+        "', '".join(stations))
+    if where_stmts:
+      where = where + where_stmts[0]
+      for stmt in where_stmts[1:]:
+        where += "AMD " + stmt + " "
+    group_by = """
+      GROUP BY
+        seconds
+    """
+    if where_stmts:
+      assembled_q = " ".join((base_q, where, group_by))
+    else:
+      assembled_q = " ".join((base_q, group_by))
+    c.execute(assembled_q)
+    ranges = [(0,5), (5,10), (10,15), (15,20), (20,25), (25,30), (30,35), (35,40), (40,45), (45,50), (50,55), (55,60), (60,65), (65,70), (70,75), (75,80), (80,85), (85,90), (90,95), (95,100), (100,105), (105,110), (110,115), (115,120), (120,125), (125,130), (130,135), (135,140), (140,145), (145,150), (150,1000),]
+    d = OrderedDict()
+    for item in ranges:
+      d[item] = 0
+    for row in c.fetchall():
+      for r in ranges:
+        m = float(float(row[0]) / 60)
+        if m > r[0] and m <= r[1]:
+          d[r] += 1
+
+    ret = ["["]
+    for r, count in d.items():
+      ret.append('{ "range": "%s", "frequency": "%s" },' % ("%f-%f" % r, count))
+    ret[len(ret)-1] = ret[len(ret)-1].rstrip(",")
+    ret.append("]")
+    return "\n".join(ret)
+  time_dist.exposed = True
+
+
   def weather(self, date, hour):
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     dt = parser.parse(date)
