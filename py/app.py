@@ -147,6 +147,7 @@ class Root(object):
   rides_by_day_of_year.exposed = True
     
   def gender(self,
+          date=None,
           gender=None,
           subscriber=None,
           age=None,
@@ -164,8 +165,10 @@ class Root(object):
     """
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     where = "WHERE "
-    if gender or subscriber or age or stations:
+    if date or gender or subscriber or age or stations:
       where_stmts = []
+      if date:
+        where_stmts.append("startdate like '%s'" % date)
       if gender:
         where_stmts.append("gender like '%s' " % gender)
       if subscriber:
@@ -207,6 +210,7 @@ class Root(object):
   gender.exposed = True
 
   def usertype(self,
+          date=None,
           gender=None,
           subscriber=None,
           age=None,
@@ -223,8 +227,10 @@ class Root(object):
     """
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     where = "WHERE "
-    if gender or subscriber or age or stations:
+    if date or gender or subscriber or age or stations:
       where_stmts = []
+      if date:
+        where_stmts.append("startdate like '%s'" % date)
       if gender:
         where_stmts.append("gender like '%s' " % gender)
       if subscriber:
@@ -263,6 +269,7 @@ class Root(object):
   usertype.exposed = True
 
   def age(self,
+          date=None,
           gender=None,
           subscriber=None,
           age=None,
@@ -280,8 +287,10 @@ class Root(object):
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
 
     where = "WHERE "
-    if gender or subscriber or age or stations:
+    if date or gender or subscriber or age or stations:
       where_stmts = []
+      if date:
+        where_stmts.append("startdate like '%s'" % date)
       if gender:
         where_stmts.append("gender like '%s' " % gender)
       if subscriber:
@@ -588,33 +597,6 @@ class Root(object):
     return "\n".join(ret)
   get_day.exposed = True
 
-  def avg_days_of_week(start='2013-06-26', 
-                       end='2013-12-31',
-                       time_of_day=None, 
-                       gender=None,
-                       subscriber=None,
-                       age=None,
-                       stations=None):
-    pass
-
-  def avg_dist_traveled(start='2013-06-26', 
-                       end='2013-12-31', 
-                       time_of_day=None,
-                       gender=None,
-                       subscriber=None,
-                       age=None,
-                       stations=None):
-    pass
-
-  def avg_trip_length(start='2013-06-26', 
-                       end='2013-12-31', 
-                       time_of_day=None,
-                       gender=None,
-                       subscriber=None,
-                       age=None,
-                       stations=None):
-    pass
-
   def bikes_out_by_day(time_of_day=None,
                        gender=None,
                        subscriber=None,
@@ -865,13 +847,13 @@ class Root(object):
     ret = []
     ret.append("[")
  
-    days =  {"Sunday":0, 
-            "Monday":0, 
-            "Tuesday":0, 
-            "Wednesday":0, 
-            "Thursday":0, 
-            "Friday":0, 
-            "Saturday":0 }
+    days =  {"Sun":0, 
+            "Mon":0, 
+            "Tue":0, 
+            "Wed":0, 
+            "Thu":0, 
+            "Fri":0, 
+            "Sat":0 }
     for row in sql:
       days[row[1].strftime("%A")] += 1
     for day, count in days.items():
@@ -939,7 +921,7 @@ class Root(object):
 
     ret = ["["]
     for r, count in d.items():  
-      ret.append('{ "range": "%s", "frequency": "%s" },' % ("%f-%f" % r, count))
+      ret.append('{ "range": "%s", "frequency": "%d" },' % ("%.1f-%.1f" % r, count))
     ret[len(ret)-1] = ret[len(ret)-1].rstrip(",")
     ret.append("]")
     return "\n".join(ret)
@@ -987,7 +969,7 @@ class Root(object):
     else:
       assembled_q = " ".join((base_q, group_by))
     c.execute(assembled_q)
-    ranges = [(0,5), (5,10), (10,15), (15,20), (20,25), (25,30), (30,35), (35,40), (40,45), (45,50), (50,55), (55,60), (60,65), (65,70), (70,75), (75,80), (80,85), (85,90), (90,95), (95,100), (100,105), (105,110), (110,115), (115,120), (120,125), (125,130), (130,135), (135,140), (140,145), (145,150), (150,1000),]
+    ranges = [(0,5), (5,10), (10,15), (15,20), (20,25), (25,30), (30,35), (35,40), (40,45), (45,50), (50,55), (55,60), (60,65), (65,70), (70,75), (75,80), (80,85), (85,90), (90,95), (95,100), (100,105), (105,110), (110,115), (115,120), (120,125), (125,130), (130,135), (135,140), (140,145), (145,150), (150,300),]
     d = OrderedDict()
     for item in ranges:
       d[item] = 0
@@ -999,7 +981,7 @@ class Root(object):
 
     ret = ["["]
     for r, count in d.items():
-      ret.append('{ "range": "%s", "frequency": "%s" },' % ("%f-%f" % r, count))
+      ret.append('{ "range": "%s", "frequency": "%s" },' % ("%d-%d" % r, int(count)))
     ret[len(ret)-1] = ret[len(ret)-1].rstrip(",")
     ret.append("]")
     return "\n".join(ret)

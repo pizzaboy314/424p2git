@@ -1,4 +1,6 @@
 function playback(date) {
+  window.dateLimit = date;
+  selectionUpdate();
   d3.select("#playLoading").html("<img src='images/spinner.gif' />");
   url = 'http://trustdarkness.com/py/get_day/'+date
   if (window.genderLimit) {
@@ -115,6 +117,7 @@ function resetPlayback() {
   d3.select("#playLoading").html("");
   window.playing = false;
   window.started = false;
+  window.dateLimit = false;
   window.running = new Map;
   window.playbackEvent = 0;
   window.genderLimit = false;

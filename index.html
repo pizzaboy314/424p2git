@@ -343,6 +343,8 @@ d3.csv("distribution-by-bike.csv", function(error, data) {
                     <h3>Distribution of Times Travelled</h3>
                   </p>
                 </div>
+                <div id="chartTimesOverall-selected" class="inline selection_graph">
+                </div>
               </div>
               <div class="tab-pane" id="distance_per_bike">
                 <div id="distancePerBike" class="inline">
@@ -781,7 +783,7 @@ d3.csv("distribution-by-bike.csv", function(error, data) {
        dayOfWeekBar("static-json/day-of-week-distribution.json", "#chartDayOfWeek"); 
        hourOfDayBar("static-json/hour-of-day-distribution.json", "#chartHourOfDay");
        distancesOverallBar("static-json/distance-distribution.json","#chartDistancesOverall");
-       timesOverallBar("#chartTimesOverall");
+       timesOverallBar("static-json/time-distribution.json", "#chartTimesOverall");
        jQuery(document).ready(function($) { 
          $.ajax(
            { url : 
