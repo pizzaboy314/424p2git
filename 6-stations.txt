@@ -1,0 +1,18 @@
+6 stations closest to UIC:
+
+900 W Harrison
+Aberdeen St & Jackson Blvd
+Clinton St & Tilden St
+Halsted St & Polk St
+Morgan St & Polk St
+Peoria St & Jackson Blvd
+
+Most outgoing trips seem to head into the Loop and then branch out to various suburbs.
+The incoming trips seem to come from the same suburbs, through the Loop, to UIC.
+These trips are probably a standard representation of UIC commuters.
+
+# of trips on average: 1500-3000
+
+Longest Trip: 22.89 hours
+Shortest Trip: 1 minute
+Most trips: Under 25 minutes
