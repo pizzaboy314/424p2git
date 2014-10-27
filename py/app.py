@@ -848,14 +848,14 @@ class Root(object):
 
     ret = []
     ret.append("[")
- 
-    days =  {"Sun":0, 
-            "Mon":0, 
-            "Tue":0, 
-            "Wed":0, 
-            "Thu":0, 
-            "Fri":0, 
-            "Sat":0 }
+    days = OrderedDict()
+    days["Sun"] = 0  
+    days["Mon"] = 0 
+    days["Tue"] = 0 
+    days["Wed"] = 0 
+    days["Thu"] = 0 
+    days["Fri"] = 0 
+    days["Sat"] = 0 
     for row in sql:
       days[row[1].strftime("%a")] += 1
     for day, count in days.items():
