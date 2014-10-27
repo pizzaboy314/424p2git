@@ -439,10 +439,27 @@ opacity:0.1}
   z-index: 3000;
 }
 
-#overload-button {
+#findings-button {
   position: absolute;
   top: 15px;
   left: 300px;
+  z-index: 2000;
+}
+
+#findings-div {
+  position: absolute;
+  top: 35px;
+  left: 0px;
+  width: 1000px;
+  height: 980px;
+  z-index: 2000;
+}
+
+
+#overload-button {
+  position: absolute;
+  top: 15px;
+  left: 480px;
   z-index: 2000;
 }
 
@@ -458,7 +475,7 @@ opacity:0.1}
 #flow-button {
   position: absolute;
   top: 15px;
-  left: 480px;
+  left: 660px;
   z-index: 2000;
 }
 
@@ -467,7 +484,7 @@ opacity:0.1}
   top: 35px;
   left: 0px;
   width: 440px;
-  height: 120px;
+  height: 119px;
   z-index: 2000;
 }
 
