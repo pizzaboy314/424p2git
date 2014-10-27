@@ -99,6 +99,8 @@ function drawOutflow(station_id) {
 
 function showFlow(timep, date) {
   removeAllMarkers();
+  window.dateLimit = date;
+  selectionUpdate();
   if (!date) {
     alert("Please select a date first");
   }

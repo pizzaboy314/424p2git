@@ -1,4 +1,4 @@
-function timesOverallBar(display_div) {
+function timesOverallBar(url, display_div) {
 	var margin = {top: 20, right: 30, bottom: 50, left: 60},
 		width = 800 - margin.left - margin.right,
 		height = 250 - margin.top - margin.bottom;
@@ -18,6 +18,13 @@ function timesOverallBar(display_div) {
 		.orient("left");
 		
 	d3.select(display_div).select("svg").remove()
+        if (display_div.indexOf("selected") > 0) {
+          d3.select(display_div).html(" ")
+            .style("padding-right", "0")
+            .style("float", "left")
+            .style("padding-top", "0");
+        }
+
 	var chart = d3.select(display_div).append("svg")
 		.attr("class", "chartOverview")
 		.attr("width", width + margin.left + margin.right)
@@ -25,7 +32,7 @@ function timesOverallBar(display_div) {
 	    .append("g")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 		
-	d3.json("static-json/time-distribution.json", function(error, data) {
+	d3.json(url, function(error, data) {
 	  x.domain(data.map(function(d) { return d.range; }));
 	  y.domain([0, d3.max(data, function(d) { return +d.frequency; })]);
 

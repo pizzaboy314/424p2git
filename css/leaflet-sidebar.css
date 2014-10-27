@@ -16,10 +16,10 @@
       transition: width 500ms; } }
   @media (min-width: 768px) and (max-width: 991px) {
     .sidebar {
-      width: 655px; } }
+      width: 685px; } }
   @media (min-width: 992px) and (max-width: 2899px) {
     .sidebar {
-      width: 940px; } }
+      width: 970px; } }
   @media (min-width: 2900px) {
     .sidebar {
       width: 1300px; } }
@@ -75,10 +75,10 @@
     display: block; }
   @media (min-width: 768px) and (max-width: 991px) {
     .sidebar-pane {
-      width: 615px; } }
+      width: 645px; } }
   @media (min-width: 992px) and (max-width: 2899px) {
     .sidebar-pane {
-      width: 900px; } }
+      width: 930px; } }
   @media (min-width: 2900px) {
     .sidebar-pane {
       width: 1260px; } }

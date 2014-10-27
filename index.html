@@ -45,6 +45,7 @@
     <script src="js/inflow.js"></script>
     <script src="js/outflow.js"></script>
     <script src="js/flow.js"></script>
+    <script src="js/chartDistribtionByBike.js"></script>
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
   </head>
   <body>
@@ -129,7 +130,6 @@ Of course, I would say this, because I live near Disneyland, and they are always
        </div>
      </div>
     <div id="colorrange"><img src="images/scale.png" /></div>
-    <div id="bike-distance" style="visibility: hidden; display: none;"> 
           <script>
          var picker = new Pikaday({
          
@@ -144,104 +144,11 @@ Of course, I would say this, because I live near Disneyland, and they are always
               }
          });
        </script>
- 
-<script>
 
-var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 3000 - margin.left - margin.right,
-
-    height = 500 - margin.top - margin.bottom;
-
-var x = d3.scale.ordinal()
-    .rangeRoundBands([0, width], .1);
-
-var y = d3.scale.linear()
-    .rangeRound([height, 0]);
-
-var color = d3.scale.ordinal()
-    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00","#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00","#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
-
-var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom");
-
-var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("left")
-    .tickFormat(d3.format(".2s"));
-
-var svg = d3.select("#bike-distance").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-d3.csv("distribution-by-bike.csv", function(error, data) {
-  color.domain(d3.keys(data[0]).filter(function(key) { return key !== "ID"; }));
-
-  data.forEach(function(d) {
-    var y0 = 0;
-    d.ages = color.domain().map(function(name) { return {name: name, y0: y0, y1: y0 += +d[name]}; });
-    d.total = d.ages[d.ages.length - 1].y1;
-  });
-
-  data.sort(function(a, b) { return b.total - a.total; });
-
-  x.domain(data.map(function(d) { return d.ID; }));
-  y.domain([0, d3.max(data, function(d) { return d.total; })]);
-
-  svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
-
-  svg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis)
-    .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text("Frequency");
-
-  var state = svg.selectAll(".state")
-      .data(data)
-    .enter().append("g")
-      .attr("class", "g")
-      .attr("transform", function(d) { return "translate(" + x(d.ID) + ",0)"; });
-
-  state.selectAll("rect")
-      .data(function(d) { return d.ages; })
-    .enter().append("rect")
-      .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.y1); })
-      .attr("height", function(d) { return y(d.y0) - y(d.y1); })
-      .style("fill", function(d) { return color(d.name); });
-
-  var legend = svg.selectAll(".legend")
-      .data(color.domain().slice().reverse())
-    .enter().append("g")
-      .attr("class", "legend")
-      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-
-  legend.append("rect")
-      .attr("x", width - 18)
-      .attr("width", 18)
-      .attr("height", 18)
-      .style("fill", color);
-
-  legend.append("text")
-      .attr("x", width - 24)
-      .attr("y", 9)
-      .attr("dy", ".35em")
-      .style("text-anchor", "end")
-      .text(function(d) { return d; });
-
-});
-
-</script>
-<div id="bike-distance-close" onclick="d3.select('#bike-distance').style('display', 'none')">Click to Hide</div>
+    <div id="bike-distance" style="visibility: hidden; display: none;"> 
+      <script>perBikeDistribution("distribution-by-bike.csv", "#bike-distance");</script>
+      <div id="bike-distance-close" onclick="d3.select('#bike-distance').style('display', 'none')">Click to Hide
+      </div>
     </div>
     <div id="map">
     </div>
@@ -342,6 +249,8 @@ d3.csv("distribution-by-bike.csv", function(error, data) {
                   <p class="chartLabel"> 
                     <h3>Distribution of Times Travelled</h3>
                   </p>
+                </div>
+                <div id="chartTimesOverall-selected" class="inline selection_graph">
                 </div>
               </div>
               <div class="tab-pane" id="distance_per_bike">
@@ -781,7 +690,7 @@ d3.csv("distribution-by-bike.csv", function(error, data) {
        dayOfWeekBar("static-json/day-of-week-distribution.json", "#chartDayOfWeek"); 
        hourOfDayBar("static-json/hour-of-day-distribution.json", "#chartHourOfDay");
        distancesOverallBar("static-json/distance-distribution.json","#chartDistancesOverall");
-       timesOverallBar("#chartTimesOverall");
+       timesOverallBar("static-json/time-distribution.json", "#chartTimesOverall");
        jQuery(document).ready(function($) { 
          $.ajax(
            { url : 

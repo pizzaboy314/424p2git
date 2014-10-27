@@ -80,6 +80,9 @@ function buildUrl(url) {
         url +="&stations="+window.selection;
         if (window.ageLimit) {
           url +="&age="+window.ageLimit;
+          if (window.dateLimit) {
+            url += "&date="+window.dateLimit;
+          }
         }
       }
     }
@@ -89,15 +92,26 @@ function buildUrl(url) {
       url +="&stations="+window.selection;
       if (window.ageLimit) {
         url +="&age="+window.ageLimit;
+        if (window.dateLimit) {
+          url+="&date="+window.dateLimit;
+        }
       }
     }
   } else if (window.selection.length > 0) {
      url += "?stations="+window.selection;
      if (window.ageLimit) {
         url +="&age="+window.ageLimit;
+        if (window.dateLimit) {
+          url += "&date="+window.dateLimit;
+        }
      }
   } else if (window.ageLimit) {
     url +="?age="+window.ageLimit;
+    if (window.dateLimit) {
+      url+="&date="+window.dateLimit;
+    }
+  } else if (window.dateLimit) {
+    url +="?date="+window.dateLimit;
   }
   return url;
 }
@@ -141,6 +155,9 @@ function selectionUpdate() {
  
     distanceUrl = buildUrl('http://trustdarkness.com/py/distance_dist/');
     distancesOverallBar(distanceUrl, "#chartDistancesOverall-selected");
+
+    timesUrl = buildUrl('http://trustdarkness.com/py/time_dist/');
+    timesOverallBar(timesUrl, "#chartTimesOverall-selected");
     d3.selectAll(".selection_graph")
       .style("background-color", "rgba(222,235,247,1)")
       .style("border", "2px #ff7800");
