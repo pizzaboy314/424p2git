@@ -325,17 +325,8 @@ opacity:0.1}
   height: 30px;
 }
 
-#overload-control {
-  position: absolute;
-  bottom: 50px;
-  left: 100px;
-  z-index: 3000;
-  background-color: rgba(255, 255, 255, 0.80);
-  width: 280px
-}
-
 #overload-control .ui-button {
-  height: 22px;
+  height: 26px;
   font-size: 12pt;
 }
  
@@ -451,14 +442,40 @@ opacity:0.1}
   position: absolute;
   top: 15px;
   left: 300px;
-  z-index: 3000;
+  z-index: 2000;
 }
 
 #overload-control {
   position: absolute;
   top: 35px;
   left: 0px;
-  width: 400px;
+  width: 440px;
   height: 80px;
-  z-index: 3000;
+  z-index: 2000;
 }
+
+#flow-button {
+  position: absolute;
+  top: 15px;
+  left: 480px;
+  z-index: 2000;
+}
+
+#flow-control {
+  position: absolute;
+  top: 35px;
+  left: 0px;
+  width: 440px;
+  height: 120px;
+  z-index: 2000;
+}
+
+#flow-control .ui-button {
+  height: 26px;
+  font-size: 12pt;
+}
+
+#flow-control .ui-button-text {
+  font-size: 8pt;
+}
+

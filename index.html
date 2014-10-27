@@ -63,6 +63,16 @@
   $(function() {
     $('#overload-control').buttonset();
   });
+  $(function() {
+    $( "#flow-button" ).accordion({
+       heightStyle: "content", collapsible: true, active: false
+    });
+  });
+
+  $(function() {
+    $('#flow-control').buttonset();
+  });
+
 
 	</script>
     <div id="overload-button">
@@ -81,9 +91,39 @@
 	</div>
       </div>
     </div>
+    <div id="flow-button">
+      <h3>Overall Flow</h3>
+      <div id="flow-control">
+        Show overall flow between stations for:
+        Date:
+       <input id="flowpicker" /><br/>
+          <input type="radio" id="fmorning" name="radio" onclick="showFlow('morning', flowDate)"/>
+            <label for="fmorning">Morning</label>
+          <input type="radio" id="flunch" name="radio" onclick="showFlow('lunch', flowDate)" />
+            <label for="flunch">Lunch</label>
+          <input type="radio" id="fafter_work" name="radio" onclick="showFlow('after_work', flowDate)"/>
+            <label for="fafter_work">After Work</label>
+          <input type="radio" id="fevening" name="radio" onclick="showFlow('evening', flowDate)"/>
+            <label for="fevening">Evening</label>
+            
+       </div>
+     </div>
     <div id="colorrange"><img src="images/scale.png" /></div>
     <div id="bike-distance" style="visibility: hidden; display: none;"> 
-    
+          <script>
+         var picker = new Pikaday({
+           field: document.getElementById('flowpicker'),
+           format: 'ddd MMM DD YYYY',
+              trigger: document.getElementById('flowpicker'),
+              minDate: new Date('2013-06-28'),
+              maxDate: new Date('2013-12-31'),
+              yearRange: [2013, 2013],
+              onSelect: function () {
+                flowDate = this.getMoment().format("YYYY-MM-DD");
+              }
+         });
+       </script>
+ 
 <script>
 
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
