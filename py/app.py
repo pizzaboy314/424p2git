@@ -920,7 +920,7 @@ class Root(object):
         where += "AMD " + stmt + " "
     group_by = """
       GROUP BY
-        startdate
+        meters
     """
     if where_stmts:
       assembled_q = " ".join((base_q, where, group_by))
@@ -933,7 +933,8 @@ class Root(object):
       d[item] = 0
     for row in c.fetchall():
       for r in ranges:
-        if row[0] > r[0] and row[0] <= r[1]:
+        km = float(row[0] / 1000)
+        if km > r[0] and km <= r[1]:
           d[r] += 1
 
     ret = ["["]

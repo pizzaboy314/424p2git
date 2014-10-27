@@ -16,13 +16,13 @@
       transition: width 500ms; } }
   @media (min-width: 768px) and (max-width: 991px) {
     .sidebar {
-      width: 605px; } }
+      width: 655px; } }
   @media (min-width: 992px) and (max-width: 1199px) {
     .sidebar {
-      width: 690px; } }
+      width: 740px; } }
   @media (min-width: 1200px) {
     .sidebar {
-      width: 950px; } }
+      width: 1300px; } }
 
 .sidebar-tabs {
   position: absolute;
@@ -75,13 +75,13 @@
     display: block; }
   @media (min-width: 768px) and (max-width: 991px) {
     .sidebar-pane {
-      width: 565px; } }
+      width: 615px; } }
   @media (min-width: 992px) and (max-width: 1199px) {
     .sidebar-pane {
-      width: 650px; } }
+      width: 700px; } }
   @media (min-width: 1200px) {
     .sidebar-pane {
-      width: 910px; } }
+      width: 1260px; } }
 
 .sidebar-map {
   margin-right: 40px; }

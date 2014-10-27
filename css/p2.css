@@ -410,3 +410,40 @@ opacity:0.1}
 .pin-inflow.highlight, .pin-outflow.highlight {
 	background-color: #FCF9CE;
 }
+
+.screenshot {
+  width: 100%;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.x.axis path {
+  display: none;
+  fill: none;
+}
+
+#bike-distance: {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+  background-color: rgba(255, 255, 255, 0.80);
+
+}
+
+#bike-distance-close {
+  font-size: 24pt;
+  position: absolute;
+  top: 600px;
+  left:1000px;
+  z-index: 3000;
+}
+
