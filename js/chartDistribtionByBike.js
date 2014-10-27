@@ -73,19 +73,19 @@ function perBikeDistribution(dataFile, cssSelector) {
         .data(color.domain().slice().reverse())
         .enter().append("g")
         .attr("class", "legend")
-        .attr("transform", function(d, i) { return "translate(" + (d3.keys(data[0]).length-1-i) * (-20) + ",0)"; });
+        .attr("transform", function(d, i) { return "translate(" + (d3.keys(data[0]).length-i*6) * (-20) + ",0)"; });
 
     legend.append("rect")
-        .attr("x", width - 18)
+        .attr("x", 550)
         .attr("width", 18)
         .attr("height", 18)
         .style("fill", color);
 
     legend.append("text")
-        .attr("x", width - 24)
+        .attr("x", 570)
         .attr("y", 9)
         .attr("dy", ".35em")
-        .style("text-anchor", "end")
+        .style("text-anchor", "start")
         .text(function(d) { return d; });
 
   });
