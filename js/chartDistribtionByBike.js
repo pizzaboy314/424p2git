@@ -1,32 +1,4 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-
-body {
-  font: 10px sans-serif;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.bar {
-  fill: steelblue;
-}
-
-.x.axis path {
-  display: none;
-}
-
-</style>
-<body>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script>
-
-function renderBikeDistribution(dataFile, cssSelector) {
+function perBikeDistribution(dataFile, cssSelector) {
   var margin = {top: 20, right: 20, bottom: 30, left: 40},
       width = 3000 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
@@ -59,8 +31,8 @@ function renderBikeDistribution(dataFile, cssSelector) {
 
     data.forEach(function(d) {
       var y0 = 0;
-      d.ages = color.domain().map(function(name) { return {name: name, y0: y0, y1: y0 += +d[name]}; });
-      d.total = d.ages[d.ages.length - 1].y1;
+      d.frequency = color.domain().map(function(name) { return {name: name, y0: y0, y1: y0 += +d[name]}; });
+      d.total = d.frequency[d.frequency.length - 1].y1;
     });
 
     data.sort(function(a, b) { return b.total - a.total; });
@@ -90,7 +62,7 @@ function renderBikeDistribution(dataFile, cssSelector) {
         .attr("transform", function(d) { return "translate(" + x(d.ID) + ",0)"; });
 
     state.selectAll("rect")
-        .data(function(d) { return d.ages; })
+        .data(function(d) { return d.frequency; })
       .enter().append("rect")
         .attr("width", x.rangeBand())
         .attr("y", function(d) { return y(d.y1); })
@@ -118,9 +90,3 @@ function renderBikeDistribution(dataFile, cssSelector) {
 
   });
 };
-
-renderBikeDistribution("distribution-by-bike.csv", "body");
-
-
-
-</script>
