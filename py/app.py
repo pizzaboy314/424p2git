@@ -968,7 +968,8 @@ class Root(object):
          from 
            divvy_trips_distances 
          where 
-           starttime like '9/1%' AND (
+           (starttime like '9/16%' OR starttime like '9/17%' OR
+            starttime like '9/18%' OR starttime like '9/19%') AND (
            (starttime like '%8:%'  and starttime not like '%18:%')
            OR (starttime like '%6:%' and starttime not like '%16:%')
            OR (starttime like '%7:%' and starttime not like '%17:%')
