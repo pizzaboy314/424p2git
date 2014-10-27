@@ -968,7 +968,7 @@ class Root(object):
          from 
            divvy_trips_distances 
          where 
-           starttime like '9%' AND (
+           starttime like '9/1%' AND (
            (starttime like '%8:%'  and starttime not like '%18:%')
            OR (starttime like '%6:%' and starttime not like '%16:%')
            OR (starttime like '%7:%' and starttime not like '%17:%')
@@ -978,8 +978,11 @@ class Root(object):
         """
     c.execute(q)
     ret = ["from_station_id,to_station_id,starttime"]
+    i = 0
     for row in c.fetchall():
       ret.append("%s,%s,%s" % (row[0], row[1], row[2]))
+      i += 1
+    print i
     return "\n".join(ret)
   get_morning_trips.exposed = True
 
