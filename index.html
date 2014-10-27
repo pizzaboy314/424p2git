@@ -715,6 +715,9 @@ d3.csv("distribution-by-bike.csv", function(error, data) {
          if (map.hasLayer(window.imbalance)) {
            map.removeLayer(window.imbalance);
          }
+         if (map.hasLayer(window.overallFlow)) {
+           map.removeLayer(window.overallFlow);
+         }
          // betrays the function name, but we don't have time to care
          if (window.selected_markers) {
            for (i=0; i<selected_markers.length; i++) {
