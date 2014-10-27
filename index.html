@@ -56,6 +56,12 @@
     </div>
 	<script type="text/javascript">
   $(function() {
+    $( "#findings-button" ).accordion({
+       heightStyle: "content", collapsible: true, active: false
+    });
+  });
+
+  $(function() {
     $( "#overload-button" ).accordion({
        heightStyle: "content", collapsible: true, active: false
     });
@@ -63,8 +69,32 @@
   $(function() {
     $('#overload-control').buttonset();
   });
+  $(function() {
+    $( "#flow-button" ).accordion({
+       heightStyle: "content", collapsible: true, active: false
+    });
+  });
+
+  $(function() {
+    $('#flow-control').buttonset();
+  });
+
 
 	</script>
+    <div id="findings-button">
+      <h3>Findings</h3>
+      <div id="findings-div">
+I once wrote a story about a man who was injured and taken to a hospital. When they began surgery on him, they discovered that he was an android, not a human, but that he did not know it. They had to break the news to him. Almost at once, Mr. Garson Poole discovered that his reality consisted of punched tape passing from reel to reel in his chest. Fascinated, he began to fill in some of the punched holes and add new ones. Immediately, his world changed. A flock of ducks flew through the room when he punched one new hole in the tape. Finally he cut the tape entirely, whereupon the world disappeared. However, it also disappeared for the other characters in the story... which makes no sense, if you think about it. Unless the other characters were figments of his punched-tape fantasy. Which I guess is what they were.
+
+It was always my hope, in writing novels and stories which asked the question "What is reality?", to someday get an answer. This was the hope of most of my readers, too. Years passed. I wrote over thirty novels and over a hundred stories, and still I could not figure out what was real. One day a girl college student in Canada asked me to define reality for her, for a paper she was writing for her philosophy class. She wanted a one-sentence answer. I thought about it and finally said, "Reality is that which, when you stop believing in it, doesn't go away." That's all I could come up with. That was back in 1972. Since then I haven't been able to define reality any more lucidly.
+
+But the problem is a real one, not a mere intellectual game. Because today we live in a society in which spurious realities are manufactured by the media, by governments, by big corporations, by religious groups, political groups -- and the electronic hardware exists by which to deliver these pseudo-worlds right into the heads of the reader, the viewer, the listener. Sometimes when I watch my eleven-year-old daughter watch TV, I wonder what she is being taught. The problem of miscuing; consider that. A TV program produced for adults is viewed by a small child. Half of what is said and done in the TV drama is probably misunderstood by the child. Maybe it's all misunderstood. And the thing is, Just how authentic is the information anyhow, even if the child correctly understood it? What is the relationship between the average TV situation comedy to reality? What about the cop shows? Cars are continually swerving out of control, crashing, and catching fire. The police are always good and they always win. Do not ignore that point: The police always win. What a lesson that is. You should not fight authority, and even if you do, you will lose. The message here is, Be passive. And -- cooperate. If Officer Baretta asks you for information, give it to him, because Officer Beratta is a good man and to be trusted. He loves you, and you should love him.
+
+So I ask, in my writing, What is real? Because unceasingly we are bombarded with pseudo-realities manufactured by very sophisticated people using very sophisticated electronic mechanisms. I do not distrust their motives; I distrust their power. They have a lot of it. And it is an astonishing power: that of creating whole universes, universes of the mind. I ought to know. I do the same thing. It is my job to create universes, as the basis of one novel after another. And I have to build them in such a way that they do not fall apart two days later. Or at least that is what my editors hope. However, I will reveal a secret to you: I like to build universes which do fall apart. I like to see them come unglued, and I like to see how the characters in the novels cope with this problem. I have a secret love of chaos. There should be more of it. Do not believe -- and I am dead serious when I say this -- do not assume that order and stability are always good, in a society or in a universe. The old, the ossified, must always give way to new life and the birth of new things. Before the new things can be born the old must perish. This is a dangerous realization, because it tells us that we must eventually part with much of what is familiar to us. And that hurts. But that is part of the script of life. Unless we can psychologically accommodate change, we ourselves begin to die, inwardly. What I am saying is that objects, customs, habits, and ways of life must perish so that the authentic human being can live. And it is the authentic human being who matters most, the viable, elastic organism which can bounce back, absorb, and deal with the new.
+
+Of course, I would say this, because I live near Disneyland, and they are always adding new rides and destroying old ones. Disneyland is an evolving organism. For years they had the Lincoln Simulacrum, like Lincoln himself, was only a temporary form which matter and energy take and then lose. The same is true of each of us, like it or not.
+      </div>
+    </div>
     <div id="overload-button">
       <h3>Imbalances</h3>
       <div id="overload-control">
@@ -81,9 +111,40 @@
 	</div>
       </div>
     </div>
+    <div id="flow-button">
+      <h3>Overall Flow</h3>
+      <div id="flow-control">
+        Show overall flow between stations for:<br/>
+        Date:
+       <input id="flowpicker" value="2013-06-27" /><br/>
+          <input type="radio" id="fmorning" name="radio" onclick="showFlow('morning', flowDate)"/>
+            <label for="fmorning">Morning</label>
+          <input type="radio" id="flunch" name="radio" onclick="showFlow('lunch', flowDate)" />
+            <label for="flunch">Lunch</label>
+          <input type="radio" id="fafter_work" name="radio" onclick="showFlow('after_work', flowDate)"/>
+            <label for="fafter_work">After Work</label>
+          <input type="radio" id="fevening" name="radio" onclick="showFlow('evening', flowDate)"/>
+            <label for="fevening">Evening</label>
+            
+       </div>
+     </div>
     <div id="colorrange"><img src="images/scale.png" /></div>
     <div id="bike-distance" style="visibility: hidden; display: none;"> 
-    
+          <script>
+         var picker = new Pikaday({
+         
+           field: document.getElementById('flowpicker'),
+           format: 'ddd MMM DD YYYY',
+              trigger: document.getElementById('flowpicker'),
+              minDate: new Date('2013-06-28'),
+              maxDate: new Date('2013-12-31'),
+              yearRange: [2013, 2013],
+              onSelect: function () {
+                flowDate = this.getMoment().format("YYYY-MM-DD");
+              }
+         });
+       </script>
+ 
 <script>
 
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
@@ -214,15 +275,15 @@ d3.csv("distribution-by-bike.csv", function(error, data) {
             <div class="tab-content">
               <div class="tab-pane" id="gender_tab">
                 <div id="gender" style="display: inline"></div>
-                <div id="gender-selected" class="inline selected_graph"></div>
+                <div id="gender-selected" class="inline selection_graph"></div>
               </div>
               <div class="tab-pane" id="subscriber_status_tab">
                 <div id="type" style="display: inline"></div>
-                <div id="type-selected" class="inline selected_graph"></div>
+                <div id="type-selected" class="inline selection_graph"></div>
               </div>
               <div class="tab-pane" id="age_tab">
                 <div id="age" style="display: inline"></div> 
-                <div id="age-selected" class="inline selected_graph"></div>
+                <div id="age-selected" class="inline selection_graph"></div>
               </div>
             </div>	
           </div>
@@ -271,6 +332,9 @@ d3.csv("distribution-by-bike.csv", function(error, data) {
                  <p class="chartLabel">  
                     <h3>Distribution of Distances Biked</h3>
                   </p>
+                </div>
+                 &nbsp;
+                <div id="chartDistancesOverall-selected" class="inline selection_graph">  
                 </div>
               </div>
               <div class="tab-pane" id="times_travelled_tab">
@@ -675,6 +739,9 @@ d3.csv("distribution-by-bike.csv", function(error, data) {
          if (map.hasLayer(window.imbalance)) {
            map.removeLayer(window.imbalance);
          }
+         if (map.hasLayer(window.overallFlow)) {
+           map.removeLayer(window.overallFlow);
+         }
          // betrays the function name, but we don't have time to care
          if (window.selected_markers) {
            for (i=0; i<selected_markers.length; i++) {
@@ -713,7 +780,7 @@ d3.csv("distribution-by-bike.csv", function(error, data) {
          })
        dayOfWeekBar("static-json/day-of-week-distribution.json", "#chartDayOfWeek"); 
        hourOfDayBar("static-json/hour-of-day-distribution.json", "#chartHourOfDay");
-       distancesOverallBar("#chartDistancesOverall");
+       distancesOverallBar("static-json/distance-distribution.json","#chartDistancesOverall");
        timesOverallBar("#chartTimesOverall");
        jQuery(document).ready(function($) { 
          $.ajax(

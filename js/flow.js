@@ -97,3 +97,37 @@ function drawOutflow(station_id) {
     window.outflowTrips.addTo(map);
 }
 
+function showFlow(timep, date) {
+  removeAllMarkers();
+  if (!date) {
+    alert("Please select a date first");
+  }
+  url = "http://trustdarkness.com/py/get_"+timep+"_trips/"+date;
+  window.overallFlow = new L.FeatureGroup()
+  d3.csv(url)
+     .get(function(error, data) {
+      count = 0
+      for (i=0; i<data.length; i++) {
+        slatlon = stations_latlon.get(data[i].from_station_id);
+        dlatlon = stations_latlon.get(data[i].to_station_id);
+        var trip = L.Routing.control({
+          plan: L.Routing.plan([
+              L.latLng(dlatlon[0], dlatlon[1]),
+              L.latLng(slatlon[0], slatlon[1])
+          ],
+          { waypointIcon: i5 } 
+          ),
+          lineOptions: {
+            styles: [
+            {color: 'black', opacity: 0, weight: 0},
+            {color: 'blue', opacity: 0, weight: 0},
+            {color: 'steelblue', opacity: 1, weight: data[i].count}
+            ]
+           },
+           fitSelectedRoutes: false
+         });
+        window.overallFlow.addLayer(trip);
+      }
+    });
+  window.overallFlow.addTo(map);
+}

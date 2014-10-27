@@ -986,4 +986,87 @@ class Root(object):
     return "\n".join(ret)
   get_morning_trips.exposed = True
 
+  def get_lunch_trips(self, date):
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+    q = """
+         select 
+           from_station_id,
+           to_station_id,
+           starttime 
+         from 
+           divvy_trips_distances 
+         where 
+            startdate = '%s' AND (
+           (starttime like '%%11:%%')
+           OR (starttime like '%%12:%%')
+           )
+         order by 
+           starttime 
+        """ % date
+    c.execute(q)
+    ret = ["from_station_id,to_station_id,starttime"]
+    i = 0
+    for row in c.fetchall():
+      ret.append("%s,%s,%s" % (row[0], row[1], row[2]))
+      i += 1
+    print i
+    return "\n".join(ret)
+  get_lunch_trips.exposed = True
+
+  def get_after_work_trips(self, date):
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+    q = """
+         select 
+           from_station_id,
+           to_station_id,
+           starttime 
+         from 
+           divvy_trips_distances 
+         where 
+            startdate = '%s' AND (
+           (starttime like '%%16:%%')
+           OR (starttime like '%%17:%%')
+           OR (starttime like '%%18:%%')
+           )
+         order by 
+           starttime 
+        """ % date
+    c.execute(q)
+    ret = ["from_station_id,to_station_id,starttime"]
+    i = 0
+    for row in c.fetchall():
+      ret.append("%s,%s,%s" % (row[0], row[1], row[2]))
+      i += 1
+    print i
+    return "\n".join(ret)
+  get_after_work_trips.exposed = True
+
+  def get_evening_trips(self, date):
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+    q = """
+         select 
+           from_station_id,
+           to_station_id,
+           starttime 
+         from 
+           divvy_trips_distances 
+         where 
+            startdate = '%s' AND (
+           (starttime like '%%19:%%')
+           OR (starttime like '%%29:%%')
+           )
+         order by 
+           starttime 
+        """ % date
+    c.execute(q)
+    ret = ["from_station_id,to_station_id,starttime"]
+    i = 0
+    for row in c.fetchall():
+      ret.append("%s,%s,%s" % (row[0], row[1], row[2]))
+      i += 1
+    print i
+    return "\n".join(ret)
+  get_evening_trips.exposed = True
+
+
 application = cherrypy.Application(Root(), script_name=None, config=None)
