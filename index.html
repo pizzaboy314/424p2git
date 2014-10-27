@@ -94,9 +94,9 @@
     <div id="flow-button">
       <h3>Overall Flow</h3>
       <div id="flow-control">
-        Show overall flow between stations for:
+        Show overall flow between stations for:<br/>
         Date:
-       <input id="flowpicker" /><br/>
+       <input id="flowpicker" value="2013-06-27" /><br/>
           <input type="radio" id="fmorning" name="radio" onclick="showFlow('morning', flowDate)"/>
             <label for="fmorning">Morning</label>
           <input type="radio" id="flunch" name="radio" onclick="showFlow('lunch', flowDate)" />
@@ -112,6 +112,7 @@
     <div id="bike-distance" style="visibility: hidden; display: none;"> 
           <script>
          var picker = new Pikaday({
+         
            field: document.getElementById('flowpicker'),
            format: 'ddd MMM DD YYYY',
               trigger: document.getElementById('flowpicker'),

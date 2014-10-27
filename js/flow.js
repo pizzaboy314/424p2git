@@ -121,7 +121,7 @@ function showFlow(timep, date) {
             styles: [
             {color: 'black', opacity: 0, weight: 0},
             {color: 'blue', opacity: 0, weight: 0},
-            {color: 'steelblue', opacity: 1, weight: data[i].count/4}
+            {color: 'steelblue', opacity: 1, weight: data[i].count}
             ]
            },
            fitSelectedRoutes: false
