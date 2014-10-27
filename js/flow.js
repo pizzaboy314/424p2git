@@ -38,7 +38,15 @@ function drawInflow(station_id) {
               return inDestIcon;
             }
           }
-          }), fitSelectedRoutes: false
+          }), 
+          lineOptions: {
+            styles: [
+            {color: 'black', opacity: 0, weight: 0},
+            {color: 'blue', opacity: 0, weight: 0},
+            {color: '#EE513F', opacity: 1, weight: data[i].count/8}
+            ]
+           },
+           fitSelectedRoutes: false
          });
         window.inflowTrips.addLayer(trip);
       }
@@ -71,8 +79,17 @@ function drawOutflow(station_id) {
             } else {
               return outDestIcon;
             }
+           
           }
-          }), fitSelectedRoutes: false
+          }),           
+          lineOptions: {
+            styles: [
+            {color: 'black', opacity: 0, weight: 0},
+            {color: 'blue', opacity: 0, weight: 0},
+            {color: '#EE513F', opacity: 1, weight: data[i].count/8}
+            ]
+           },
+           fitSelectedRoutes: false
          });
         window.outflowTrips.addLayer(trip);
       }

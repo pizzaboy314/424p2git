@@ -95,7 +95,7 @@ var inDestIcon = L.icon({
 });
 
 var inSrcIcon = L.icon({
-  iconUrl: 'images/divvy-up.png',
+  iconUrl: 'images/divvy-down.png',
   shadowUrl: 'images/marker-shadow.png',
     iconSize:     [35,35], // size of the icon
     shadowSize:   sS, // size of the shadow
@@ -116,7 +116,7 @@ var outSrcIcon = L.icon({
 });
 
 var outDestIcon = L.icon({
-  iconUrl: 'images/divvy-down.png',
+  iconUrl: 'images/divvy-up.png',
   shadowUrl: 'images/marker-shadow.png',
     iconSize:     [35,35], // size of the icon
     shadowSize:   sS, // size of the shadow

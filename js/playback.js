@@ -120,6 +120,19 @@ function resetPlayback() {
   window.genderLimit = false;
   clearInterval(window.repeat);
   d3.selectAll(".tripdata").html("");
+         $.ajax(
+           { url :
+             "http://api.wunderground.com/api/9d7e28be82bf1469/geolookup/conditions/q/IL/Chicago.json",
+             dataType : "jsonp",
+             success : function(parsed_json) {
+               var location = parsed_json['location']['city'];
+               var temp_f = parsed_json['current_observation']['temp_f'];
+               var wicon = parsed_json['current_observation']['icon'];
+               d3.select('#temp').html(temp_f+'&deg;');
+               d3.select('#date').html(moment().format('MMMM Do YYYY'));
+               d3.select('#wicon').attr('src', 'http://icons.wxug.com/i/c/i/'+wicon+'.gif');
+             }
+           });
   d3.select("#day").selectAll("li").attr("class", "");
   d3.select("map").selectAll("path").remove();
   d3.selectAll(".leaflet-marker-pane").selectAll("img").remove();
@@ -132,5 +145,20 @@ function resetPlayback() {
   // Refresh the jQuery UI buttonset.                  
   $( "#radiousertype" ).buttonset('refresh');
   d3.select("#playbackError").html(" ");
+  d3.select(".leaflet-overlay-pane").selectAll("g").selectAll(".leaflet-clickable").remove();
+         $.ajax(
+           { url :
+             "http://api.wunderground.com/api/9d7e28be82bf1469/geolookup/conditions/q/IL/Chicago.json",
+             dataType : "jsonp",
+             success : function(parsed_json) {
+               var location = parsed_json['location']['city'];
+               var temp_f = parsed_json['current_observation']['temp_f'];
+               var wicon = parsed_json['current_observation']['icon'];
+               d3.select('#temp').html(temp_f+'&deg;');
+               d3.select('#date').html(moment().format('MMMM Do YYYY'));
+               d3.select('#wicon').attr('src', 'http://icons.wxug.com/i/c/i/'+wicon+'.gif');
+             }
+           });
+
   clearSelection();
 }

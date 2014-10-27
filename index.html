@@ -55,12 +55,19 @@
       </p><span id="date"></span></p>
     </div>
 	<script type="text/javascript">
-		$(function() {
-			$('#overload-control').buttonset();
-		});
+  $(function() {
+    $( "#overload-button" ).accordion({
+       heightStyle: "content", collapsible: true, active: false
+    });
+  });
+  $(function() {
+    $('#overload-control').buttonset();
+  });
 
 	</script>
-    <div id="overload-control">
+    <div id="overload-button">
+      <h3>Imbalances</h3>
+      <div id="overload-control">
       Show the most imbalanced stations for:
       	<div id="overload-selector">
 	  <input type="radio" id="morning" name="radio" onclick="showImbalance(morning)"/>
@@ -69,9 +76,10 @@
             <label for="lunch">Lunch</label>
 	  <input type="radio" id="after_work" name="radio" onclick="showImbalance(after_work)"/>
             <label for="after_work">After Work</label>
-          <input type="radio" id="evening" name="radio" onclick="showImbalance(evening)"/><label for="evening">Evening</label>
-
+          <input type="radio" id="evening" name="radio" onclick="showImbalance(evening)"/>
+            <label for="evening">Evening</label>
 	</div>
+      </div>
     </div>
     <div id="colorrange"><img src="images/scale.png" /></div>
     <div id="bike-distance" style="visibility: hidden; display: none;"> 
@@ -363,19 +371,19 @@ d3.csv("distribution-by-bike.csv", function(error, data) {
         </div>
         <div class="sidebar-pane" id="messages">
           <h1>Playback A Day's Rides</h1>
-          <input type="text" id="datepicker" value="2013-06-26">
+          <input type="text" id="datepicker" value="2013-06-27">
           <button id="playbutton">Play</button>
           <button id="resetbutton">Reset</button>
           <div style="display: inline" id="playLoading"></div>
           <script>
             var dateData;
-            ourDate = '2013-06-26';
+            ourDate = '2013-06-27';
             window.running = new Map;
             var picker = new Pikaday({
               field: document.getElementById('datepicker'),
               format: 'ddd MMM DD YYYY',
               trigger: document.getElementById('datepicker'),
-              minDate: new Date('2013-06-27'),
+              minDate: new Date('2013-06-28'),
               maxDate: new Date('2013-12-31'),
               yearRange: [2013, 2013],
               onSelect: function () {

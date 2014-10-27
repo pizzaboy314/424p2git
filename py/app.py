@@ -933,7 +933,7 @@ class Root(object):
       d[item] = 0
     for row in c.fetchall():
       for r in ranges:
-        km = float(row[0] / 1000)
+        km = float(float(row[0]) / 1000)
         if km > r[0] and km <= r[1]:
           d[r] += 1
 
@@ -957,6 +957,33 @@ class Root(object):
     ret.append("%s,%s" % winfo[hour])
     return "\n".join(ret)
   weather.exposed = True
-
+ 
+  def get_morning_trips(self, date):
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+    q = """
+         select 
+           from_station_id,
+           to_station_id,
+           starttime 
+         from 
+           divvy_trips_distances 
+         where 
+            startdate = '%s' AND (
+           (starttime like '%%8:%%'  and starttime not like '%%18:%%')
+           OR (starttime like '%%6:%%' and starttime not like '%%16:%%')
+           OR (starttime like '%%7:%%' and starttime not like '%%17:%%')
+           )
+         order by 
+           starttime 
+        """ % date
+    c.execute(q)
+    ret = ["from_station_id,to_station_id,starttime"]
+    i = 0
+    for row in c.fetchall():
+      ret.append("%s,%s,%s" % (row[0], row[1], row[2]))
+      i += 1
+    print i
+    return "\n".join(ret)
+  get_morning_trips.exposed = True
 
 application = cherrypy.Application(Root(), script_name=None, config=None)
