@@ -43,7 +43,7 @@ function drawInflow(station_id) {
             styles: [
             {color: 'black', opacity: 0, weight: 0},
             {color: 'blue', opacity: 0, weight: 0},
-            {color: '#EE513F', opacity: 1, weight: data[i].count/20}
+            {color: '#EE513F', opacity: 1, weight: data[i].count/8}
             ]
            },
            fitSelectedRoutes: false
@@ -86,7 +86,7 @@ function drawOutflow(station_id) {
             styles: [
             {color: 'black', opacity: 0, weight: 0},
             {color: 'blue', opacity: 0, weight: 0},
-            {color: '#EE513F', opacity: 1, weight: data[i].count/20}
+            {color: '#EE513F', opacity: 1, weight: data[i].count/8}
             ]
            },
            fitSelectedRoutes: false
