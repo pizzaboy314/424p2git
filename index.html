@@ -55,12 +55,19 @@
       </p><span id="date"></span></p>
     </div>
 	<script type="text/javascript">
-		$(function() {
-			$('#overload-control').buttonset();
-		});
+  $(function() {
+    $( "#overload-button" ).accordion({
+       heightStyle: "content", collapsible: true, active: false
+    });
+  });
+  $(function() {
+    $('#overload-control').buttonset();
+  });
 
 	</script>
-    <div id="overload-control">
+    <div id="overload-button">
+      <h3>Imbalances</h3>
+      <div id="overload-control">
       Show the most imbalanced stations for:
       	<div id="overload-selector">
 	  <input type="radio" id="morning" name="radio" onclick="showImbalance(morning)"/>
@@ -69,9 +76,10 @@
             <label for="lunch">Lunch</label>
 	  <input type="radio" id="after_work" name="radio" onclick="showImbalance(after_work)"/>
             <label for="after_work">After Work</label>
-          <input type="radio" id="evening" name="radio" onclick="showImbalance(evening)"/><label for="evening">Evening</label>
-
+          <input type="radio" id="evening" name="radio" onclick="showImbalance(evening)"/>
+            <label for="evening">Evening</label>
 	</div>
+      </div>
     </div>
     <div id="colorrange"><img src="images/scale.png" /></div>
     <div id="bike-distance" style="visibility: hidden; display: none;"> 
