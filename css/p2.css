@@ -479,6 +479,14 @@ opacity:0.1}
   z-index: 2000;
 }
 
+#doc-button {
+  position: absolute;
+  top: 15px;
+  left: 800px;
+  z-index: 2000;
+}
+
+
 #flow-control {
   position: absolute;
   top: 35px;
@@ -533,4 +541,5 @@ margin-top: 20px;
 #ssspie img {
   margin-right: 135px;
   margin-top:20px;
-  
+ }
+ 
