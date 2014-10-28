@@ -1113,5 +1113,4 @@ class Root(object):
     return "\n".join(ret)
   get_evening_trips.exposed = True
 
-
 application = cherrypy.Application(Root(), script_name=None, config=None)
