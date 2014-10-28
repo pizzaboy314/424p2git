@@ -159,7 +159,7 @@ function selectionUpdate() {
     timesUrl = buildUrl('http://trustdarkness.com/py/time_dist/');
     timesOverallBar(timesUrl, "#chartTimesOverall-selected");
     d3.selectAll(".selection_graph")
-      .style("background-color", "rgba(222,235,247,1)")
+      //.style("background-color", "rgba(222,235,247,1)")
       .style("border", "2px #ff7800");
 
   }
