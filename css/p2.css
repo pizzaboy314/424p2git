@@ -479,6 +479,14 @@ opacity:0.1}
   z-index: 2000;
 }
 
+#doc-button {
+  position: absolute;
+  top: 15px;
+  left: 800px;
+  z-index: 2000;
+}
+
+
 #flow-control {
   position: absolute;
   top: 35px;
@@ -497,3 +505,41 @@ opacity:0.1}
   font-size: 8pt;
 }
 
+#github {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.80);
+}
+
+#flagday{ 
+margin-left: 160px;
+margin-top: 20px;
+}
+
+#flaghour{
+margin-left: 160px;
+margin-top: 20px;
+}
+
+#flagdist{
+margin-left: 300px;
+margin-top: 20px;
+}
+
+#flagyear{
+margin-left: 190px;
+margin-top: 20px;
+}
+
+#flagpie img {
+  margin-left: 135px;
+  margin-top: 20px;
+  width: 69px;
+}
+
+#ssspie img {
+  margin-right: 135px;
+  margin-top:20px;
+ }
+ 

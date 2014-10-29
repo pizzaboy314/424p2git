@@ -86,7 +86,7 @@ var defaultIcon = L.icon({
 var inDestIcon = L.icon({
   iconUrl: 'images/indest.png',
   shadowUrl: 'images/marker-shadow.png',
-    iconSize:     iS, // size of the icon
+    iconSize:     [18,21], // size of the icon
     shadowSize:   sS, // size of the shadow
     iconAnchor:   iA, // point of the icon which will correspond to marker's location
     shadowAnchor: sA,  // the same for the shadow
@@ -108,7 +108,7 @@ var inSrcIcon = L.icon({
 var outSrcIcon = L.icon({
   iconUrl: 'images/outsrc.png',
   shadowUrl: 'images/marker-shadow.png',
-    iconSize:     iS, // size of the icon
+    iconSize:     [19,21], // size of the icon
     shadowSize:   sS, // size of the shadow
     iconAnchor:   iA, // point of the icon which will correspond to marker's location
     shadowAnchor: sA,  // the same for the shadow

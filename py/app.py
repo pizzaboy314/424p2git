@@ -676,6 +676,8 @@ class Root(object):
                   age=None,
                   stations=None):
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+    sql = []
+    cache_string = ""
     where = ""
     if date or gender or subscriber or age or stations:
     # lets do some ghetto caching
@@ -695,55 +697,54 @@ class Root(object):
             return f.read()
       except:
         pass
-      try:
-        with open ("%s/%s_trip_id_starttime.pickle" % \
-          (os.path.join(PATH,"cache"), cache_string), "rb") as f:
-          sql = pickle.load(f)
-        print "running from cached version"
-      except:
-        print "running from SQL"
-        where = "WHERE "
-        where_stmts = []
-        if date:
-          where_stmts.append("startdate like '%s'" % date)
-        if gender:
-          where_stmts.append("gender like '%s'" % gender)
-        if subscriber:
-          where_stmts.append("usertype like '%s'" % subscriber)
-        if age:
-          bottom, top = parse_age(age)
-          where_stmts.append("age_in_2014 < %d" % top)
-          where_stmts.append("age_in_2014 > %d" % bottom)
-        if stations:
-          stations = stations.split(",")
-          # since its bikes out, we'll only look at the depating station
-          where_stmts.append("from_station_id in (%s)" % \
-            ", ".join(stations))
-        if where_stmts:
-          where = where + where_stmts[0]
-          for stmt in where_stmts[1:]:
-            where += "AND " + stmt + " "
-        else:
-          where = ""
-      q = """
-        SELECT
-          trip_id,
-          starttime
-        FROM
-          divvy_trips_distances
-        %s
-        GROUP BY
-          trip_id
-      """ % where
-      c.execute(q)
-
-      sql = []
-      for row in c.fetchall():
-        sql.append((row[0],parser.parse(row[1])))
+    try:
       with open ("%s/%s_trip_id_starttime.pickle" % \
-        (os.path.join(PATH,"cache"), cache_string), "wb") as f:
+        (os.path.join(PATH,"cache"), cache_string), "rb") as f:
+        sql = pickle.load(f)
+      print "running from cached version"
+    except:
+      print "running from SQL"
+      where = "WHERE "
+      where_stmts = []
+      if date:
+        where_stmts.append("startdate like '%s'" % date)
+      if gender:
+        where_stmts.append("gender like '%s'" % gender)
+      if subscriber:
+        where_stmts.append("usertype like '%s'" % subscriber)
+      if age:
+        bottom, top = parse_age(age)
+        where_stmts.append("age_in_2014 < %d" % top)
+        where_stmts.append("age_in_2014 > %d" % bottom)
+      if stations:
+        stations = stations.split(",")
+        # since its bikes out, we'll only look at the depating station
+        where_stmts.append("from_station_id in (%s)" % \
+          ", ".join(stations))
+      if where_stmts:
+        where = where + where_stmts[0]
+        for stmt in where_stmts[1:]:
+          where += "AND " + stmt + " "
+      else:
+        where = ""
+    q = """
+      SELECT
+        trip_id,
+        starttime
+      FROM
+        divvy_trips_distances
+      %s
+      GROUP BY
+        trip_id
+    """ % where
+    c.execute(q)
+    sql = []
+    for row in c.fetchall():
+      sql.append((row[0],parser.parse(row[1])))
+    with open ("%s/%s_trip_id_starttime.pickle" % \
+      (os.path.join(PATH,"cache"), cache_string), "wb") as f:
 
-        pickle.dump(sql, f)
+      pickle.dump(sql, f)
       
     ret = []
     ret.append("[")
@@ -770,13 +771,14 @@ class Root(object):
                   gender=None,
                   subscriber=None,
                   age=None,
-                  stations=None):
+                  stations=None):  
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+    sql = []
+    cache_string = ""
     # lets do some ghetto caching
     where = ""
     if date or gender or subscriber or age or stations:
     # lets do some ghetto caching
-      cache_string = ""
       if date:
         cache_string += date.replace(" ", "").replace("/", "")
       if gender:
@@ -792,70 +794,70 @@ class Root(object):
             return f.read()
       except:
         pass
-      try:
-        with open ("%s/%s_trip_id_starttime.pickle" % \
-          (os.path.join(PATH,"cache"), cache_string), "rb") as f:
-          sql = pickle.load(f)
-        print "running from cached version"
-      except:
-        print "running from SQL"
-
-        where = "WHERE "
-        where_stmts = []
-        if date:
-          where_stmts.append("startdate like '%s'" % date)
-        if gender:
-          where_stmts.append("gender like '%s'" % gender)
-        if subscriber:
-          where_stmts.append("usertype like '%s'" % subscriber)
-        if age:
-          bottom, top = parse_age(age)
-          where_stmts.append("age_in_2014 < %d" % top)
-          where_stmts.append("age_in_2014 > %d" % bottom)
-        if stations:
-          stationsstr = stations
-          stations = stations.split(",")
-          # since its bikes out, we'll only look at the depating station
-          where_stmts.append("from_station_id in (%s)" % \
-            ", ".join(stations))
-        if where_stmts:
-          where = where + where_stmts[0]
-          for stmt in where_stmts[1:]:
-            where += "AND " + stmt + " "
-        else:
-          where = ""
-      q = """
-        SELECT
-          trip_id,
-          starttime
-        FROM
-          divvy_trips_distances
-        %s
-        GROUP BY
-          trip_id
-      """ % where
-      c.execute(q)
-      sql = []
-      for row in c.fetchall():
-        sql.append((row[0],parser.parse(row[1])))
+    try:
       with open ("%s/%s_trip_id_starttime.pickle" % \
-        (os.path.join(PATH,"cache"), cache_string), "wb") as f:
+        (os.path.join(PATH,"cache"), cache_string), "rb") as f:
+        sql = pickle.load(f)
+      print "running from cached version"
+    except:
+      print "running from SQL"
 
-        pickle.dump(sql, f)
+      where = "WHERE "
+      where_stmts = []
+      if date:
+        where_stmts.append("startdate like '%s'" % date)
+      if gender:
+        where_stmts.append("gender like '%s'" % gender)
+      if subscriber:
+        where_stmts.append("usertype like '%s'" % subscriber)
+      if age:
+        bottom, top = parse_age(age)
+        where_stmts.append("age_in_2014 < %d" % top)
+        where_stmts.append("age_in_2014 > %d" % bottom)
+      if stations:
+        stationsstr = stations
+        stations = stations.split(",")
+        # since its bikes out, we'll only look at the depating station
+        where_stmts.append("from_station_id in (%s)" % \
+          ", ".join(stations))
+      if where_stmts:
+        where = where + where_stmts[0]
+        for stmt in where_stmts[1:]:
+          where += "AND " + stmt + " "
+      else:
+        where = ""
+    q = """
+      SELECT
+        trip_id,
+        starttime
+      FROM
+        divvy_trips_distances
+      %s
+      GROUP BY
+        trip_id
+    """ % where
+    c.execute(q)
+    sql = []
+    for row in c.fetchall():
+      sql.append((row[0],parser.parse(row[1])))
+    with open ("%s/%s_trip_id_starttime.pickle" % \
+      (os.path.join(PATH,"cache"), cache_string), "wb") as f:
+
+      pickle.dump(sql, f)
 
 
     ret = []
     ret.append("[")
- 
-    days =  {"Sun":0, 
-            "Mon":0, 
-            "Tue":0, 
-            "Wed":0, 
-            "Thu":0, 
-            "Fri":0, 
-            "Sat":0 }
+    days = OrderedDict()
+    days["Sun"] = 0  
+    days["Mon"] = 0 
+    days["Tue"] = 0 
+    days["Wed"] = 0 
+    days["Thu"] = 0 
+    days["Fri"] = 0 
+    days["Sat"] = 0 
     for row in sql:
-      days[row[1].strftime("%A")] += 1
+      days[row[1].strftime("%a")] += 1
     for day, count in days.items():
       ret.append('{"range":"%s", "frequency":"%d"},' % (day, count))
     ret[len(ret)-1] = ret[len(ret)-1].rstrip(",")
@@ -1110,6 +1112,5 @@ class Root(object):
     print i
     return "\n".join(ret)
   get_evening_trips.exposed = True
-
 
 application = cherrypy.Application(Root(), script_name=None, config=None)

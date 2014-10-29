@@ -117,10 +117,6 @@ function buildUrl(url) {
 }
 
 function selectionUpdate() {
-  if (window.selection.length == 0) {
-    console.log("hiding selections");
-    d3.selectAll(".selection_graph").html(""); 
-  } else {
     d3.selectAll(".selection_graph").style("display", "inline");
     d3.selectAll(".selection_graph").html('<div class="inline" id="facebookG"><div id="blockG_1" class="facebook_blockG"></div><div id="blockG_2" class="facebook_blockG"></div><div id="blockG_3" class="facebook_blockG"></div>').style("float", "right").style("padding-right", "175px").style("padding-top", "30px"); 
     yearDayUrl = buildUrl('http://trustdarkness.com/py/bikes_out_by_day/');
@@ -159,10 +155,9 @@ function selectionUpdate() {
     timesUrl = buildUrl('http://trustdarkness.com/py/time_dist/');
     timesOverallBar(timesUrl, "#chartTimesOverall-selected");
     d3.selectAll(".selection_graph")
-      .style("background-color", "rgba(222,235,247,1)")
+      //.style("background-color", "rgba(222,235,247,1)")
       .style("border", "2px #ff7800");
 
-  }
   
 }
 
